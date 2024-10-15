@@ -1,36 +1,38 @@
-// man: http://www.libpng.org/pub/png/libpng-manual.txt
+// man: https://developers.google.com/speed/webp/docs/api
 
 #include "image/webp_image.hpp"
 
 #include <fstream>
 #include <iostream>
-#include <vector>
 
 #include <webp/decode.h>
 
 #include "conviniences.hpp"
 
 WebpImage::WebpImage(char const *const filename) {
-    letmut source = std::ifstream(filename, std::ios::binary);
-    source.seekg(0, std::ios::end);
-    let source_size = source.tellg();
-    source.seekg(0, std::ios::beg);
+    static_assert(
+        sizeof(char) == sizeof(uint8_t),
+        "This code is expected to work on 1-byte chars only."
+    );
 
-    letmut data = std::vector<uint8_t>(source_size);
-    for (letmut data_iter = data.begin(); source >> *data_iter; data_iter++);
+    letmut src = std::ifstream(filename, std::ios::binary);
+    src.seekg(0, std::ios::end);
+    let src_size = src.tellg();
+    src.seekg(0, std::ios::beg);
 
-    int width = 0, height = 0;
-    if (!WebPGetInfo(data.data(), data.size(), &width, &height)) {
-        letmut features = WebPBitstreamFeatures();
-        std::cout << WebPGetFeatures(data.data(), data.size(), &features)
-                  << "\n";
-        VP8StatusCode::VP8_STATUS_INVALID_PARAM;
-        throw "TODO SomeInternalImageReadingError";
-    }
+    let src_data = new uint8_t[src_size];
+    if (src_data == nullptr) throw std::runtime_error("Allocatoin failed!");
+    src.read((char *)src_data, src_size);
+
+    int width, height;
+    data = (uint32_t *)
+        WebPDecodeRGBA((uint8_t *)src_data, src_size, &width, &height);
+    if (data == nullptr)
+        delete[] src_data, throw std::runtime_error("WebP decoding failed!");
 
     size = Size(width, height);
+
+    delete[] src_data;
 }
 
-Image::Pixel WebpImage::get_pixel(size_t const x, size_t const y) const {
-    return x + y;
-}
+WebpImage::~WebpImage() { WebPFree(data); }

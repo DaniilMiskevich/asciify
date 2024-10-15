@@ -3,14 +3,18 @@
 
 #include "image/image.hpp"
 
-class WebpImage : private Image {
+class WebpImage : public Image {
    public:
     WebpImage(char const *const filename);
+    ~WebpImage();
 
-    Size get_size(void) const { return size; }
-    Pixel get_pixel(size_t const x, size_t const y) const;
+    Size get_size(void) const override { return size; }
+    Pixel get_pixel(Pos const pos) const override {
+        return data[pos.x + pos.y * size.w];
+    }
 
    private:
+    uint32_t *data;
     Size size = Size(0, 0);
 };
 
