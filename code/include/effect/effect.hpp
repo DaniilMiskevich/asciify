@@ -9,34 +9,31 @@
 #include "image/image.hpp"
 
 struct AsciiEffect {
-    virtual void operator()(Image const &src, AsciiArt &tgt) const = 0;
+  virtual void operator()(Image const &src, AsciiArt &tgt) const = 0;
 };
 
 struct LuminanceAsciiEffect : private AsciiEffect {
-    void operator()(Image const &src, AsciiArt &tgt) const override {
-        for (letmut i = uint16_t(0); i < tgt.get_size().w; i++) {
-            for (letmut j = uint16_t(0); j < tgt.get_size().h; j++) {
-                letmut avg_luminance = 0.0;
-                for (letmut dx = 0; dx < 8; dx++)
-                    for (letmut dy = 0; dy < 8; dy++) {
-                        let pix = src.get_pixel(Pos(i * 8 + dx, j * 8 + dy));
-                        avg_luminance +=
-                            (0.2126 * pix.r + 0.7152 * pix.g + 0.0722 * pix.b) /
-                            (8.0 * 8.0);
-                    }
-                avg_luminance /= 255.0;
+  void operator()(Image const &src, AsciiArt &tgt) const override {
+    for (letmut i = uint16_t(0); i < tgt.get_size().w; i++) {
+      for (letmut j = uint16_t(0); j < tgt.get_size().h; j++) {
+        letmut avg_luminance = 0.0;
+        for (letmut dx = 0; dx < 16; dx++)
+          for (letmut dy = 0; dy < 8; dy++) {
+            let pix = src.get_pixel(Pos(i * 16 + dx, j * 8 + dy));
+            avg_luminance +=
+                (0.2126 * pix.r + 0.7152 * pix.g + 0.0722 * pix.b) /
+                (8.0 * 16.0);
+          }
+        avg_luminance /= 255.0;
 
-                static char chars[8] = {' ', '.', ',', ';', 'o', 'a', 'A', '@'};
-                let quantized_luminance =
-                    avg_luminance == 1.0 ? 7 : size_t(avg_luminance * 8);
+        static char chars[8] = {' ', '.', ',', ';', 'o', 'a', 'A', '@'};
+        let quantized_luminance =
+            avg_luminance == 1.0 ? 7 : size_t(avg_luminance * 8);
 
-                tgt.set_el(
-                    Pos(i, j),
-                    AsciiArt::El{chars[quantized_luminance], false}
-                );
-            }
-        }
+        tgt.set_el(Pos(i, j), AsciiArt::El{chars[quantized_luminance], false});
+      }
     }
+  }
 };
 
 // class BlurEffect : public AsciiEffect {
