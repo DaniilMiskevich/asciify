@@ -26,9 +26,10 @@ struct LuminanceAsciiEffect : private AsciiEffect {
           }
         avg_luminance /= 255.0;
 
-        static char chars[8] = {' ', '.', ',', ';', 'o', 'a', 'A', '@'};
+        static char chars[10] = {' ', '.', ':', '-', '=',
+                                 '+', '*', '#', '%', '@'};
         let quantized_luminance =
-            avg_luminance == 1.0 ? 7 : size_t(avg_luminance * 8);
+            avg_luminance == 1.0 ? 10 : size_t(avg_luminance * 10);
 
         tgt.set_el(Pos(i, j), AsciiArt::El{chars[quantized_luminance], false});
       }
