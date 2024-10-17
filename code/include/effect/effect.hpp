@@ -9,32 +9,34 @@
 #include "image/image.hpp"
 
 struct AsciiEffect {
-  virtual void operator()(Image const &src, AsciiArt &tgt) const = 0;
+    virtual void operator()(Image const &src, AsciiArt &tgt) const = 0;
 };
 
 struct LuminanceAsciiEffect : private AsciiEffect {
-  void operator()(Image const &src, AsciiArt &tgt) const override {
-    for (letmut i = uint16_t(0); i < tgt.get_size().w; i++) {
-      for (letmut j = uint16_t(0); j < tgt.get_size().h; j++) {
-        letmut avg_luminance = 0.0;
-        for (letmut dx = 0; dx < 16; dx++)
-          for (letmut dy = 0; dy < 8; dy++) {
-            let pix = src.get_pixel(Pos(i * 16 + dx, j * 8 + dy));
-            avg_luminance +=
-                (0.2126 * pix.r + 0.7152 * pix.g + 0.0722 * pix.b) /
-                (8.0 * 16.0);
-          }
-        avg_luminance /= 255.0;
+    void operator()(Image const &src, AsciiArt &tgt) const override {
+        let size = tgt.get_size();
+        for (letmut i = 0; i < size.w; i++) {
+            for (letmut j = 0; j < size.h; j++) {
+                letmut avg_r = 0.0, avg_g = 0.0, avg_b = 0.0;
 
-        static char chars[10] = {' ', '.', ':', '-', '=',
-                                 '+', '*', '#', '%', '@'};
-        let quantized_luminance =
-            avg_luminance == 1.0 ? 10 : size_t(avg_luminance * 10);
+                let char_size = tgt.get_char_size();
+                for (letmut dx = 0; dx < char_size.w; dx++)
+                    for (letmut dy = 0; dy < char_size.h; dy++) {
+                        let pix = src.get_pixel(
+                            Pos(i * char_size.w + dx, j * char_size.h + dy)
+                        );
+                        avg_r += pix.r, avg_g += pix.g, avg_b += pix.b;
+                    }
 
-        tgt.set_el(Pos(i, j), AsciiArt::El{chars[quantized_luminance], false});
-      }
+                let char_area = char_size.get_area();
+                avg_r /= char_area, avg_g /= char_area, avg_b /= char_area;
+
+                let avg_color = Image::Pixel(avg_r, avg_g, avg_b);
+
+                tgt.set_el(Pos(i, j), AsciiArt::El(avg_color));
+            }
+        }
     }
-  }
 };
 
 #endif
