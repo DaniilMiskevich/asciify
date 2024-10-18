@@ -1,12 +1,14 @@
 #ifndef WEBP_IMAGE_HPP
 #define WEBP_IMAGE_HPP
 
+#include <cstddef>
+
 #include "conviniences.hpp"
 #include "image/image.hpp"
 
 class WebpImage : public Image {
    public:
-    WebpImage(char const *const filename);
+    WebpImage(uint8_t const *const src_data, size_t const src_size);
     ~WebpImage();
 
     Size get_size(void) const override { return size; }

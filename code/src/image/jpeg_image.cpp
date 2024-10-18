@@ -8,30 +8,7 @@
 
 #include "conviniences.hpp"
 
-JpegImage::JpegImage(char const *const filename) {
-    static_assert(
-        sizeof(char) == sizeof(uint8_t),
-        "This code is expected to work on 1-byte chars only."
-    );
-
-    letmut src = std::ifstream(filename, std::ios::binary);
-    src.seekg(0, std::ios::end);
-    let src_size = src.tellg();
-    src.seekg(0, std::ios::beg);
-
-    let src_data = new uint8_t[src_size];
-    if (src_data == nullptr) throw std::runtime_error("Allocatoin failed!");
-    src.read(reinterpret_cast<char *>(src_data), src_size);
-
-    read_jpeg_data(src_data, src_size);
-
-    delete[] src_data;
-}
-
-void JpegImage::read_jpeg_data(
-    uint8_t const *const src_data,
-    size_t const src_size
-) {
+JpegImage::JpegImage(uint8_t const *const src_data, size_t const src_size) {
     struct jpeg_decompress_struct info;
     struct jpeg_error_mgr jerr;
 

@@ -4,7 +4,6 @@ refs:
         - https://www.youtube.com/watch?v=gg40RWiaHRY
     - gradients:
         - https://paulbourke.net/dataformats/asciiart/
-        - https://www.youtube.com/watch?v=n4zUgtDk95w
 */
 // TODO! if format is invalid aborts on jpeg instead of throwing "invalid
 // format"
@@ -13,15 +12,15 @@ refs:
 
 #include "conviniences.hpp"
 #include "effect/effect.hpp"
-#include "image/image_factory.hpp"
+#include "image/image_loader.hpp"
 
 int main() {
-    let image_factory = ImageFactory();
+    let image_loader = ImageLoader();
 
-    letmut image = image_factory.create("test.jpeg");
+    letmut image = image_loader.load("test.jpeg");
     std::cout << image->get_size().w << "x" << image->get_size().h << "\n";
 
-    letmut ascii_art = AsciiArt(image->get_size(), Size(10, 22) / 1.5);
+    letmut ascii_art = AsciiArt(image->get_size(), Size(10, 22) / 1.25);
 
     let effect = LuminanceAsciiEffect();
     // TODO not looking good for me

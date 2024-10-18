@@ -9,7 +9,7 @@
 
 class JpegImage : public Image {
    public:
-    JpegImage(char const *const filename);
+    JpegImage(uint8_t const *const src_data, size_t const src_size);
     ~JpegImage();
 
     Size get_size(void) const override { return size; }
@@ -22,8 +22,6 @@ class JpegImage : public Image {
 
    private:
     typedef uint8_t JpegPixel[3];
-
-    void read_jpeg_data(uint8_t const *const src_data, size_t const src_size);
 
     JpegPixel const *data;
     Size size = Size(0, 0);
