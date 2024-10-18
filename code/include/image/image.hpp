@@ -19,7 +19,8 @@ class Image {
 
         uint8_t const r, g, b;
     };
-    // static_assert(sizeof(Pixel) == 3 * sizeof(Pixel::Channel));
+
+    virtual ~Image(){};
 
     virtual Size get_size(void) const = 0;
     virtual Pixel get_pixel(Pos const pos) const = 0;

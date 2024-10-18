@@ -6,26 +6,30 @@ refs:
         - https://paulbourke.net/dataformats/asciiart/
         - https://www.youtube.com/watch?v=n4zUgtDk95w
 */
+// TODO! if format is invalid aborts on jpeg instead of throwing "invalid
+// format"
 
 #include <iostream>
 
 #include "conviniences.hpp"
 #include "effect/effect.hpp"
-#include "image/jpeg_image.hpp"
-#include "image/webp_image.hpp"
+#include "image/image_factory.hpp"
 
 int main() {
-    let image = WebpImage("test.webp");
-    // let image = JpegImage("test.jpeg");
-    // THIS IS INVALID FIX LATER
-    letmut ascii_art = AsciiArt(image.get_size(), Size(10, 22) / 1.5);
+    let image_factory = ImageFactory();
 
-    std::cout << image.get_size().w << "x" << image.get_size().h << "\n";
+    letmut image = image_factory.create("test.jpeg");
+    std::cout << image->get_size().w << "x" << image->get_size().h << "\n";
+
+    letmut ascii_art = AsciiArt(image->get_size(), Size(10, 22) / 1.5);
 
     let effect = LuminanceAsciiEffect();
-    effect(image, ascii_art);
+    // TODO not looking good for me
+    effect(*image, ascii_art);
 
     std::cout << ascii_art;
+
+    delete image;
 
     return 0;
 }
