@@ -12,13 +12,17 @@
             "icon": "󰐊",
             "desc": "just run the project",
             "cmd": [
-                "cmake -B $BUILD -S ./ --log-level=$CMAKE_LOG_LEVEL -DCMAKE_BUILD_TYPE=$RUN_BUILD_TYPE; cmake --build $BUILD; echo; $BUILD/main $ARGS"
+                "cmake -B $BUILD -S ./ --log-level=$CMAKE_LOG_LEVEL -DCMAKE_BUILD_TYPE=$RUN_BUILD_TYPE; cmake --build $BUILD",
+                "echo; $BUILD/main $ARGS"
             ]
         },
         "debug": {
             "icon": "󰨰",
             "desc": "run the project via gdb",
-            "cmd": "cmake -B $BUILD -S ./ --log-level=$CMAKE_LOG_LEVEL -DCMAKE_BUILD_TYPE=$RUN_BUILD_TYPE; cmake --build $BUILD; echo; gdb $BUILD/main $ARGS"
+            "cmd": [
+                "cmake -B $BUILD -S ./ --log-level=$CMAKE_LOG_LEVEL -DCMAKE_BUILD_TYPE=$RUN_BUILD_TYPE; cmake --build $BUILD",
+                "echo; gdb $BUILD/main $ARGS"
+            ]
         },
         "clean": {
             "icon": "󰃢",

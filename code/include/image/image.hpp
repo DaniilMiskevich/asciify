@@ -20,7 +20,7 @@ class Image {
         uint8_t const r, g, b;
     };
 
-    virtual ~Image() {};
+    virtual ~Image(){};
 
     virtual Size get_size(void) const = 0;
     virtual Pixel get_pixel(Pos const pos) const = 0;

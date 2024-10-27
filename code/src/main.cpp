@@ -11,7 +11,7 @@ refs:
 #include <iostream>
 
 #include "conviniences.hpp"
-#include "effect/effect.hpp"
+#include "effect/fill_ascii_effect.hpp"
 #include "image/image_loader.hpp"
 
 int main() {
@@ -22,7 +22,7 @@ int main() {
 
     letmut ascii_art = AsciiArt(image->get_size(), Size(10, 22) / 1.25);
 
-    let effect = LuminanceAsciiEffect();
+    let effect = FillAsciiEffect();
     // TODO not looking good for me
     effect(*image, ascii_art);
 

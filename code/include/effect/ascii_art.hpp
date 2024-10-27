@@ -27,10 +27,14 @@ class AsciiArt {
         El(Image::Pixel const color) : c(ascii_from_color(color)) {}
 
         char c;
-        // bool const is_transparent;
 
         friend std::ostream &operator<<(std::ostream &stream, El const &el) {
-            return stream << el.c;
+            return stream
+
+                // << "\033[38;2;" << int(el.color.r) << ";" << int(el.color.g)
+                // << ";" << int(el.color.b) << "m"
+
+                << el.c;
         }
     };
 
