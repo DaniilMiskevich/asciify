@@ -12,8 +12,8 @@ class JpegImage : public Image {
     JpegImage(uint8_t const *const src_data, size_t const src_size);
     ~JpegImage();
 
-    Size get_size(void) const override { return size; }
-    Pixel get_pixel(Pos const pos) const override {
+    Size get_size() const override { return size; }
+    Pixel operator[](Pos const pos) const override {
         if (pos.x >= size.w || pos.y >= size.h) return 0;
 
         let pix = data[pos.x + size.w * pos.y];

@@ -11,12 +11,12 @@ class WebpImage : public Image {
     WebpImage(uint8_t const *const src_data, size_t const src_size);
     ~WebpImage();
 
-    Size get_size(void) const override { return size; }
-    Pixel get_pixel(Pos const pos) const override {
+    Size get_size() const override { return size; }
+    Pixel operator[](Pos const pos) const override {
         if (pos.x >= size.w || pos.y >= size.h) return 0;
 
-        let pix = data[pos.x + size.w * pos.y];
-        return Pixel(pix[0], pix[1], pix[2]);
+        let px = data[pos.x + size.w * pos.y];
+        return Pixel(px[0], px[1], px[2]);
     }
 
    private:

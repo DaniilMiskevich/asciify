@@ -1,26 +1,35 @@
 #include "image/jpeg_image.hpp"
 
 #include <cassert>
-#include <fstream>
-#include <iostream>
+#include <cstdio>
+#include <stdexcept>
 
 #include <jpeglib.h>
 
 #include "conviniences.hpp"
 
-JpegImage::JpegImage(uint8_t const *const src_data, size_t const src_size) {
-    struct jpeg_decompress_struct info;
-    struct jpeg_error_mgr jerr;
+static void my_jpeg_error_exit(j_common_ptr const common) {
+    throw std::runtime_error(common->err->msg_parm.s);
+}
+static struct jpeg_error_mgr *jpeg_throw_error(struct jpeg_error_mgr *err) {
+    err = jpeg_std_error(err);
+    err->error_exit = my_jpeg_error_exit;
+    return err;
+}
 
-    info.err = jpeg_std_error(&jerr);
+JpegImage::JpegImage(uint8_t const *const src_data, size_t const src_size) {
+    jpeg_decompress_struct info;
+    jpeg_error_mgr jerr;
+
+    info.err = jpeg_throw_error(&jerr);
     jpeg_create_decompress(&info);
 
     jpeg_mem_src(&info, src_data, src_size);
 
-    if (!jpeg_read_header(&info, TRUE))
+    if (!jpeg_read_header(&info, 1))
         throw std::runtime_error("Cannot read jpeg.");
 
-    jpeg_start_decompress(&info);
+    if (!jpeg_start_decompress(&info)) abort();
     if (info.output_components != sizeof(JpegPixel))
         throw std::runtime_error("Unsupported colour format.");
 

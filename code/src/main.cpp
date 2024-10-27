@@ -5,12 +5,11 @@ refs:
     - gradients:
         - https://paulbourke.net/dataformats/asciiart/
 */
-// TODO! if format is invalid aborts on jpeg instead of throwing "invalid
-// format"
 
 #include <iostream>
 
 #include "conviniences.hpp"
+#include "effect/color_ascii_effect.hpp"
 #include "effect/fill_ascii_effect.hpp"
 #include "image/image_loader.hpp"
 
@@ -22,9 +21,11 @@ int main() {
 
     letmut ascii_art = AsciiArt(image->get_size(), Size(10, 22) / 1.25);
 
-    let effect = FillAsciiEffect();
+    let fill_effect = FillAsciiEffect();
+    let color_effect = ColorAsciiEffect();
     // TODO not looking good for me
-    effect(*image, ascii_art);
+    fill_effect(*image, ascii_art);
+    color_effect(*image, ascii_art);
 
     std::cout << ascii_art;
 

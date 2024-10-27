@@ -25,13 +25,12 @@ class ImageLoader {
         src.seekg(0, std::ios::beg);
 
         let src_data = new uint8_t[src_size];
-        if (src_data == nullptr) throw std::runtime_error("Allocatoin failed!");
         src.read(reinterpret_cast<char *>(src_data), src_size);
 
         // this is a hacky piece of code, very concise though
         try {
-            _create<WebpImage>(src_data, src_size);
-            _create<JpegImage>(src_data, src_size);
+            pass_image<WebpImage>(src_data, src_size);
+            pass_image<JpegImage>(src_data, src_size);
 
             delete[] src_data;
             throw std::runtime_error("Unsupported image format.");
@@ -43,7 +42,7 @@ class ImageLoader {
 
    private:
     template <typename T>
-    T const *_create(uint8_t const *const src_data, size_t const src_size)
+    T const *pass_image(uint8_t const *const src_data, size_t const src_size)
         const {
         try {
             throw new T(src_data, src_size);
