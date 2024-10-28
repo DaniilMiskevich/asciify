@@ -37,7 +37,8 @@ struct Size {
 
 struct Pos {
     Pos() = delete;
-    Pos(uint16_t const x, uint16_t const y) : x(x), y(y) {}
+
+    constexpr Pos(uint16_t const x, uint16_t const y) : x(x), y(y) {}
 
     uint16_t const x, y;
 };
