@@ -6,12 +6,13 @@
 
 struct Size {
     Size() = delete;
-    Size(uint16_t const w, uint16_t const h) : w(w), h(h) {}
 
-    unsigned get_area() const { return w * h; }
+    constexpr Size(uint16_t const w, uint16_t const h) : w(w), h(h) {}
+
+    constexpr unsigned get_area() const { return w * h; }
 
     template <typename T>
-    Size operator*(T const x) {
+    constexpr Size operator*(T const x) {
         static_assert(
             std::is_arithmetic<T>(),
             "Operator `*` does not exist for this type."
@@ -20,7 +21,7 @@ struct Size {
     }
 
     template <typename T>
-    Size operator/(T const x) {
+    constexpr Size operator/(T const &x) {
         static_assert(
             std::is_arithmetic<T>(),
             "Operator `/` does not exist for this type."
@@ -28,11 +29,9 @@ struct Size {
         return Size(w / x, h / x);
     }
 
-    friend Size operator/(Size const &a, Size const &b) {
-        return Size(a.w / b.w, a.h / b.h);
-    }
+    constexpr Size operator/(Size const &b) { return Size(w / b.w, h / b.h); }
 
-    uint16_t w, h;
+    uint16_t const w, h;
 };
 
 struct Pos {

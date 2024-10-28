@@ -2,18 +2,19 @@
 
 #include "image/webp_image.hpp"
 
-#include <stdexcept>
+#include <new>
 
 #include <webp/decode.h>
 
-WebpImage::WebpImage(uint8_t const *const src_data, size_t const src_size) {
+WebpImage
+WebpImage::load(uint8_t const *const src_data, size_t const src_size) {
     int width, height;
-    data = reinterpret_cast<WebpPixel const *>(
+    let data = reinterpret_cast<WebpPixel const *>(
         WebPDecodeRGB(src_data, src_size, &width, &height)
     );
-    if (data == nullptr) throw std::runtime_error("WebP decoding failed!");
+    if (data == nullptr) throw std::bad_alloc();
 
-    size = Size(width, height);
+    return WebpImage(data, Size(width, height));
 }
 
 WebpImage::~WebpImage() { WebPFree(const_cast<WebpPixel *>(data)); }

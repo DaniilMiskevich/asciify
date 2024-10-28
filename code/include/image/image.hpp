@@ -1,33 +1,31 @@
 #ifndef IMAGE_HPP
 #define IMAGE_HPP
 
-#include <cstdint>
-
+#include "color.hpp"
+#include "conviniences.hpp"
 #include "dims.hpp"
 
 class Image {
    public:
-    struct Pixel;
-
     virtual ~Image(){};
 
     virtual Size get_size(void) const = 0;
-    virtual Pixel operator[](Pos const pos) const = 0;
-};
+    virtual Color operator[](Pos const pos) const = 0;
 
-struct Image::Pixel {
-    Pixel() = delete;
+    Color get_avg_in_region(Pos const pos, Size const size) const {
+        letmut avg_r = 0.0, avg_g = 0.0, avg_b = 0.0;
+        for (letmut dx = 0; dx < size.w; dx++)
+            for (letmut dy = 0; dy < size.h; dy++) {
+                let pix =
+                    (*this)[Pos(pos.x * size.w + dx, pos.y * size.h + dy)];
+                avg_r += pix.r, avg_g += pix.g, avg_b += pix.b;
+            }
 
-    Pixel(uint8_t const r, uint8_t const g, uint8_t const b)
-    : r(r), g(g), b(b) {}
+        let char_area = size.get_area();
+        avg_r /= char_area, avg_g /= char_area, avg_b /= char_area;
 
-    Pixel(uint32_t const hex)
-    // dont have to be &'d with 255 coz got truncated during storing into u8
-    : r(hex), g(hex >> 8), b(hex >> 16) {}
-
-    operator int() const { return r | g << 8 | b << 16; }
-
-    uint8_t const r, g, b;
+        return Color(avg_r, avg_g, avg_b);
+    }
 };
 
 #endif

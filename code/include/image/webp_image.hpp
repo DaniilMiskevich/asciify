@@ -8,22 +8,27 @@
 
 class WebpImage : public Image {
    public:
-    WebpImage(uint8_t const *const src_data, size_t const src_size);
+    static WebpImage load(uint8_t const *const src_data, size_t const src_size);
+
     ~WebpImage();
 
     Size get_size() const override { return size; }
-    Pixel operator[](Pos const pos) const override {
-        if (pos.x >= size.w || pos.y >= size.h) return 0;
+
+    Color operator[](Pos const pos) const override {
+        if (pos.x >= size.w || pos.y >= size.h) return Color(0x000000);
 
         let px = data[pos.x + size.w * pos.y];
-        return Pixel(px[0], px[1], px[2]);
+        return Color(px[0], px[1], px[2]);
     }
 
    private:
     typedef uint8_t WebpPixel[3];
 
-    WebpPixel const *data;
-    Size size = Size(0, 0);
+    WebpImage(WebpPixel const *const data, Size const size)
+    : data(data), size(size) {}
+
+    WebpPixel const *const data;
+    Size const size;
 };
 
 #endif

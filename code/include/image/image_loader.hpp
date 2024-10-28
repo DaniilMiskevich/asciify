@@ -27,26 +27,27 @@ class ImageLoader {
         let src_data = new uint8_t[src_size];
         src.read(reinterpret_cast<char *>(src_data), src_size);
 
-        // this is a hacky piece of code, very concise though
+        Image const *image = nullptr;
         try {
             pass_image<WebpImage>(src_data, src_size);
             pass_image<JpegImage>(src_data, src_size);
+        } catch (Image const *passed_image) { image = passed_image; }
 
-            delete[] src_data;
+        delete[] src_data;
+
+        if (image == nullptr)
             throw std::runtime_error("Unsupported image format.");
-        } catch (Image const *const image) {
-            delete[] src_data;
-            return image;
-        }
+
+        return image;
     }
 
    private:
     template <typename T>
-    T const *pass_image(uint8_t const *const src_data, size_t const src_size)
+    void pass_image(uint8_t const *const src_data, size_t const src_size)
         const {
         try {
-            throw new T(src_data, src_size);
-        } catch (std::exception &e) { return nullptr; }
+            throw new T(T::load(src_data, src_size));
+        } catch (std::exception &e) {}
     }
 };
 

@@ -9,22 +9,26 @@
 
 class JpegImage : public Image {
    public:
-    JpegImage(uint8_t const *const src_data, size_t const src_size);
+    static JpegImage load(uint8_t const *const src_data, size_t const src_size);
+
     ~JpegImage();
 
     Size get_size() const override { return size; }
-    Pixel operator[](Pos const pos) const override {
-        if (pos.x >= size.w || pos.y >= size.h) return 0;
 
+    Color operator[](Pos const pos) const override {
+        if (pos.x >= size.w || pos.y >= size.h) return Color(0x000000);
         let pix = data[pos.x + size.w * pos.y];
-        return Pixel(pix[0], pix[1], pix[2]);
+        return Color(pix[0], pix[1], pix[2]);
     }
 
    private:
     typedef uint8_t JpegPixel[3];
 
-    JpegPixel const *data;
-    Size size = Size(0, 0);
+    JpegImage(JpegPixel const *const data, Size const size)
+    : data(data), size(size) {}
+
+    JpegPixel const *const data;
+    Size const size;
 };
 
 #endif

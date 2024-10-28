@@ -5,27 +5,33 @@ refs:
     - gradients:
         - https://paulbourke.net/dataformats/asciiart/
 */
+// TODO add color support for non-RGB terminals
 
 #include <iostream>
 
+#include "ascii/ascii_art.hpp"
+#include "ascii/color_ascii_effect.hpp"
+#include "ascii/fill_ascii_effect.hpp"
 #include "conviniences.hpp"
-#include "effect/color_ascii_effect.hpp"
-#include "effect/fill_ascii_effect.hpp"
 #include "image/image_loader.hpp"
+
+#define CHAR_SCALE (1.25)
 
 int main() {
     let image_loader = ImageLoader();
 
-    letmut image = image_loader.load("test.jpeg");
-    std::cout << image->get_size().w << "x" << image->get_size().h << "\n";
+    letmut image = image_loader.load("test.webp");
+    std::cout << "Image loaded (" << image->get_size().w << "x"
+              << image->get_size().h << ")" << "\n";
 
-    letmut ascii_art = AsciiArt(image->get_size(), Size(10, 22) / 1.25);
+    let char_size = Size(10, 22) / CHAR_SCALE;
+    letmut ascii_art = AsciiArt(*image, char_size);
 
-    let fill_effect = FillAsciiEffect();
-    let color_effect = ColorAsciiEffect();
-    // TODO not looking good for me
-    fill_effect(*image, ascii_art);
-    color_effect(*image, ascii_art);
+    let fill = FillAsciiEffect();
+    let color = ColorAsciiEffect(true);
+
+    fill(ascii_art);
+    color(ascii_art);
 
     std::cout << ascii_art;
 

@@ -17,7 +17,8 @@ static struct jpeg_error_mgr *jpeg_throw_error(struct jpeg_error_mgr *err) {
     return err;
 }
 
-JpegImage::JpegImage(uint8_t const *const src_data, size_t const src_size) {
+JpegImage
+JpegImage::load(uint8_t const *const src_data, size_t const src_size) {
     jpeg_decompress_struct info;
     jpeg_error_mgr jerr;
 
@@ -47,8 +48,7 @@ JpegImage::JpegImage(uint8_t const *const src_data, size_t const src_size) {
     jpeg_finish_decompress(&info);
     jpeg_destroy_decompress(&info);
 
-    size = Size(width, height);
-    this->data = buf;
+    return JpegImage(buf, Size(width, height));
 }
 
 JpegImage::~JpegImage() { delete[] data; }
