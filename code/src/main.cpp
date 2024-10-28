@@ -27,7 +27,7 @@ int main() {
     let char_size = Size(10, 22) / CHAR_SCALE;
     letmut ascii_art = AsciiArt(*image, char_size);
 
-    let fill = FillAsciiEffect();
+    let fill = FillAsciiEffect(" .,-:+*csS$@");
     let color = ColorAsciiEffect(true);
 
     fill(ascii_art);
