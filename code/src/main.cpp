@@ -5,7 +5,6 @@ refs:
     - gradients:
         - https://paulbourke.net/dataformats/asciiart/
 */
-// TODO add color support for non-RGB terminals
 
 #include <iostream>
 
@@ -20,7 +19,7 @@ refs:
 int main() {
     let image_loader = ImageLoader();
 
-    // let font = Font();
+    // let font = Font::load("font.ttf");
 
     letmut image = image_loader.load("test.webp");
     std::cout << "Image loaded (" << image->get_size().w << "x"
@@ -36,6 +35,12 @@ int main() {
     color(ascii_art);
 
     std::cout << ascii_art;
+
+    // TODO temporary impl of file output
+    {
+        letmut output = std::ofstream("out.txt");
+        output << ascii_art;
+    }
 
     delete image;
 
