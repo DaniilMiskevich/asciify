@@ -26,7 +26,7 @@ struct Color {
     }
 
     constexpr explicit operator uint32_t() const {
-        return r | g << 8 | b << 16;
+        return b | g << 8 | r << 16;
     }
 
     constexpr Color operator-(Color const &other) const {

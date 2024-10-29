@@ -11,8 +11,6 @@
 
 class ImageLoader {
    public:
-    ImageLoader() {}
-
     Image const *load(char const *const filename) const {
         static_assert(
             sizeof(char) == sizeof(uint8_t),

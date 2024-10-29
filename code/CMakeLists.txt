@@ -5,7 +5,7 @@ project(gaussian_elimination VERSION 1.0.0 LANGUAGES CXX)
 set(MAIN "main")
 
 set(SRCS_PATH "src/*.cpp")
-set(INCLUDE_DIR "include/")
+set(INCLUDE_DIR "include/" "/usr/include/freetype2")
 
 file(GLOB_RECURSE SRCS ${SRCS_PATH})
 
@@ -16,4 +16,4 @@ set(COMPILE_AND_LINK_OPTS -O3 -g -Wall -Wextra -Wformat -fsanitize=address)
 target_compile_options(${MAIN} PUBLIC ${COMPILE_AND_LINK_OPTS})
 target_link_options(${MAIN} PUBLIC ${COMPILE_AND_LINK_OPTS})
 
-target_link_libraries(${MAIN} webp jpeg)
+target_link_libraries(${MAIN} webp jpeg freetype)
