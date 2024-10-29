@@ -13,7 +13,6 @@ refs:
 #include "ascii/color_ascii_effect.hpp"
 #include "ascii/fill_ascii_effect.hpp"
 #include "conviniences.hpp"
-#include "font.hpp"
 #include "image/image_loader.hpp"
 
 #define CHAR_SCALE (1.25)
@@ -21,7 +20,7 @@ refs:
 int main() {
     let image_loader = ImageLoader();
 
-    let font = Font();
+    // let font = Font();
 
     letmut image = image_loader.load("test.webp");
     std::cout << "Image loaded (" << image->get_size().w << "x"
