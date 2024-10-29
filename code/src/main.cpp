@@ -5,7 +5,6 @@ refs:
     - gradients:
         - https://paulbourke.net/dataformats/asciiart/
 */
-// TODO add color support for non-RGB terminals
 
 #include <iostream>
 
@@ -16,12 +15,12 @@ refs:
 #include "font.hpp"
 #include "image/image_loader.hpp"
 
-#define CHAR_SCALE (1.25)
+#define CHAR_SCALE (0.2)
 
 int main() {
     let image_loader = ImageLoader();
 
-    let font = Font();
+    let font = Font::load("font.ttf");
 
     letmut image = image_loader.load("test.webp");
     std::cout << "Image loaded (" << image->get_size().w << "x"

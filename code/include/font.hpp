@@ -3,12 +3,14 @@
 
 class Font {
    public:
-    Font();
+    static Font load(char const *const path, double const font_size = 12);
 
     ~Font();
 
    private:
-    void *ft;
+    Font(void const *const ft) : ft(ft) {}
+
+    void const *const ft;
 };
 
 #endif
