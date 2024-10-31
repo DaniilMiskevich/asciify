@@ -29,7 +29,7 @@ int main() {
     letmut ascii_art = AsciiArt(*image, char_size);
 
     let fill = FillAsciiEffect(" .,-:+*csS$@");
-    let color = ColorAsciiEffect(true);
+    let color = ColorAsciiEffect<false>();
 
     fill(ascii_art);
     color(ascii_art);
