@@ -15,10 +15,10 @@ class WebpImage : public Image {
     Size get_size() const override { return size; }
 
     Color operator[](Pos const pos) const override {
-        if (pos.x >= size.w || pos.y >= size.h) return Color(0x000000);
+        if (pos.x >= size.w || pos.y >= size.h) return Color::hex(0x000000);
 
         let px = data[pos.x + size.w * pos.y];
-        return Color(px[0], px[1], px[2]);
+        return Color::rgb255(px[0], px[1], px[2]);
     }
 
    private:

@@ -34,8 +34,8 @@ int main() {
     let color = ColorAsciiEffect<true>();
 
     fill(ascii_art);
-    edges(ascii_art);
-    // color(ascii_art);
+    // edges(ascii_art);
+    color(ascii_art);
 
     std::cout << ascii_art;
 

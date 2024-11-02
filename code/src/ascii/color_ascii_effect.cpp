@@ -3,14 +3,14 @@
 template <>
 void ColorAsciiEffect<false>::operator()(AsciiArt &dst) const {
     static Color const cols[] = {
-        Color(0x000000),
-        Color(0x800000),
-        Color(0x008000),
-        Color(0x808000),
-        Color(0x000080),
-        Color(0x800080),
-        Color(0x008080),
-        Color(0xc0c0c0),
+        Color::hex(0x000000),
+        Color::hex(0x800000),
+        Color::hex(0x008000),
+        Color::hex(0x808000),
+        Color::hex(0x000080),
+        Color::hex(0x800080),
+        Color::hex(0x008080),
+        Color::hex(0xC0C0C0),
     };
 
     let &image = dst.get_image();
@@ -57,9 +57,9 @@ void ColorAsciiEffect<true>::operator()(AsciiArt &dst) const {
             dst[pos] = AsciiEl(
                 "\033[38;2;" +
 
-                std::to_string(int(avg_col.r)) + ";" +
-                std::to_string(int(avg_col.g)) + ";" +
-                std::to_string(int(avg_col.b)) + "m" +
+                std::to_string(int(avg_col.r * 0xFF)) + ";" +
+                std::to_string(int(avg_col.g * 0xFF)) + ";" +
+                std::to_string(int(avg_col.b * 0xFF)) + "m" +
 
                 dst[pos].data +
 

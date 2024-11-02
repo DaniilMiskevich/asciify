@@ -16,9 +16,9 @@ class JpegImage : public Image {
     Size get_size() const override { return size; }
 
     Color operator[](Pos const pos) const override {
-        if (pos.x >= size.w || pos.y >= size.h) return Color(0x000000);
+        if (pos.x >= size.w || pos.y >= size.h) return Color::hex(0x000000);
         let pix = data[pos.x + size.w * pos.y];
-        return Color(pix[0], pix[1], pix[2]);
+        return Color::rgb255(pix[0], pix[1], pix[2]);
     }
 
    private:
