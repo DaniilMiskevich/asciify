@@ -16,11 +16,7 @@ struct Color {
         return Color(float(r) / 0xFF, float(g) / 0xFF, float(b) / 0xFF);
     }
     static constexpr Color hex(uint32_t const hex) {
-        return Color::rgb255(
-            float((hex >> 16) & 0xFF) / 0xFF,
-            float((hex >> 8) & 0xFF) / 0xFF,
-            float((hex >> 0) & 0xFF) / 0xFF
-        );
+        return Color::rgb255(hex >> 16, hex >> 8, hex >> 0);
     }
 
     float r, g, b;
