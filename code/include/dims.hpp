@@ -49,12 +49,6 @@ struct Pos {
     constexpr Pos operator-(Pos const &other) const {
         return Pos(x - other.x, y - other.y);
     }
-    constexpr Pos operator*(Pos const &other) const {
-        return Pos(x * other.x, y * other.y);
-    }
-    constexpr Pos operator/(Pos const &other) const {
-        return Pos(x / other.x, y / other.y);
-    }
     template <typename T>
     constexpr Pos operator*(T const &other) const {
         return Pos(x * other, y * other);
