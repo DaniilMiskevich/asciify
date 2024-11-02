@@ -16,24 +16,23 @@ void ColorAsciiEffect<false>::operator()(AsciiArt &dst) const {
     let &image = dst.get_image();
     let size = dst.get_size();
 
-    for (letmut i = 0; i < size.w; i++) {
-        for (letmut j = 0; j < size.h; j++) {
-            let pos = Pos(i, j);
-
+    letmut pos = Pos(0, 0);
+    for (pos.x = 0; pos.x < size.w; pos.x++) {
+        for (pos.y = 0; pos.y < size.h; pos.y++) {
             let avg_col = image.get_avg_in_region(pos, image.get_size() / size);
 
-            let col_i = [avg_col]() {
+            let i = [avg_col]() {
                 size_t closest_i;
                 for (letmut i = closest_i = size_t(1); i < lenof(cols); i++) {
-                    if (Color::distance(cols[i], avg_col) <=
-                        Color::distance(cols[closest_i], avg_col))
+                    if ((cols[i] - avg_col).get_magnitude() <=
+                        (cols[closest_i] - avg_col).get_magnitude())
                         closest_i = i;
                 }
                 return closest_i;
             }();
 
             dst[pos] = AsciiEl(
-                "\033[3" + std::to_string(col_i) + ";2m" +
+                "\033[3" + std::to_string(i) + ";2m" +
 
                 dst[pos].data +
 
@@ -48,10 +47,9 @@ void ColorAsciiEffect<true>::operator()(AsciiArt &dst) const {
     let &image = dst.get_image();
     let size = dst.get_size();
 
-    for (letmut i = 0; i < size.w; i++) {
-        for (letmut j = 0; j < size.h; j++) {
-            let pos = Pos(i, j);
-
+    letmut pos = Pos(0, 0);
+    for (pos.x = 0; pos.x < size.w; pos.x++) {
+        for (pos.y = 0; pos.y < size.h; pos.y++) {
             let avg_col = image.get_avg_in_region(pos, image.get_size() / size);
 
             dst[pos] = AsciiEl(

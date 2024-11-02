@@ -4,8 +4,6 @@
 #include <cmath>
 #include <cstdint>
 
-#include "conviniences.hpp"
-
 struct Color {
     constexpr Color() : r(0.0), g(0.0), b(0.0) {}
     constexpr Color(float const r, float const g, float const b)
@@ -25,15 +23,14 @@ struct Color {
         );
     }
 
-    constexpr static double distance(Color const &a, Color const &b) {
-        let d = a - b;
-        return d.r * d.r + d.g * d.g + d.b * d.b;
-    }
-
     float r, g, b;
 
     constexpr double get_luminance() const {
         return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    }
+
+    constexpr double get_magnitude() const {
+        return sqrt(r * r + g * g + b * b);
     }
 
     constexpr explicit operator uint32_t() const {

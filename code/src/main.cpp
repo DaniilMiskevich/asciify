@@ -30,11 +30,11 @@ int main() {
     letmut ascii_art = AsciiArt(*image, char_size);
 
     let fill = FillAsciiEffect(" .,-:+*csS$@");
-    let edges = EdgeAsciiEffect();
+    let edges = EdgeAsciiEffect(0.3);
     let color = ColorAsciiEffect<true>();
 
     fill(ascii_art);
-    // edges(ascii_art);
+    edges(ascii_art);
     color(ascii_art);
 
     std::cout << ascii_art;

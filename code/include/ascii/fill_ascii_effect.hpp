@@ -16,10 +16,9 @@ class FillAsciiEffect : public AsciiEffect {
         let &image = dst.get_image();
         let size = dst.get_size();
 
-        for (letmut i = 0; i < size.w; i++) {
-            for (letmut j = 0; j < size.h; j++) {
-                let pos = Pos(i, j);
-
+        letmut pos = Pos(0, 0);
+        for (pos.x = 0; pos.x < size.w; pos.x++) {
+            for (pos.y = 0; pos.y < size.h; pos.y++) {
                 let avg_col =
                     image.get_avg_in_region(pos, image.get_size() / size);
 
