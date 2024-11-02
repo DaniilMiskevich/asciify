@@ -16,8 +16,8 @@ struct Color {
     // dont have to be &'d with 255 coz got truncated during storing into u8
     : r(hex >> 16), g(hex >> 8), b(hex >> 0) {}
 
-    constexpr uint8_t get_luminance() const {
-        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    constexpr double get_luminance() const {
+        return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255.0;
     }
 
     constexpr static double distance(Color const &a, Color const &b) {

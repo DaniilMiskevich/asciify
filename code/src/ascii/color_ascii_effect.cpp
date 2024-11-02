@@ -2,7 +2,7 @@
 
 template <>
 void ColorAsciiEffect<false>::operator()(AsciiArt &dst) const {
-    static Color const colors[] = {
+    static Color const cols[] = {
         Color(0x000000),
         Color(0x800000),
         Color(0x008000),
@@ -24,9 +24,9 @@ void ColorAsciiEffect<false>::operator()(AsciiArt &dst) const {
 
             let col_i = [avg_col]() {
                 size_t closest_i;
-                for (letmut i = closest_i = size_t(1); i < lenof(colors); i++) {
-                    if (Color::distance(colors[i], avg_col) <=
-                        Color::distance(colors[closest_i], avg_col))
+                for (letmut i = closest_i = size_t(1); i < lenof(cols); i++) {
+                    if (Color::distance(cols[i], avg_col) <=
+                        Color::distance(cols[closest_i], avg_col))
                         closest_i = i;
                 }
                 return closest_i;

@@ -26,6 +26,17 @@ class Image {
 
         return Color(avg_r, avg_g, avg_b);
     }
+
+    template <uint16_t W, uint16_t H>
+    static double
+    filter(Color const (&src)[W][H], double const (&kernel)[W][H]) {
+        letmut s = 0.0;
+        for (letmut i = uint16_t(0); i < W; i++)
+            for (letmut j = uint16_t(0); j < H; j++)
+                s += src[i][j].get_luminance() * kernel[i][j];
+
+        return s;
+    }
 };
 
 #endif

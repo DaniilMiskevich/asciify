@@ -20,10 +20,13 @@ class FillAsciiEffect : public AsciiEffect {
             for (letmut j = 0; j < size.h; j++) {
                 let pos = Pos(i, j);
 
-                let avg_color =
+                let avg_col =
                     image.get_avg_in_region(pos, image.get_size() / size);
 
-                dst[pos] = AsciiEl(ascii_from_color(avg_color));
+                let lum = avg_col.get_luminance();
+                let i =
+                    lum == 1.0 ? palette_len - 1 : size_t(lum * palette_len);
+                dst[pos] = AsciiEl(palette[i]);
             }
         }
     }
@@ -31,13 +34,6 @@ class FillAsciiEffect : public AsciiEffect {
    private:
     char const *const palette;
     size_t const palette_len;
-
-    char ascii_from_color(Color const color) const {
-        let lum = color.get_luminance() / 255.0;
-        let ascii_idx =
-            lum == 1.0 ? palette_len - 1 : size_t(lum * palette_len);
-        return palette[ascii_idx];
-    }
 };
 
 #endif

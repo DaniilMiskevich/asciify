@@ -10,6 +10,7 @@ refs:
 
 #include "ascii/ascii_art.hpp"
 #include "ascii/color_ascii_effect.hpp"
+#include "ascii/edge_ascii_effect.hpp"
 #include "ascii/fill_ascii_effect.hpp"
 #include "conviniences.hpp"
 #include "image/image_loader.hpp"
@@ -29,10 +30,12 @@ int main() {
     letmut ascii_art = AsciiArt(*image, char_size);
 
     let fill = FillAsciiEffect(" .,-:+*csS$@");
-    let color = ColorAsciiEffect<false>();
+    let edges = EdgeAsciiEffect();
+    let color = ColorAsciiEffect<true>();
 
     fill(ascii_art);
-    color(ascii_art);
+    edges(ascii_art);
+    // color(ascii_art);
 
     std::cout << ascii_art;
 
