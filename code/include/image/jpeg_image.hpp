@@ -9,6 +9,9 @@
 
 class JpegImage : public Image {
    public:
+    class InternalLoadingException;
+    class InvalidHeaderLoadingException;
+
     static JpegImage load(uint8_t const *const src_data, size_t const src_size);
 
     ~JpegImage();
@@ -29,6 +32,21 @@ class JpegImage : public Image {
 
     JpegPixel const *const data;
     Size const size;
+};
+
+class JpegImage::InternalLoadingException : public Image::LoadingException {
+   public:
+    InternalLoadingException(char const *const msg) : msg(msg) {}
+
+   private:
+    char const *const msg;
+
+    char const *what() const throw() override { return msg; }
+};
+
+class JpegImage::InvalidHeaderLoadingException :
+public Image::LoadingException {
+    char const *what() const throw() override { return "Invalid JPEG header."; }
 };
 
 #endif

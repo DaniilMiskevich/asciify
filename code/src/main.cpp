@@ -6,6 +6,7 @@ refs:
         - https://paulbourke.net/dataformats/asciiart/
 */
 
+#include <fstream>
 #include <iostream>
 
 #include "ascii/ascii_art.hpp"
@@ -22,7 +23,10 @@ int main() {
 
     // let font = Font::load("font.ttf");
 
-    letmut image = image_loader.load("test.webp");
+    letmut image = image_loader.load("test.jpeg");
+    // letmut image = image_loader.load("test.webp");
+    // letmut image = image_loader.load("CMakeLists.txt");
+
     std::cout << "Image loaded (" << image->get_size().w << "x"
               << image->get_size().h << ")" << "\n";
 
@@ -41,8 +45,9 @@ int main() {
 
     // TODO temporary impl of file output
     {
-        letmut output = std::ofstream("out.txt");
-        output << ascii_art;
+        letmut out = std::ofstream("out.txt");
+        out.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+        out << ascii_art;
     }
 
     delete image;

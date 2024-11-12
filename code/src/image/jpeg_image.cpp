@@ -9,7 +9,7 @@
 #include "conviniences.hpp"
 
 static void my_jpeg_error_exit(j_common_ptr const common) {
-    throw std::runtime_error(common->err->msg_parm.s);
+    throw JpegImage::InternalLoadingException(common->err->msg_parm.s);
 }
 static struct jpeg_error_mgr *jpeg_throw_error(struct jpeg_error_mgr *err) {
     err = jpeg_std_error(err);
@@ -20,19 +20,19 @@ static struct jpeg_error_mgr *jpeg_throw_error(struct jpeg_error_mgr *err) {
 JpegImage
 JpegImage::load(uint8_t const *const src_data, size_t const src_size) {
     jpeg_decompress_struct info;
-    jpeg_error_mgr jerr;
+    jpeg_error_mgr err;
 
-    info.err = jpeg_throw_error(&jerr);
+    info.err = jpeg_throw_error(&err);
     jpeg_create_decompress(&info);
 
     jpeg_mem_src(&info, src_data, src_size);
 
-    if (!jpeg_read_header(&info, 1))
-        throw std::runtime_error("Cannot read jpeg.");
+    if (!jpeg_read_header(&info, 1)) throw InvalidHeaderLoadingException();
 
     if (!jpeg_start_decompress(&info)) abort();
+    // TODO! support CMYK and grayscale images
     if (info.output_components != sizeof(JpegPixel))
-        throw std::runtime_error("Unsupported colour format.");
+        throw InternalLoadingException("Unsupported colour format.");
 
     let width = info.image_width;
     let height = info.image_height;

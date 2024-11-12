@@ -1,12 +1,16 @@
 #ifndef IMAGE_HPP
 #define IMAGE_HPP
 
+#include <exception>
+
 #include "color.hpp"
 #include "conviniences.hpp"
 #include "dims.hpp"
 
 class Image {
    public:
+    class LoadingException;
+
     virtual ~Image(){};
 
     virtual Size get_size(void) const = 0;
@@ -36,6 +40,10 @@ class Image {
 
         return s;
     }
+};
+
+class Image::LoadingException : public std::exception {
+    virtual char const *what() const throw() override = 0;
 };
 
 #endif
