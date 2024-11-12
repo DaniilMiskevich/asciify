@@ -66,9 +66,7 @@ class EdgeAsciiEffect : public AsciiEffect {
         for (pos.x = 0; pos.x < size.w; pos.x++) {
             for (pos.y = 0; pos.y < size.h; pos.y++) {
                 let avg_col = image.get_avg_in_region(pos, char_size);
-                if (fabs(avg_col.r) <= threshold &&
-                    fabs(avg_col.g) <= threshold)
-                    continue;
+                if (fabs(avg_col.get_magnitude()) <= threshold) continue;
 
                 let angle = atan2(avg_col.r, avg_col.g) / M_PI;
                 letmut i = int(round(angle * 4));
