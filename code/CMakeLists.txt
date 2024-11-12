@@ -12,7 +12,7 @@ file(GLOB_RECURSE SRCS ${SRCS_PATH})
 add_executable(${MAIN} ${SRCS})
 target_include_directories(${MAIN} PRIVATE ${INCLUDE_DIR})
 
-set(COMPILE_AND_LINK_OPTS -O3 -g -Wall -Wextra -Wformat -fsanitize=address)
+set(COMPILE_AND_LINK_OPTS -Og -g -Wall -Wextra -Wformat -fsanitize=address)
 target_compile_options(${MAIN} PUBLIC ${COMPILE_AND_LINK_OPTS})
 target_link_options(${MAIN} PUBLIC ${COMPILE_AND_LINK_OPTS})
 

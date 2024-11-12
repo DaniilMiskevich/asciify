@@ -11,7 +11,7 @@ class Image {
    public:
     class LoadingException;
 
-    virtual ~Image(){};
+    virtual ~Image() {};
 
     virtual Size get_size(void) const = 0;
     virtual Color operator[](Pos const pos) const = 0;
@@ -43,6 +43,7 @@ class Image {
 };
 
 class Image::LoadingException : public std::exception {
+   public:
     virtual char const *what() const throw() override = 0;
 };
 

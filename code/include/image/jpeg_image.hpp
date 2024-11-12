@@ -38,14 +38,15 @@ class JpegImage::InternalLoadingException : public Image::LoadingException {
    public:
     InternalLoadingException(char const *const msg) : msg(msg) {}
 
+    char const *what() const throw() override { return msg; }
+
    private:
     char const *const msg;
-
-    char const *what() const throw() override { return msg; }
 };
 
 class JpegImage::InvalidHeaderLoadingException :
 public Image::LoadingException {
+   public:
     char const *what() const throw() override { return "Invalid JPEG header."; }
 };
 

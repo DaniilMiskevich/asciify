@@ -13,6 +13,7 @@ class ImageLoader {
 };
 
 class ImageLoader::UnsupportedFormatException : public std::exception {
+   public:
     char const *what() const throw() override {
         return "Unsupported image format.";
     }

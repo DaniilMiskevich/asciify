@@ -23,34 +23,40 @@ int main() {
 
     // let font = Font::load("font.ttf");
 
-    letmut image = image_loader.load("test.jpeg");
-    // letmut image = image_loader.load("test.webp");
-    // letmut image = image_loader.load("CMakeLists.txt");
+    try {
+        letmut image = image_loader.load("test.jpeg");
+        // letmut image = image_loader.load("test.webp");
+        // letmut image = image_loader.load("CMakeLists.txt");
 
-    std::cout << "Image loaded (" << image->get_size().w << "x"
-              << image->get_size().h << ")" << "\n";
+        std::cout << "Image loaded (" << image->get_size().w << "x"
+                  << image->get_size().h << ")" << "\n";
 
-    let char_size = Size(10, 22) / CHAR_SCALE;
-    letmut ascii_art = AsciiArt(*image, char_size);
+        let char_size = Size(10, 22) / CHAR_SCALE;
+        letmut ascii_art = AsciiArt(*image, char_size);
 
-    let fill = FillAsciiEffect(" .,-:+*csS$@");
-    let edges = EdgeAsciiEffect(0.5);
-    let color = ColorAsciiEffect<true>();
+        let fill = FillAsciiEffect(" .,-:+*csS$@");
+        let edges = EdgeAsciiEffect(0.5);
+        let color = ColorAsciiEffect<true>();
 
-    fill(ascii_art);
-    edges(ascii_art);
-    color(ascii_art);
+        fill(ascii_art);
+        edges(ascii_art);
+        color(ascii_art);
 
-    std::cout << ascii_art;
+        std::cout << ascii_art;
 
-    // TODO temporary impl of file output
-    {
-        letmut out = std::ofstream("out.txt");
-        out.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-        out << ascii_art;
+        // TODO temporary impl of file output
+        {
+            letmut out = std::ofstream("out.txt");
+            out.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+            out << ascii_art;
+        }
+
+        delete image;
+
+        return 0;
+    } catch (ImageLoader::UnsupportedFormatException &e) {
+        std::cout << e.what() << "\n";
+
+        return 1;
     }
-
-    delete image;
-
-    return 0;
 }

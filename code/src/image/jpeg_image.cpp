@@ -2,7 +2,6 @@
 
 #include <cassert>
 #include <cstdio>
-#include <stdexcept>
 
 #include <jpeglib.h>
 
@@ -21,34 +20,42 @@ JpegImage
 JpegImage::load(uint8_t const *const src_data, size_t const src_size) {
     jpeg_decompress_struct info;
     jpeg_error_mgr err;
+    try {
+        info.err = jpeg_throw_error(&err);
+        jpeg_create_decompress(&info);
 
-    info.err = jpeg_throw_error(&err);
-    jpeg_create_decompress(&info);
+        jpeg_mem_src(&info, src_data, src_size);
 
-    jpeg_mem_src(&info, src_data, src_size);
+        if (!jpeg_read_header(&info, 1)) throw InvalidHeaderLoadingException();
 
-    if (!jpeg_read_header(&info, 1)) throw InvalidHeaderLoadingException();
+        if (!jpeg_start_decompress(&info)) abort();
+        // TODO! support CMYK and grayscale images
+        if (info.output_components != sizeof(JpegPixel))
+            throw InternalLoadingException("Unsupported colour format.");
 
-    if (!jpeg_start_decompress(&info)) abort();
-    // TODO! support CMYK and grayscale images
-    if (info.output_components != sizeof(JpegPixel))
-        throw InternalLoadingException("Unsupported colour format.");
+        let width = info.image_width;
+        let height = info.image_height;
 
-    let width = info.image_width;
-    let height = info.image_height;
+        let buf = new JpegPixel[width * height];
 
-    let buf = new JpegPixel[width * height];
+        while (info.output_scanline < height) {
+            JpegPixel *buf_ptr = buf + info.output_scanline * width;
 
-    while (info.output_scanline < height) {
-        JpegPixel *buf_ptr = buf + info.output_scanline * width;
+            jpeg_read_scanlines(
+                &info,
+                reinterpret_cast<uint8_t **>(&buf_ptr),
+                1
+            );
+        }
 
-        jpeg_read_scanlines(&info, reinterpret_cast<uint8_t **>(&buf_ptr), 1);
+        jpeg_finish_decompress(&info);
+        jpeg_destroy_decompress(&info);
+
+        return JpegImage(buf, Size(width, height));
+    } catch (std::exception &e) {
+        jpeg_destroy_decompress(&info);
+        throw;
     }
-
-    jpeg_finish_decompress(&info);
-    jpeg_destroy_decompress(&info);
-
-    return JpegImage(buf, Size(width, height));
 }
 
 JpegImage::~JpegImage() { delete[] data; }
