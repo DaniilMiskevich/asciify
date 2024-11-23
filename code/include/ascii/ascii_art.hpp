@@ -1,7 +1,7 @@
 #ifndef ASCII_ART_HPP
 #define ASCII_ART_HPP
 
-#include <ostream>
+#include <stdexcept>
 
 #include "ascii/ascii_el.hpp"
 #include "dims.hpp"
@@ -13,6 +13,9 @@ class AsciiArt {
     : image(image),
       size(image.get_size() / char_size),
       els(new AsciiEl[size.get_area()]()) {}
+
+    AsciiArt(AsciiArt const &other)
+    : AsciiArt(other.image, other.image.get_size() / other.size) {}
 
     ~AsciiArt() { delete[] els; }
 
@@ -28,9 +31,6 @@ class AsciiArt {
             throw std::out_of_range("`pos` is outside the image.");
         return els[pos.x + pos.y * size.w];
     }
-
-    friend std::ostream &
-    operator<<(std::ostream &stream, AsciiArt const &ascii_art);
 
    private:
     Image const &image;

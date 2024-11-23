@@ -7,7 +7,7 @@
 #include <webp/decode.h>
 
 WebpImage
-WebpImage::load(uint8_t const *const src_data, size_t const src_size) {
+WebpImage::decode(uint8_t const *const src_data, size_t const src_size) {
     int width, height;
     let data = reinterpret_cast<WebpPixel const *>(
         WebPDecodeRGB(src_data, src_size, &width, &height)

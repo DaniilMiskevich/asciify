@@ -17,7 +17,7 @@ static struct jpeg_error_mgr *jpeg_throw_error(struct jpeg_error_mgr *err) {
 }
 
 JpegImage
-JpegImage::load(uint8_t const *const src_data, size_t const src_size) {
+JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
     jpeg_decompress_struct info;
     jpeg_error_mgr err;
     try {

@@ -9,11 +9,11 @@
 template <typename T>
 static void pass_image(uint8_t const *const src_data, size_t const src_size) {
     try {
-        throw new T(T::load(src_data, src_size));
+        throw new T(T::decode(src_data, src_size));
     } catch (std::exception &e) {}
 }
 
-Image const *ImageLoader::load(char const *const filename) const {
+Image const *ImageLoader::decode(char const *const filename) const {
     static_assert(
         sizeof(char) == sizeof(uint8_t),
         "This code is expected to work on 1-byte chars only."

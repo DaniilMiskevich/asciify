@@ -8,7 +8,8 @@
 
 class WebpImage : public Image {
    public:
-    static WebpImage load(uint8_t const *const src_data, size_t const src_size);
+    static WebpImage
+    decode(uint8_t const *const src_data, size_t const src_size);
 
     ~WebpImage();
 

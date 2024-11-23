@@ -10,6 +10,7 @@ refs:
 #include <iostream>
 
 #include "ascii/ascii_art.hpp"
+#include "ascii/ascii_art_writer.hpp"
 #include "ascii/color_ascii_effect.hpp"
 #include "ascii/edge_ascii_effect.hpp"
 #include "ascii/fill_ascii_effect.hpp"
@@ -23,34 +24,29 @@ void run() {
 
     // let font = Font::load("font.ttf");
 
-    letmut image = image_loader.load("test.jpeg");
-    // letmut image = image_loader.load("test.webp");
-    // letmut image = image_loader.load("CMakeLists.txt");
-
-    std::cout << "Image loaded (" << image->get_size().w << "x"
-              << image->get_size().h << ")" << "\n";
-
     let char_size = Size(10, 22) / CHAR_SCALE;
-    letmut ascii_art = AsciiArt(*image, char_size);
 
     let fill = FillAsciiEffect(" .,-:+*csS$@");
     let edges = EdgeAsciiEffect(0.5);
-    let color = ColorAsciiEffect<true>();
+    let color = ColorAsciiEffect();
+
+    letmut image = image_loader.decode("test.jpeg");
+    // letmut image = image_loader.load("test.webp");
+    // letmut image = image_loader.load("CMakeLists.txt");
+    std::cout << "Image loaded (" << image->get_size().w << "x"
+              << image->get_size().h << ")" << "\n";
+
+    letmut ascii_art = AsciiArt(*image, char_size);
 
     fill(ascii_art);
     edges(ascii_art);
     color(ascii_art);
 
-    std::cout << ascii_art;
-
-    // TODO temporary impl of file output
-    {
-        letmut out = std::ofstream("out.txt");
-        out.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-        out << ascii_art;
-    }
-
     delete image;
+
+    let writer = AsciiArtWriter(ascii_art);
+    writer.write_to(std::cout, AsciiArtWriter::COLOR_MODE_TRUE);
+    writer.write_to_file("out.txt");
 }
 
 int main() {

@@ -12,7 +12,8 @@ class JpegImage : public Image {
     class InternalLoadingException;
     class InvalidHeaderLoadingException;
 
-    static JpegImage load(uint8_t const *const src_data, size_t const src_size);
+    static JpegImage
+    decode(uint8_t const *const src_data, size_t const src_size);
 
     ~JpegImage();
 

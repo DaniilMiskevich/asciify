@@ -1,20 +1,63 @@
-
 #ifndef ASCII_EL_HPP
 #define ASCII_EL_HPP
 
-#include <ostream>
+#include "color.hpp"
+#include "conviniences.hpp"
 
 struct AsciiEl {
-    AsciiEl() : AsciiEl(" ") {}
+    AsciiEl() : AsciiEl(' ') {}
 
-    explicit AsciiEl(std::string const data) : data(data) {}
+    explicit AsciiEl(char const c, Color const color = Color::hex(0xFFFFFF))
+    : c(c), true_color(color), indexed_color_index(color_to_indexed(color)) {}
 
-    explicit AsciiEl(char const c) : data(std::string(1, c)) {}
+    char c;
 
-    std::string data;
+    constexpr unsigned get_indexed_color_index() const {
+        return indexed_color_index;
+    }
+    constexpr Color get_true_color() const { return true_color; }
 
-    friend std::ostream &operator<<(std::ostream &stream, AsciiEl const &el) {
-        return stream << el.data;
+    void set_true_color(Color const value) {
+        true_color = value;
+        indexed_color_index = color_to_indexed(value);
+    }
+
+   private:
+    Color true_color;
+    unsigned indexed_color_index;
+
+    static constexpr Color const indexed_colors[] = {
+#ifdef _MSC_BUILD
+        // windows console colors
+        Color::rgb255(12, 12, 12),
+        Color::rgb255(197, 15, 31),
+        Color::rgb255(19, 161, 14),
+        Color::rgb255(193, 156, 0),
+        Color::rgb255(0, 55, 218),
+        Color::rgb255(136, 23, 152),
+        Color::rgb255(58, 150, 221),
+        Color::rgb255(204, 204, 204),
+#else
+        // xterm colors
+        Color::rgb255(0, 0, 0),
+        Color::rgb255(205, 0, 0),
+        Color::rgb255(0, 205, 0),
+        Color::rgb255(205, 205, 0),
+        Color::rgb255(0, 0, 238),
+        Color::rgb255(205, 0, 205),
+        Color::rgb255(0, 205, 205),
+        Color::rgb255(229, 229, 229),
+#endif
+    };
+
+    static constexpr unsigned color_to_indexed(Color const color) {
+        letmut closest_i = unsigned(0);
+        for (letmut i = unsigned(1); i < lenof(indexed_colors); i++) {
+            if ((indexed_colors[i] - color).get_magnitude() <=
+                (indexed_colors[closest_i] - color).get_magnitude())
+                closest_i = i;
+        }
+        return closest_i;
     }
 };
 
