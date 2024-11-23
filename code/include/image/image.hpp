@@ -11,7 +11,7 @@ class Image {
    public:
     class LoadingException;
 
-    virtual ~Image() {};
+    virtual ~Image(){};
 
     virtual Size get_size(void) const = 0;
     virtual Color operator[](Pos const pos) const = 0;
@@ -29,16 +29,6 @@ class Image {
         avg /= char_area;
 
         return avg;
-    }
-
-    template <typename T, uint16_t W, uint16_t H>
-    static T filter(T const (&src)[W][H], double const (&kernel)[W][H]) {
-        letmut s = T(0);
-        for (letmut i = uint16_t(0); i < W; i++)
-            for (letmut j = uint16_t(0); j < H; j++)
-                s += src[i][j] * kernel[i][j];
-
-        return s;
     }
 };
 

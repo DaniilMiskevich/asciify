@@ -23,9 +23,6 @@ struct AsciiEl {
     }
 
    private:
-    Color true_color;
-    unsigned indexed_color_index;
-
     static constexpr Color const indexed_colors[] = {
 #ifdef _MSC_BUILD
         // windows console colors
@@ -49,6 +46,9 @@ struct AsciiEl {
         Color::rgb255(229, 229, 229),
 #endif
     };
+
+    Color true_color;
+    unsigned indexed_color_index;
 
     static constexpr unsigned color_to_indexed(Color const color) {
         letmut closest_i = unsigned(0);

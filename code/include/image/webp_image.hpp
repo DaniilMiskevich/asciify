@@ -10,6 +10,7 @@ class WebpImage : public Image {
    public:
     static WebpImage
     decode(uint8_t const *const src_data, size_t const src_size);
+    static void encode(Image const &src, char const *const path);
 
     ~WebpImage();
 
@@ -23,12 +24,12 @@ class WebpImage : public Image {
     }
 
    private:
-    typedef uint8_t WebpPixel[3];
+    typedef uint8_t Pixel[3];
 
-    WebpImage(WebpPixel const *const data, Size const size)
+    WebpImage(Pixel const *const data, Size const size)
     : data(data), size(size) {}
 
-    WebpPixel const *const data;
+    Pixel const *const data;
     Size const size;
 };
 

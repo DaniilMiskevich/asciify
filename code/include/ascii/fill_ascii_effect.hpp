@@ -23,8 +23,10 @@ class FillAsciiEffect : public AsciiEffect {
                     image.get_avg_in_region(pos, image.get_size() / size);
 
                 let lum = avg_col.get_luminance();
-                let i =
-                    lum == 1.0 ? palette_len - 1 : size_t(lum * palette_len);
+
+                letmut i = size_t(lum * palette_len);
+                if (i >= palette_len) i = palette_len - 1;
+
                 dst[pos] = AsciiEl(palette[i]);
             }
         }

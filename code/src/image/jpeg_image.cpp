@@ -28,7 +28,7 @@ JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
 
         if (!jpeg_read_header(&info, 1)) throw InvalidHeaderLoadingException();
 
-        if (!jpeg_start_decompress(&info)) abort();
+        assert(jpeg_start_decompress(&info));
         // TODO! support CMYK and grayscale images
         if (info.output_components != sizeof(JpegPixel))
             throw InternalLoadingException("Unsupported colour format.");

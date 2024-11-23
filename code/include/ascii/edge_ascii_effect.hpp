@@ -5,50 +5,7 @@
 #include <cstring>
 
 #include "ascii/ascii_effect.hpp"
-
-class SobelFilter : public Image {
-   public:
-    SobelFilter(Image const &src) : src(src) {}
-
-    Size get_size(void) const { return src.get_size(); }
-    // TODO? maybe worth to compute once in the constructor
-    Color operator[](Pos const pos) const {
-        static double const gx[3][3] = {
-            {+1, +0, -1},
-            {+2, +0, -2},
-            {+1, +0, -1},
-        };
-        static double const gy[3][3] = {
-            {+1, +2, +1},
-            {+0, +0, +0},
-            {-1, -2, -1},
-        };
-        double const src_pxs[3][3] = {
-            {
-                src[pos - 1].get_magnitude(),
-                src[pos + Pos(0, -1)].get_magnitude(),
-                src[pos + Pos(1, -1)].get_magnitude(),
-            },
-            {
-                src[pos + Pos(-1, 0)].get_magnitude(),
-                src[pos].get_magnitude(),
-                src[pos + Pos(1, 0)].get_magnitude(),
-            },
-            {
-                src[pos + Pos(-1, 1)].get_magnitude(),
-                src[pos + Pos(0, 1)].get_magnitude(),
-                src[pos + 1].get_magnitude(),
-            },
-        };
-
-        let x = Image::filter(src_pxs, gx), y = Image::filter(src_pxs, gy);
-
-        return Color(x, y, 0);
-    }
-
-   private:
-    Image const &src;
-};
+#include "image/filter/sobel_filter.hpp"
 
 class EdgeAsciiEffect : public AsciiEffect {
    public:
@@ -58,7 +15,7 @@ class EdgeAsciiEffect : public AsciiEffect {
     }
 
     void operator()(AsciiArt &dst) const override {
-        let &image = SobelFilter(dst.get_image());
+        let &image = SobelFilteredImage(dst.get_image());
         let size = dst.get_size();
         let char_size = image.get_size() / size;
 
