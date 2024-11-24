@@ -18,10 +18,10 @@ class Image {
 
     Color get_avg_in_region(Pos const pos, Size const size) const {
         letmut avg = Color();
-        for (letmut dx = 0; dx < size.w; dx++)
-            for (letmut dy = 0; dy < size.h; dy++) {
-                let pix =
-                    (*this)[Pos(pos.x * size.w + dx, pos.y * size.h + dy)];
+        letmut dpos = Pos(0, 0);
+        for (dpos.x = 0; dpos.x < size.w; dpos.x++)
+            for (dpos.y = 0; dpos.y < size.h; dpos.y++) {
+                let pix = (*this)[Pos(pos.x * size.w, pos.y * size.h) + dpos];
                 avg += pix;
             }
 

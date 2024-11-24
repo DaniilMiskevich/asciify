@@ -26,7 +26,7 @@ struct Color {
     }
 
     constexpr float get_magnitude() const {
-        return sqrt(r * r + g * g + b * b);
+        return sqrtf(r * r + g * g + b * b);
     }
 
     constexpr explicit operator uint32_t() const {

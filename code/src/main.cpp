@@ -25,9 +25,9 @@ void run() {
 
     let char_size = Size(10, 22) / CHAR_SCALE;
 
-    let fill = FillAsciiEffect(" .,-:+*csS$@");
-    let edges = EdgeAsciiEffect(0.25);
+    let fill = FillAsciiEffect(" .:+*csS&$@");
     let color = ColorAsciiEffect();
+    let edges = EdgeAsciiEffect(0.625, "~`\\|;/", 1.1, 0.85);
 
     // letmut image = image_loader.decode("test.jpeg");
     letmut image = image_loader.decode("test.webp");

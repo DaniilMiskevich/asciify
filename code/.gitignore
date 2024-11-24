@@ -1,4 +1,4 @@
 .cache/
 build/
 out.txt
-sobel_filtered.webp
+*_filter.webp

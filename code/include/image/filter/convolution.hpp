@@ -2,6 +2,7 @@
 #define CONVOLUTION_HPP
 
 #include <cstring>
+#include <functional>
 
 #include "image/image.hpp"
 
@@ -25,10 +26,25 @@ class ConvolvedImage : public Image {
 
 template <typename T, uint16_t W, uint16_t H>
 struct ConvolutionKernel {
-   public:
-    constexpr ConvolutionKernel(T const (&matrix)[H][W]) {
-        memcpy(this->matrix, matrix, sizeof(matrix));
+    ConvolutionKernel() = delete;
+
+    constexpr ConvolutionKernel(
+        T const (&matrix)[H][W],
+        float const factor = 1
+    ) {
+        for (letmut i = uint16_t(0); i < H; i++)
+            for (letmut j = uint16_t(0); j < W; j++)
+                this->matrix[i][j] = matrix[i][j] * factor;
     }
+
+    constexpr ConvolutionKernel(
+        std::function<T(uint16_t const x, uint16_t const y)> fn
+    ) {
+        for (letmut i = uint16_t(0); i < H; i++)
+            for (letmut j = uint16_t(0); j < W; j++) matrix[i][j] = fn(i, j);
+    }
+
+    T matrix[W][H];
 
     ConvolvedImage operator*(Image const &other) const {
         let size = other.get_size();
@@ -74,9 +90,6 @@ struct ConvolutionKernel {
 
         return ConvolvedImage(data, size);
     }
-
-   private:
-    T matrix[W][H];
 };
 
 #endif

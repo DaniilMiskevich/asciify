@@ -1,10 +1,7 @@
 #ifndef SOBEL_FILTER_HPP
 #define SOBEL_FILTER_HPP
 
-#include <climits>
-
 #include "image/filter/convolution.hpp"
-#include "image/image.hpp"
 
 class SobelFilter : public Image {
    public:
@@ -20,28 +17,10 @@ class SobelFilter : public Image {
             {+0, +0, +0},
             {-1, -2, -1},
         }) *
-        src) {
-        let size = x.get_size();
-        letmut max_sqr_magnitude = -INFINITY, min_sqr_magnitude = INFINITY;
-
-        letmut pos = Pos(0, 0);
-        for (pos.x = 0; pos.x < size.w; pos.x++) {
-            for (pos.y = 0; pos.y < size.h; pos.y++) {
-                let x = this->x[pos].r, y = this->y[pos].r;
-                let sqr_magnitude = x * x + y * y;
-
-                if (sqr_magnitude > max_sqr_magnitude)
-                    max_sqr_magnitude = sqr_magnitude;
-                else if (sqr_magnitude < min_sqr_magnitude)
-                    min_sqr_magnitude = sqr_magnitude;
-            }
-        }
-
-        sqr_normalization_factor = max_sqr_magnitude - min_sqr_magnitude;
-        sqr_normalization_offset = -min_sqr_magnitude;
-    }
+        src) {}
 
     Size get_size(void) const override { return x.get_size(); }
+
     // x and y gradienst are stored in r and g channels respectfully
     Color operator[](Pos const pos) const override {
         return Color(
@@ -53,7 +32,6 @@ class SobelFilter : public Image {
 
    private:
     ConvolvedImage const x, y;
-    float sqr_normalization_factor, sqr_normalization_offset;
 };
 
 #endif
