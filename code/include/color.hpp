@@ -21,11 +21,11 @@ struct Color {
 
     float r, g, b;
 
-    constexpr double get_luminance() const {
+    constexpr float get_luminance() const {
         return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     }
 
-    constexpr double get_magnitude() const {
+    constexpr float get_magnitude() const {
         return sqrt(r * r + g * g + b * b);
     }
 

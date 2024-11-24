@@ -3,7 +3,7 @@
 
 class Font {
    public:
-    static Font load(char const *const path, double const font_size = 12);
+    static Font load(char const *const path, float const font_size = 12);
 
     ~Font();
 

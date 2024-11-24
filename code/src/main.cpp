@@ -15,7 +15,6 @@ refs:
 #include "ascii/fill_ascii_effect.hpp"
 #include "conviniences.hpp"
 #include "image/image_loader.hpp"
-#include "image/webp_image.hpp"
 
 #define CHAR_SCALE (1.25)
 
@@ -27,14 +26,12 @@ void run() {
     let char_size = Size(10, 22) / CHAR_SCALE;
 
     let fill = FillAsciiEffect(" .,-:+*csS$@");
-    let edges = EdgeAsciiEffect(0.5);
+    let edges = EdgeAsciiEffect(0.25);
     let color = ColorAsciiEffect();
 
     // letmut image = image_loader.decode("test.jpeg");
-    letmut image1 = image_loader.decode("test.webp");
+    letmut image = image_loader.decode("test.webp");
     // letmut image = image_loader.decode("CMakeLists.txt");
-    letmut image = new SobelFilteredImage(*image1);
-    WebpImage::encode(*image, "sobel_filtered.webp");
     std::cout << "Image loaded (" << image->get_size().w << "x"
               << image->get_size().h << ")" << "\n";
 

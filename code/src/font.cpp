@@ -10,7 +10,7 @@
 #include "conviniences.hpp"
 
 // TODO? maybe make library static/global
-Font Font::load(char const *const path, double const font_size) {
+Font Font::load(char const *const path, float const font_size) {
     FT_Library ft = nullptr;
     let handle_err = [](FT_Error err, char const *const msg = "error") {
         if (err != FT_Err_Ok) throw std::runtime_error(msg);
