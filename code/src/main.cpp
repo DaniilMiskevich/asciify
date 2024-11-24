@@ -4,6 +4,8 @@ refs:
         - https://www.youtube.com/watch?v=gg40RWiaHRY
     - gradients:
         - https://paulbourke.net/dataformats/asciiart/
+    - dog:
+        - https://users.cs.northwestern.edu/~sco590/winnemoeller-cag2012.pdf
 */
 
 #include <iostream>
@@ -27,7 +29,7 @@ void run() {
 
     let fill = FillAsciiEffect(" .:+*csS&$@");
     let color = ColorAsciiEffect();
-    let edges = EdgeAsciiEffect(0.625, "~`\\|;/", 1.1, 0.85);
+    let edges = EdgeAsciiEffect(4, "~`\\|;/");
 
     // letmut image = image_loader.decode("test.jpeg");
     letmut image = image_loader.decode("test.webp");
@@ -44,7 +46,7 @@ void run() {
     delete image;
 
     let writer = AsciiArtWriter(ascii_art);
-    writer.write_to(std::cout, AsciiArtWriter::COLOR_MODE_TRUE);
+    writer.write_to(std::cout, AsciiArtWriter::COLOR_MODE_INDEXED);
     writer.write_to_file("out.txt");
 }
 

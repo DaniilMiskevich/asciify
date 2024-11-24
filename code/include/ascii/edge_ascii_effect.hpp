@@ -14,8 +14,8 @@ class EdgeAsciiEffect : public AsciiEffect {
     EdgeAsciiEffect(
         float const threshold,
         char const *const palette = "-\\|/",
-        float const dog_eps = 1.1,
-        float const dog_p = 0.75
+        float const dog_eps = 1,
+        float const dog_p = 10
     )
     : threshold(threshold),
       palette(palette),
@@ -27,7 +27,7 @@ class EdgeAsciiEffect : public AsciiEffect {
         let dog_filter = DoGFilter(dst.get_image(), dog_eps, dog_p);
         let sobel_filter = SobelFilter(dog_filter);
 
-        // TODO!!! for debugging
+        // TODO remove later; for debugging only
         WebpImage::encode(dog_filter, "dog_filter.webp");
         WebpImage::encode(sobel_filter, "sobel_filter.webp");
 
@@ -59,7 +59,7 @@ class EdgeAsciiEffect : public AsciiEffect {
                         else if (i < 0)
                             i = palette_len + i;
 
-                        edge_weights[i] += pix.get_magnitude();
+                        edge_weights[i] += pix.get_sqr_magnitude();
                     }
 
                 letmut total_edge_weight = float(0);

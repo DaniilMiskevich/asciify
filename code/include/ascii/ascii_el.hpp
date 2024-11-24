@@ -53,8 +53,8 @@ struct AsciiEl {
     static constexpr unsigned color_to_indexed(Color const color) {
         letmut closest_i = unsigned(0);
         for (letmut i = unsigned(1); i < lenof(indexed_colors); i++) {
-            if ((indexed_colors[i] - color).get_magnitude() <=
-                (indexed_colors[closest_i] - color).get_magnitude())
+            if ((indexed_colors[i] - color).get_sqr_magnitude() <=
+                (indexed_colors[closest_i] - color).get_sqr_magnitude())
                 closest_i = i;
         }
         return closest_i;

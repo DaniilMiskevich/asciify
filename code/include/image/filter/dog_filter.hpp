@@ -16,7 +16,7 @@ class DoGFilter : public Image {
    public:
     DoGFilter(Image const &src, float const eps, float const p = 1)
     : a(GaussianKernel<7>() * src),
-      b(GaussianKernel<3>() * src),
+      b(GaussianKernel<5>() * src),
       eps(eps),
       p(p) {}
 
@@ -26,8 +26,7 @@ class DoGFilter : public Image {
     Color operator[](Pos const pos) const override {
         let pix = this->a[pos] * (1 + p) - this->b[pos] * p;
 
-        letmut r = pix.get_magnitude();
-        return r > eps ? Color(1, 1, 1) : Color();
+        return pix.get_sqr_magnitude() > eps * eps ? Color(1, 1, 1) : Color();
     }
 
    private:

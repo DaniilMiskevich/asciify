@@ -25,9 +25,8 @@ struct Color {
         return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     }
 
-    constexpr float get_magnitude() const {
-        return sqrtf(r * r + g * g + b * b);
-    }
+    constexpr float get_sqr_magnitude() const { return r * r + g * g + b * b; }
+    constexpr float get_magnitude() const { return sqrtf(get_sqr_magnitude()); }
 
     constexpr explicit operator uint32_t() const {
         return uint8_t(r * 0xFF) << 16 | uint8_t(g * 0xFF) << 8 |
