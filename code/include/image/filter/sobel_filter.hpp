@@ -1,14 +1,14 @@
-#ifndef SOBEL_FILTERED_IMAGE_HPP
-#define SOBEL_FILTERED_IMAGE_HPP
+#ifndef SOBEL_FILTER_HPP
+#define SOBEL_FILTER_HPP
 
 #include <climits>
 
 #include "image/filter/convolution.hpp"
 #include "image/image.hpp"
 
-class SobelFilteredImage : public Image {
+class SobelFilter : public Image {
    public:
-    SobelFilteredImage(Image const &src)
+    SobelFilter(Image const &src)
     : x(ConvolutionKernel<float, 3, 3>({
             {+1, +0, -1},
             {+2, +0, -2},
@@ -42,6 +42,7 @@ class SobelFilteredImage : public Image {
     }
 
     Size get_size(void) const override { return x.get_size(); }
+    // x and y gradienst are stored in r and g channels respectfully
     Color operator[](Pos const pos) const override {
         return Color(
             this->x[pos].get_luminance(),

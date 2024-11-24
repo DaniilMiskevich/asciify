@@ -15,7 +15,7 @@ class EdgeAsciiEffect : public AsciiEffect {
     }
 
     void operator()(AsciiArt &dst) const override {
-        let image = SobelFilteredImage(dst.get_image());
+        let image = SobelFilter(dst.get_image());
         let size = dst.get_size();
         let char_size = image.get_size() / size;
 
