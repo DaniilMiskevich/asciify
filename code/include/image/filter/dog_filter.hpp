@@ -20,13 +20,14 @@ class DoGFilter : public Image {
       eps(eps),
       p(p) {}
 
-    Size get_size(void) const override { return a.get_size(); }
+    Size size(void) const override { return a.size(); }
 
     // x and y gradienst are stored in r and g channels respectfully
-    Color operator[](Pos const pos) const override {
-        let pix = a[pos] * (1 + p) - b[pos] * p;
-        return pix.get_sqr_magnitude() > eps * eps ? Color(0xFFFFFF)
-                                                   : Color(0x000000);
+    Color const &operator[](Pos const pos) const override {
+        static let bright = Color(0xFFFFFF), dim = Color(0x000000);
+
+        let px = a[pos] * (1 + p) - b[pos] * p;
+        return px.sqr_magnitude() > eps * eps ? bright : dim;
     }
 
    private:

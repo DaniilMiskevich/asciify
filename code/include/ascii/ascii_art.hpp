@@ -52,14 +52,12 @@ class AsciiArt {
 
     AsciiArt(Image const &image, Size const char_size)
     : image(image),
-      size(image.get_size() / char_size),
-      els(new AsciiEl[size.get_area()]()) {}
+      size(image.size() / char_size),
+      els(new AsciiEl[size.area()]()) {}
 
     AsciiArt(AsciiArt const &other)
-    : image(other.image),
-      size(other.size),
-      els(new AsciiEl[size.w * size.h]()) {
-        std::copy(other.els, other.els + size.w * size.h, els);
+    : image(other.image), size(other.size), els(new AsciiEl[size.area()]()) {
+        std::copy(other.els, other.els + size.area(), els);
     }
 
     ~AsciiArt() { delete[] els; }

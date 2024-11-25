@@ -3,7 +3,6 @@
 
 #include <cstddef>
 
-#include "conviniences.hpp"
 #include "image/image.hpp"
 
 class WebpImage : public Image {
@@ -14,34 +13,30 @@ class WebpImage : public Image {
     static void encode(Image const &src, char const *const path);
 
     WebpImage(WebpImage const &other)
-    : size(other.size), data(new Pixel[size.w * size.h]()) {
+    : _size(other._size), data(new Color[_size.area()]()) {
         std::copy(
             other.data,
-            other.data + size.w * size.h,
-            const_cast<Pixel *>(data)
+            other.data + _size.area(),
+            const_cast<Color *>(data)
         );
     }
 
-    ~WebpImage();
+    ~WebpImage() { delete[] data; }
 
-    Size get_size() const override { return size; }
+    Size size() const override { return _size; }
 
-    Color operator[](Pos const pos) const override {
-        if (pos.x >= size.w || pos.y >= size.h) return Color(0x000000);
-        let px = data[pos.x + size.w * pos.y];
-        return Color::rgb24(px.r, px.g, px.b);
+    Color const &operator[](Pos pos) const override {
+        if (pos.x >= _size.w) pos.x = _size.w - 1;
+        if (pos.y >= _size.h) pos.y = _size.h - 1;
+        return data[pos.x + pos.y * _size.w];
     }
 
    private:
-    struct Pixel {
-        uint8_t r, g, b;
-    };
+    WebpImage(Color const *const data, Size const size)
+    : _size(size), data(data) {}
 
-    WebpImage(Pixel const *const data, Size const size)
-    : size(size), data(data) {}
-
-    Size const size;
-    Pixel const *const data;
+    Size const _size;
+    Color const *const data;
 };
 
 #endif

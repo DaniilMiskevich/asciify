@@ -2,6 +2,7 @@
 
 #include "image/webp_image.hpp"
 
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <new>
@@ -9,25 +10,35 @@
 #include <webp/decode.h>
 #include <webp/encode.h>
 
+struct Pixel {
+    uint8_t r, g, b;
+};
+
 WebpImage
 WebpImage::decode(uint8_t const *const src_data, size_t const src_size) {
     int width, height;
-    let data = reinterpret_cast<Pixel const *>(
+    let buf = reinterpret_cast<Pixel *>(
         WebPDecodeRGB(src_data, src_size, &width, &height)
     );
-    if (data == nullptr) throw std::bad_alloc();
+    if (buf == nullptr) throw std::bad_alloc();
+
+    let data = new Color[width * height]();
+    std::transform(buf, buf + width * height, data, [](Pixel const px) {
+        return Color::rgb24(px.r, px.g, px.b);
+    });
+
+    WebPFree(buf);
 
     return WebpImage(data, Size(width, height));
 }
 
 void WebpImage::encode(Image const &src, char const *const path) {
-    let size = src.get_size();
+    let size = src.size();
 
-    let pixels = new Pixel[size.get_area()];
-    for (letmut i = size_t(0); i < size.get_area(); i++) {
+    let pixels = new Pixel[size.area()]();
+    for (letmut i = size_t(0); i < size.area(); i++) {
         let col = src[Pos(i % size.w, i / size.w)];
-        pixels[i].r = col.get_r8(), pixels[i].g = col.get_g8(),
-        pixels[i].b = col.get_b8();
+        pixels[i].r = col.r8(), pixels[i].g = col.g8(), pixels[i].b = col.b8();
     }
 
     uint8_t *out;
@@ -50,7 +61,6 @@ void WebpImage::encode(Image const &src, char const *const path) {
     }
 
     WebPFree(out);
+
     delete[] pixels;
 }
-
-WebpImage::~WebpImage() { WebPFree(const_cast<Pixel *>(data)); }

@@ -11,7 +11,7 @@ struct Size {
 
     uint16_t w, h;
 
-    constexpr unsigned get_area() const { return w * h; }
+    constexpr unsigned area() const { return w * h; }
 
     constexpr Size operator+(Size const &other) const {
         return Size(w + other.w, h + other.h);
@@ -55,6 +55,9 @@ struct Pos {
     }
     constexpr Pos operator-(Pos const &other) const {
         return Pos(x - other.x, y - other.y);
+    }
+    constexpr Pos operator*(Size const &other) const {
+        return Pos(x * other.w, y * other.h);
     }
     template <typename T>
     constexpr Pos operator*(T const &other) const {

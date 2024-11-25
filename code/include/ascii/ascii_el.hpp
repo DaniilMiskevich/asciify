@@ -57,8 +57,8 @@ struct AsciiEl {
                    indexed_colors,
                    indexed_colors + lenof(indexed_colors),
                    [&color](Color const &a, Color const &b) {
-                       return (a - color).get_sqr_magnitude() <=
-                              (b - color).get_sqr_magnitude();
+                       return (a - color).sqr_magnitude() <=
+                              (b - color).sqr_magnitude();
                    }
                ) -
                indexed_colors;

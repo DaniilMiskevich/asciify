@@ -30,7 +30,7 @@ void run() {
     letmut image = image_loader.decode("test.jpeg");
     // letmut image = image_loader.decode("test.webp");
     // letmut image = image_loader.decode("CMakeLists.txt");
-    let image_size = image->get_size();
+    let image_size = image->size();
     std::cout << "image size: " << image_size.w << "x" << image_size.h << "\n";
 
     letmut ascii_art = AsciiArt(*image, FONT_CHAR_SIZE / CHAR_SCALE);

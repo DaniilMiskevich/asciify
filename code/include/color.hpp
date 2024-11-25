@@ -20,19 +20,19 @@ struct Color {
 
     float r, g, b;
 
-    constexpr uint8_t get_r8() const { return r * 0xFF; }
-    constexpr uint8_t get_g8() const { return g * 0xFF; }
-    constexpr uint8_t get_b8() const { return b * 0xFF; }
+    constexpr uint8_t r8() const { return r * 0xFF; }
+    constexpr uint8_t g8() const { return g * 0xFF; }
+    constexpr uint8_t b8() const { return b * 0xFF; }
 
-    constexpr float get_sum() const {
+    constexpr float sum() const {
         return 0.3333 * r + 0.3333 * g + 0.3333 * b + 0.0001;
     }
-    constexpr float get_luminance() const {
+    constexpr float luminance() const {
         return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     }
 
-    constexpr float get_sqr_magnitude() const { return r * r + g * g + b * b; }
-    constexpr float get_magnitude() const { return sqrtf(get_sqr_magnitude()); }
+    constexpr float sqr_magnitude() const { return r * r + g * g + b * b; }
+    constexpr float magnitude() const { return sqrtf(sqr_magnitude()); }
 
     constexpr explicit operator uint32_t() const {
         return uint8_t(r * 0xFF) << 16 | uint8_t(g * 0xFF) << 8 |

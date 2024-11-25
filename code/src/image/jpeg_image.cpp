@@ -1,5 +1,6 @@
 #include "image/jpeg_image.hpp"
 
+#include <algorithm>
 #include <cassert>
 #include <cstdio>
 
@@ -18,6 +19,10 @@ static struct jpeg_error_mgr *jpeg_throw_error(struct jpeg_error_mgr *err) {
 
 JpegImage
 JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
+    struct Pixel {
+        uint8_t r, g, b;
+    };
+
     jpeg_decompress_struct info;
     jpeg_error_mgr err;
     try {
@@ -27,9 +32,8 @@ JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
         jpeg_mem_src(&info, src_data, src_size);
 
         if (!jpeg_read_header(&info, 1)) throw InvalidHeaderLoadingException();
+        if (!jpeg_start_decompress(&info)) throw std::bad_alloc();
 
-        // TODO
-        assert(jpeg_start_decompress(&info));
         // TODO! support CMYK and grayscale images
         if (info.output_components != sizeof(Pixel))
             throw InternalLoadingException("Unsupported colour format.");
@@ -49,14 +53,19 @@ JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
             );
         }
 
+        let data = new Color[width * height]();
+        std::transform(buf, buf + width * height, data, [](Pixel const px) {
+            return Color::rgb24(px.r, px.g, px.b);
+        });
+
+        delete[] buf;
+
         jpeg_finish_decompress(&info);
         jpeg_destroy_decompress(&info);
 
-        return JpegImage(buf, Size(width, height));
+        return JpegImage(data, Size(width, height));
     } catch (std::exception &e) {
         jpeg_destroy_decompress(&info);
         throw;
     }
 }
-
-JpegImage::~JpegImage() { delete[] data; }

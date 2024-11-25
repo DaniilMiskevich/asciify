@@ -11,13 +11,14 @@ class Image {
    public:
     class Iterator {
        public:
-        Iterator(Pos const pos, Image const &image) : pos(pos), image(image) {}
+        Iterator(Pos const pos, Image const &image)
+        : pos(pos), size(image.size()), image(image) {}
+        Iterator(Pos const pos, Image const &image, Size const region_size)
+        : pos(pos), size(region_size), image(image) {}
 
         Pos const &get_pos() const { return pos; }
 
         Iterator &operator++() {
-            let size = art.get_size();
-
             pos.x++;
             if (pos.x < size.w) return *this;
 
@@ -34,7 +35,7 @@ class Image {
             return it;
         }
 
-        Color operator*() const { return image[pos]; }
+        Color const &operator*() const { return image[pos]; }
 
         bool operator==(Iterator const &other) const {
             return pos == other.pos;
@@ -45,35 +46,38 @@ class Image {
 
        private:
         Pos pos;
+        Size const size;
         Image const &image;
     };
 
+    class Region;
+
     virtual ~Image(){};
 
-    virtual Size get_size(void) const = 0;
-    virtual Color operator[](Pos const pos) const = 0;
+    virtual Size size(void) const = 0;
+    virtual Color const &operator[](Pos const pos) const = 0;
 
-    Iterator begin() { return Iterator(Pos(0, 0), *this); }
-    Iterator end() { return Iterator(Pos(0, get_size().h), *this); }
-
-    Color get_avg_in_region(Pos const pos, Size const size) const {
-        letmut avg = Color();
-        letmut dpos = Pos(0, 0);
-        // TODO iterators + algorithms
-        for (dpos.x = 0; dpos.x < size.w; dpos.x++)
-            for (dpos.y = 0; dpos.y < size.h; dpos.y++) {
-                let pix = (*this)[Pos(pos.x * size.w, pos.y * size.h) + dpos];
-                avg += pix;
-            }
-
-        let char_area = size.get_area();
-        avg /= char_area;
-
-        return avg;
-    }
+    Iterator begin() const { return Iterator(Pos(0, 0), *this); }
+    Iterator end() const { return Iterator(Pos(0, size().h), *this); }
 
    public:
     class LoadingException;
+};
+
+class Image::Region : public Image {
+   public:
+    Region(Image const &base, Pos const offset, Size const size)
+    : offset(offset), _size(size), base(base) {}
+
+    Size size() const override { return _size; }
+    Color const &operator[](Pos const pos) const override {
+        return base[offset + pos];
+    }
+
+   private:
+    Pos const offset;
+    Size const _size;
+    Image const &base;
 };
 
 class Image::LoadingException : public std::exception {
