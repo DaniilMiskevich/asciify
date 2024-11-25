@@ -34,4 +34,4 @@ Font Font::load(char const *const path, float const font_size) {
 
     return Font(ft);
 }
-Font::~Font() { FT_Done_FreeType(FT_Library(this->ft)); }
+Font::~Font() { FT_Done_FreeType(ft); }

@@ -9,31 +9,42 @@
 
 class JpegImage : public Image {
    public:
-    class InternalLoadingException;
-    class InvalidHeaderLoadingException;
-
     static JpegImage
     decode(uint8_t const *const src_data, size_t const src_size);
 
+    JpegImage(JpegImage const &other)
+    : size(other.size), data(new Pixel[size.w * size.h]()) {
+        std::copy(
+            other.data,
+            other.data + size.w * size.h,
+            const_cast<Pixel *>(data)
+        );
+    }
+
     ~JpegImage();
-    // TODO copy + move
 
     Size get_size() const override { return size; }
 
     Color operator[](Pos const pos) const override {
         if (pos.x >= size.w || pos.y >= size.h) return Color(0x000000);
         let px = data[pos.x + size.w * pos.y];
-        return Color::rgb24(px[0], px[1], px[2]);
+        return Color::rgb24(px.r, px.g, px.b);
     }
 
    private:
-    typedef uint8_t Pixel[3];
+    struct Pixel {
+        uint8_t r, g, b;
+    };
 
     JpegImage(Pixel const *const data, Size const size)
-    : data(data), size(size) {}
+    : size(size), data(data) {}
 
-    Pixel const *const data;
     Size const size;
+    Pixel const *const data;
+
+   public:
+    class InternalLoadingException;
+    class InvalidHeaderLoadingException;
 };
 
 class JpegImage::InternalLoadingException : public Image::LoadingException {

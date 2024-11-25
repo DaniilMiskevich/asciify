@@ -43,6 +43,13 @@ struct Pos {
 
     uint16_t x, y;
 
+    constexpr bool operator==(Pos const &other) const {
+        return x == other.x && y == other.y;
+    }
+    constexpr bool operator!=(Pos const &other) const {
+        return !(*this == other);
+    }
+
     constexpr Pos operator+(Pos const &other) const {
         return Pos(x + other.x, y + other.y);
     }

@@ -23,39 +23,36 @@ void EdgeAsciiEffect::operator()(AsciiArt &dst) const {
     float *const edge_weights =
         reinterpret_cast<float *>(alloca(elsizeof(edge_weights) * palette_len));
 
-    letmut pos = Pos(0, 0);
-    for (pos.x = 0; pos.x < art_size.w; pos.x++) {
-        for (pos.y = 0; pos.y < art_size.h; pos.y++) {
-            std::fill(edge_weights, edge_weights + palette_len, 0);
+    for (letmut it = dst.begin(); it != dst.end(); it++) {
+        std::fill(edge_weights, edge_weights + palette_len, 0);
 
-            letmut dpos = Pos(0, 0);
-            // TODO iterators
-            for (dpos.x = 0; dpos.x < char_size.w; dpos.x++)
-                for (dpos.y = 0; dpos.y < char_size.h; dpos.y++) {
-                    let pix = image
-                        [Pos(pos.x * char_size.w, pos.y * char_size.h) + dpos];
+        letmut dpos = Pos(0, 0);
+        // TODO iterators
+        for (dpos.x = 0; dpos.x < char_size.w; dpos.x++)
+            for (dpos.y = 0; dpos.y < char_size.h; dpos.y++) {
+                let pos = it.get_pos();
+                let pix =
+                    image[Pos(pos.x * char_size.w, pos.y * char_size.h) + dpos];
 
-                    // must be negated to preserve palette in normal order
-                    let angle = -atan2(pix.g, pix.r) / M_PI;
+                // must be negated to preserve palette in normal order
+                let angle = -atan2(pix.g, pix.r) / M_PI;
 
-                    letmut i = size_t(round(angle * palette_len));
-                    if (i == palette_len)
-                        i = 0;
-                    else if (i > palette_len)
-                        i = palette_len + i;
+                letmut i = size_t(round(angle * palette_len));
+                if (i == palette_len)
+                    i = 0;
+                else if (i > palette_len)
+                    i = palette_len + i;
 
-                    edge_weights[i] += pix.get_sqr_magnitude();
-                }
+                edge_weights[i] += pix.get_sqr_magnitude();
+            }
 
-            let total_edge_weight =
-                std::accumulate(edge_weights, edge_weights + palette_len, 0.0);
-            if (total_edge_weight / char_size.get_area() < threshold) continue;
+        let total_edge_weight =
+            std::accumulate(edge_weights, edge_weights + palette_len, 0.0);
+        if (total_edge_weight / char_size.get_area() < threshold) continue;
 
-            let max_i =
-                std::max_element(edge_weights, edge_weights + palette_len) -
-                edge_weights;
+        let max_i = std::max_element(edge_weights, edge_weights + palette_len) -
+                    edge_weights;
 
-            dst[pos] = AsciiEl(palette[max_i]);
-        }
+        (*it) = AsciiEl(palette[max_i]);
     }
 }

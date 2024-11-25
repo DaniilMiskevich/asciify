@@ -24,7 +24,7 @@ class DoGFilter : public Image {
 
     // x and y gradienst are stored in r and g channels respectfully
     Color operator[](Pos const pos) const override {
-        let pix = this->a[pos] * (1 + p) - this->b[pos] * p;
+        let pix = a[pos] * (1 + p) - b[pos] * p;
         return pix.get_sqr_magnitude() > eps * eps ? Color(0xFFFFFF)
                                                    : Color(0x000000);
     }

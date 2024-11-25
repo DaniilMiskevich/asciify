@@ -9,7 +9,15 @@
 class ConvolvedImage : public Image {
    public:
     ConvolvedImage(Color const *const data, Size const size)
-    : data(data), size(size) {}
+    : size(size), data(data) {}
+    ConvolvedImage(ConvolvedImage const &other)
+    : size(other.size), data(new Color[size.w * size.h]()) {
+        std::copy(
+            other.data,
+            other.data + size.w * size.h,
+            const_cast<Color *>(data)
+        );
+    }
 
     ~ConvolvedImage() { delete[] data; }
 
@@ -20,8 +28,8 @@ class ConvolvedImage : public Image {
     }
 
    private:
-    Color const *const data;
     Size const size;
+    Color const *const data;
 };
 
 template <typename T, uint16_t W, uint16_t H>
@@ -29,11 +37,7 @@ struct ConvolutionKernel {
     ConvolutionKernel() = delete;
 
     constexpr ConvolutionKernel(T const (&matrix)[H][W]) {
-        std::copy(
-            &matrix[0][0],              // from the first element
-            &matrix[H - 1][W - 1] + 1,  // past the last element
-            &this->matrix[0][0]         // into the matrix
-        );
+        std::copy(&matrix[0][0], &matrix[0][0] + H * W, &this->matrix[0][0]);
     }
 
     constexpr ConvolutionKernel(
@@ -61,11 +65,10 @@ struct ConvolutionKernel {
             for (pos.y = 0; pos.y < size.h; pos.y++) {
                 // stepping down, so need to calculate the entire section
                 if (pos.y > 0) {
-                    std::move(
-                        &src[1][0],  // from the first element of the second row
-                        &src[H - 1][W - 1] + 1,  // past the last element
-                        &src[0][0]               // into the first row
-                    );
+                    // just move each row up a row
+                    for (letmut row = src; row < src + H - 1; row++)
+                        std::move(&*(row + 1)[0], &*(row + 1)[0] + W, &*row[0]);
+
                     // and only calculate the last
                     let i = H - 1;
                     for (letmut j = uint16_t(0); j < W; j++) {

@@ -9,13 +9,52 @@
 
 class Image {
    public:
-    class LoadingException;
+    class Iterator {
+       public:
+        Iterator(Pos const pos, Image const &image) : pos(pos), image(image) {}
+
+        Pos const &get_pos() const { return pos; }
+
+        Iterator &operator++() {
+            let size = art.get_size();
+
+            pos.x++;
+            if (pos.x < size.w) return *this;
+
+            pos.x = 0;
+            pos.y++;
+            if (pos.y < size.h) return *this;
+
+            return *this;
+        }
+
+        Iterator operator++(int) {
+            let it = *this;
+            ++(*this);
+            return it;
+        }
+
+        Color operator*() const { return image[pos]; }
+
+        bool operator==(Iterator const &other) const {
+            return pos == other.pos;
+        }
+        bool operator!=(Iterator const &other) const {
+            return pos != other.pos;
+        }
+
+       private:
+        Pos pos;
+        Image const &image;
+    };
 
     virtual ~Image(){};
-    // TODO? move + copy
 
     virtual Size get_size(void) const = 0;
     virtual Color operator[](Pos const pos) const = 0;
+
+    Iterator begin() { return Iterator(Pos(0, 0), *this); }
+    Iterator end() { return Iterator(Pos(0, get_size().h), *this); }
 
     Color get_avg_in_region(Pos const pos, Size const size) const {
         letmut avg = Color();
@@ -32,6 +71,9 @@ class Image {
 
         return avg;
     }
+
+   public:
+    class LoadingException;
 };
 
 class Image::LoadingException : public std::exception {

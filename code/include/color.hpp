@@ -55,29 +55,21 @@ struct Color {
     }
 
     constexpr Color const &operator+=(Color const &other) {
-        this->r += other.r;
-        this->g += other.g;
-        this->b += other.b;
+        r += other.r, g += other.g, b += other.b;
         return *this;
     }
     constexpr Color const &operator-=(Color const &other) {
-        this->r -= other.r;
-        this->g -= other.g;
-        this->b -= other.b;
+        r -= other.r, g -= other.g, b -= other.b;
         return *this;
     }
     template <typename T>
     constexpr Color const &operator*=(T const &other) {
-        this->r *= other;
-        this->g *= other;
-        this->b *= other;
+        r *= other, g *= other, b *= other;
         return *this;
     }
     template <typename T>
     constexpr Color const &operator/=(T const &other) {
-        this->r /= other;
-        this->g /= other;
-        this->b /= other;
+        r /= other, g /= other, b /= other;
         return *this;
     }
 };

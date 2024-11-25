@@ -7,9 +7,10 @@
 
 class ImageLoader {
    public:
-    class UnsupportedFormatException;
-
     Image const *decode(char const *const filename) const;
+
+   public:
+    class UnsupportedFormatException;
 };
 
 class ImageLoader::UnsupportedFormatException : public std::exception {

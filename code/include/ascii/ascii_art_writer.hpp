@@ -18,7 +18,6 @@ class AsciiArtWriter {
         let size = art.get_size();
 
         letmut pos = Pos(0, 0);
-        // TODO iterator
         for (pos.y = 0; pos.y < size.h; pos.y++) {
             for (pos.x = 0; pos.x < size.w; pos.x++) {
                 let el = art[pos];

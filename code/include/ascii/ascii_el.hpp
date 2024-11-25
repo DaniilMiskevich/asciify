@@ -2,9 +2,9 @@
 #define ASCII_EL_HPP
 
 #include <algorithm>
-#include <iterator>
 
 #include "color.hpp"
+#include "conviniences.hpp"
 
 struct AsciiEl {
     AsciiEl() : AsciiEl(' ') {}
@@ -54,8 +54,8 @@ struct AsciiEl {
 
     static constexpr unsigned color_to_indexed(Color const &color) {
         return std::min_element(
-                   std::begin(indexed_colors),
-                   std::end(indexed_colors),
+                   indexed_colors,
+                   indexed_colors + lenof(indexed_colors),
                    [&color](Color const &a, Color const &b) {
                        return (a - color).get_sqr_magnitude() <=
                               (b - color).get_sqr_magnitude();

@@ -13,15 +13,11 @@ class ColorAsciiEffect : public AsciiEffect {
         let &image = dst.get_image();
         let size = dst.get_size();
 
-        letmut pos = Pos(0, 0);
-        // TODO iterator + algorithm
-        for (pos.x = 0; pos.x < size.w; pos.x++) {
-            for (pos.y = 0; pos.y < size.h; pos.y++) {
-                let avg_col =
-                    image.get_avg_in_region(pos, image.get_size() / size);
+        for (letmut it = dst.begin(); it != dst.end(); it++) {
+            let avg_col =
+                image.get_avg_in_region(it.get_pos(), image.get_size() / size);
 
-                dst[pos].set_true_color(avg_col);
-            }
+            it->set_true_color(avg_col);
         }
     }
 
