@@ -1,13 +1,15 @@
 #ifndef ASCII_EL_HPP
 #define ASCII_EL_HPP
 
+#include <algorithm>
+#include <iterator>
+
 #include "color.hpp"
-#include "conviniences.hpp"
 
 struct AsciiEl {
     AsciiEl() : AsciiEl(' ') {}
 
-    explicit AsciiEl(char const c, Color const color = Color::hex(0xFFFFFF))
+    explicit AsciiEl(char const c, Color const &color = Color(0xFFFFFF))
     : c(c), true_color(color), indexed_color_index(color_to_indexed(color)) {}
 
     char c;
@@ -17,7 +19,7 @@ struct AsciiEl {
     }
     constexpr Color get_true_color() const { return true_color; }
 
-    void set_true_color(Color const value) {
+    void set_true_color(Color const &value) {
         true_color = value;
         indexed_color_index = color_to_indexed(value);
     }
@@ -36,28 +38,30 @@ struct AsciiEl {
         Color::rgb255(204, 204, 204),
 #else
         // xterm colors
-        Color::rgb255(0, 0, 0),
-        Color::rgb255(205, 0, 0),
-        Color::rgb255(0, 205, 0),
-        Color::rgb255(205, 205, 0),
-        Color::rgb255(0, 0, 238),
-        Color::rgb255(205, 0, 205),
-        Color::rgb255(0, 205, 205),
-        Color::rgb255(229, 229, 229),
+        Color::rgb24(0, 0, 0),
+        Color::rgb24(205, 0, 0),
+        Color::rgb24(0, 205, 0),
+        Color::rgb24(205, 205, 0),
+        Color::rgb24(0, 0, 238),
+        Color::rgb24(205, 0, 205),
+        Color::rgb24(0, 205, 205),
+        Color::rgb24(229, 229, 229),
 #endif
     };
 
     Color true_color;
     unsigned indexed_color_index;
 
-    static constexpr unsigned color_to_indexed(Color const color) {
-        letmut closest_i = unsigned(0);
-        for (letmut i = unsigned(1); i < lenof(indexed_colors); i++) {
-            if ((indexed_colors[i] - color).get_sqr_magnitude() <=
-                (indexed_colors[closest_i] - color).get_sqr_magnitude())
-                closest_i = i;
-        }
-        return closest_i;
+    static constexpr unsigned color_to_indexed(Color const &color) {
+        return std::min_element(
+                   std::begin(indexed_colors),
+                   std::end(indexed_colors),
+                   [&color](Color const &a, Color const &b) {
+                       return (a - color).get_sqr_magnitude() <=
+                              (b - color).get_sqr_magnitude();
+                   }
+               ) -
+               indexed_colors;
     }
 };
 

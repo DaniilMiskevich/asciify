@@ -8,19 +8,25 @@ struct Color {
     constexpr Color() : r(0.0), g(0.0), b(0.0) {}
     constexpr Color(float const r, float const g, float const b)
     : r(r), g(g), b(b) {}
-    constexpr Color(Color const &other) : Color(other.r, other.g, other.b) {}
-    constexpr Color(Color const &&other) : Color(other.r, other.g, other.b) {}
+    constexpr Color(uint32_t const hex)
+    : r(float((hex >> 16) & 0xFF) / 0xFF),
+      g(float((hex >> 8) & 0xFF) / 0xFF),
+      b(float((hex >> 0) & 0xFF) / 0xFF) {}
 
     static constexpr Color
-    rgb255(uint8_t const r, uint8_t const g, uint8_t const b) {
+    rgb24(uint8_t const r, uint8_t const g, uint8_t const b) {
         return Color(float(r) / 0xFF, float(g) / 0xFF, float(b) / 0xFF);
-    }
-    static constexpr Color hex(uint32_t const hex) {
-        return Color::rgb255(hex >> 16, hex >> 8, hex >> 0);
     }
 
     float r, g, b;
 
+    constexpr uint8_t get_r8() const { return r * 0xFF; }
+    constexpr uint8_t get_g8() const { return g * 0xFF; }
+    constexpr uint8_t get_b8() const { return b * 0xFF; }
+
+    constexpr float get_sum() const {
+        return 0.3333 * r + 0.3333 * g + 0.3333 * b + 0.0001;
+    }
     constexpr float get_luminance() const {
         return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     }
@@ -48,12 +54,6 @@ struct Color {
         return Color(r / other, g / other, b / other);
     }
 
-    constexpr Color const &operator=(Color const &other) {
-        this->r = other.r;
-        this->g = other.g;
-        this->b = other.b;
-        return *this;
-    }
     constexpr Color const &operator+=(Color const &other) {
         this->r += other.r;
         this->g += other.g;

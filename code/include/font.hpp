@@ -2,15 +2,17 @@
 #define FONT_HPP
 
 class Font {
+    typedef struct FT_LibraryRec_ *FT_Library;
+
    public:
     static Font load(char const *const path, float const font_size = 12);
 
     ~Font();
 
    private:
-    Font(void const *const ft) : ft(ft) {}
+    Font(FT_Library ft) : ft(ft) {}
 
-    void const *const ft;
+    FT_Library const ft;
 };
 
 #endif

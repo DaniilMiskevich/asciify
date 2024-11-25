@@ -16,10 +16,11 @@ class AsciiArt {
 
     AsciiArt(AsciiArt const &other)
     : AsciiArt(other.image, other.image.get_size() / other.size) {}
+    // TODO move and copy
 
     ~AsciiArt() { delete[] els; }
 
-    Image const &get_image() { return image; }
+    Image const &get_image() const { return image; }
     Size get_size() const { return size; };
 
     AsciiEl operator[](Pos const pos) const {

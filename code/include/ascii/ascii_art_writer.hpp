@@ -17,9 +17,11 @@ class AsciiArtWriter {
     ) const {
         let size = art.get_size();
 
-        for (unsigned short j = 0; j < size.h; j++) {
-            for (unsigned short i = 0; i < size.w; i++) {
-                let el = art[Pos(i, j)];
+        letmut pos = Pos(0, 0);
+        // TODO iterator
+        for (pos.y = 0; pos.y < size.h; pos.y++) {
+            for (pos.x = 0; pos.x < size.w; pos.x++) {
+                let el = art[pos];
 
                 switch (color_mode) {
                 case COLOR_MODE_NONE: stream << el.c; break;
@@ -37,9 +39,9 @@ class AsciiArtWriter {
 
                     stream << "\033[38;2;"
 
-                           << std::to_string(int(col.r * 0xFF)) + ";"
-                           << std::to_string(int(col.g * 0xFF)) + ";"
-                           << std::to_string(int(col.b * 0xFF)) + "m"
+                           << std::to_string(int(col.get_r8())) + ";"
+                           << std::to_string(int(col.get_g8())) + ";"
+                           << std::to_string(int(col.get_b8())) + "m"
 
                            << el.c
 

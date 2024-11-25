@@ -28,18 +28,19 @@ JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
 
         if (!jpeg_read_header(&info, 1)) throw InvalidHeaderLoadingException();
 
+        // TODO
         assert(jpeg_start_decompress(&info));
         // TODO! support CMYK and grayscale images
-        if (info.output_components != sizeof(JpegPixel))
+        if (info.output_components != sizeof(Pixel))
             throw InternalLoadingException("Unsupported colour format.");
 
         let width = info.image_width;
         let height = info.image_height;
 
-        let buf = new JpegPixel[width * height];
+        let buf = new Pixel[width * height];
 
         while (info.output_scanline < height) {
-            JpegPixel *buf_ptr = buf + info.output_scanline * width;
+            Pixel *buf_ptr = buf + info.output_scanline * width;
 
             jpeg_read_scanlines(
                 &info,

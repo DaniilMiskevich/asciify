@@ -8,7 +8,7 @@ struct GaussianKernel : public ConvolutionKernel<float, S, S> {
     GaussianKernel()
     : ConvolutionKernel<float, S, S>([](uint16_t const i, uint16_t const j) {
           let x = i - 0.5 * S, y = j - 0.5 * S;
-          return 1. / (M_2_PI * S * S) * expf(-(x * x + y * y) / (2 * S * S));
+          return 1.0 / (M_2_PI * S * S) * expf(-(x * x + y * y) / (2 * S * S));
       }) {}
 };
 
@@ -25,8 +25,8 @@ class DoGFilter : public Image {
     // x and y gradienst are stored in r and g channels respectfully
     Color operator[](Pos const pos) const override {
         let pix = this->a[pos] * (1 + p) - this->b[pos] * p;
-
-        return pix.get_sqr_magnitude() > eps * eps ? Color(1, 1, 1) : Color();
+        return pix.get_sqr_magnitude() > eps * eps ? Color(0xFFFFFF)
+                                                   : Color(0x000000);
     }
 
    private:

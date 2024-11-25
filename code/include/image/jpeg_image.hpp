@@ -16,22 +16,23 @@ class JpegImage : public Image {
     decode(uint8_t const *const src_data, size_t const src_size);
 
     ~JpegImage();
+    // TODO copy + move
 
     Size get_size() const override { return size; }
 
     Color operator[](Pos const pos) const override {
-        if (pos.x >= size.w || pos.y >= size.h) return Color::hex(0x000000);
-        let pix = data[pos.x + size.w * pos.y];
-        return Color::rgb255(pix[0], pix[1], pix[2]);
+        if (pos.x >= size.w || pos.y >= size.h) return Color(0x000000);
+        let px = data[pos.x + size.w * pos.y];
+        return Color::rgb24(px[0], px[1], px[2]);
     }
 
    private:
-    typedef uint8_t JpegPixel[3];
+    typedef uint8_t Pixel[3];
 
-    JpegImage(JpegPixel const *const data, Size const size)
+    JpegImage(Pixel const *const data, Size const size)
     : data(data), size(size) {}
 
-    JpegPixel const *const data;
+    Pixel const *const data;
     Size const size;
 };
 

@@ -23,11 +23,7 @@ class SobelFilter : public Image {
 
     // x and y gradienst are stored in r and g channels respectfully
     Color operator[](Pos const pos) const override {
-        return Color(
-            this->x[pos].get_luminance(),
-            this->y[pos].get_luminance(),
-            0
-        );
+        return Color(x[pos].get_sum(), y[pos].get_sum(), 0);
     }
 
    private:

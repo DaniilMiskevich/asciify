@@ -26,6 +26,7 @@ void WebpImage::encode(Image const &src, char const *const path) {
     let pixels = new Pixel[size.get_area()];
     for (letmut i = size_t(0); i < size.get_area(); i++) {
         let col = src[Pos(i % size.w, i / size.w)];
+        // TODO use uint32_t(Color)
         pixels[i][0] = col.r * 0xFF;
         pixels[i][1] = col.g * 0xFF;
         pixels[i][2] = col.b * 0xFF;
@@ -40,6 +41,7 @@ void WebpImage::encode(Image const &src, char const *const path) {
         100,
         &out
     );
+    // TODO
     assert(out_len != 0);
 
     {
