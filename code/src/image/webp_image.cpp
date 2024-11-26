@@ -4,21 +4,20 @@
 
 #include <algorithm>
 #include <fstream>
-#include <iostream>
 #include <new>
 
 #include <webp/decode.h>
 #include <webp/encode.h>
 
 struct Pixel {
-    uint8_t r, g, b;
+    uint8_t r, g, b, a;
 };
 
 Image<Color>
 WebpImage::decode(uint8_t const *const src_data, size_t const src_size) {
     int width, height;
     let buf = reinterpret_cast<Pixel *>(
-        WebPDecodeRGB(src_data, src_size, &width, &height)
+        WebPDecodeRGBA(src_data, src_size, &width, &height)
     );
     if (buf == nullptr) throw std::bad_alloc();
 
@@ -26,7 +25,7 @@ WebpImage::decode(uint8_t const *const src_data, size_t const src_size) {
     letmut image = Image<Color>(size);
 
     std::transform(buf, buf + size.area(), image.begin(), [](Pixel const px) {
-        return Color::rgb24(px.r, px.g, px.b);
+        return Color::rgb24(px.r, px.g, px.b) * px.a / 0xFF;
     });
 
     WebPFree(buf);
@@ -39,7 +38,7 @@ void WebpImage::encode(Image<Color> const &src, char const *const path) {
 
     let pixels = new Pixel[size.area()]();
     std::transform(src.begin(), src.end(), pixels, [](Color const col) {
-        return Pixel{col.r8(), col.g8(), col.b8()};
+        return Pixel{col.r8(), col.g8(), col.b8(), 0xFF};
     });
 
     uint8_t *out;

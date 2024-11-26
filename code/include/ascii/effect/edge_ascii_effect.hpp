@@ -6,8 +6,7 @@
 
 #include "ascii_effect.hpp"
 
-class EdgeAsciiEffect : public AsciiEffect {
-   public:
+struct EdgeAsciiEffect : public AsciiEffect {
     EdgeAsciiEffect(
         float const threshold,
         char const *const palette = "|\\-/",

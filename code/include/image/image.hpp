@@ -6,6 +6,7 @@
 
 #include "conviniences.hpp"
 #include "dims.hpp"
+#include "image/filter/filter.hpp"
 
 template <typename T>
 class Image {
@@ -98,6 +99,7 @@ class Image {
     ~Image() { delete[] data; };
 
     Size size(void) const { return _size; }
+
     T const &operator[](Pos pos) const {
         if (pos.x >= _size.w) pos.x = _size.w - 1;
         if (pos.y >= _size.h) pos.y = _size.h - 1;
@@ -107,6 +109,11 @@ class Image {
         if (pos.x >= _size.w || pos.y >= _size.h)
             throw std::range_error("`pos` is beyond of image size.");
         return data[pos.x + pos.y * _size.w];
+    }
+
+    Image &operator*=(Filter<T, Image> const &other) {
+        other(*this);
+        return *this;
     }
 
     Iterator begin() const { return Iterator(Pos(0, 0), *this); }

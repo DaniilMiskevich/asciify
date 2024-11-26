@@ -8,7 +8,7 @@
 
 class ImageLoader {
    public:
-    Image<Color> decode(char const *const filename) const;
+    Image<Color> *decode(char const *const filename) const;
 
    public:
     class UnsupportedFormatException;

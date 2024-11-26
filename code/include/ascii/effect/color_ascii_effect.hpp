@@ -6,10 +6,7 @@
 
 #include "ascii_effect.hpp"
 
-class ColorAsciiEffect : public AsciiEffect {
-   public:
-    ColorAsciiEffect() {}
-
+struct ColorAsciiEffect : public AsciiEffect {
     void operator()(AsciiArt &dst) const override {
         let &image = dst.image();
         let char_size = image.size() / dst.size();
@@ -23,8 +20,6 @@ class ColorAsciiEffect : public AsciiEffect {
             (*it).set_true_color(avg);
         }
     }
-
-   private:
 };
 
 #endif

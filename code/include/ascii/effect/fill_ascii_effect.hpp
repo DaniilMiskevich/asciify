@@ -8,8 +8,7 @@
 #include "conviniences.hpp"
 #include "image/image.hpp"
 
-class FillAsciiEffect : public AsciiEffect {
-   public:
+struct FillAsciiEffect : public AsciiEffect {
     FillAsciiEffect(char const *const palette = " .:-;=+*#B%@")
     : palette(palette), palette_len(strlen(palette)) {}
 

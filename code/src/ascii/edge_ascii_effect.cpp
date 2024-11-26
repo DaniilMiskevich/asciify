@@ -9,14 +9,14 @@
 #include "image/webp_image.hpp"
 
 void EdgeAsciiEffect::operator()(AsciiArt &dst) const {
-    let &dog_filter = DoGFilter(dst.image(), dog_eps, dog_p).image;
-    let &sobel_filter = SobelFilter(dog_filter).image;
-
+    letmut image = dst.image();
+    image *= DoGFilter(dog_eps, dog_p);
     // TODO for debugging remove later
-    WebpImage::encode(dog_filter, "dog_filter.webp");
-    WebpImage::encode(sobel_filter, "sobel_filter.webp");
+    WebpImage::encode(image, "dog_filter.webp");
+    image *= SobelFilter();
+    // TODO for debugging remove later
+    WebpImage::encode(image, "sobel_filter.webp");
 
-    let &image = sobel_filter;
     let art_size = dst.size();
     let char_size = image.size() / art_size;
 

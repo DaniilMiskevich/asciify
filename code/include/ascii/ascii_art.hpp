@@ -12,6 +12,11 @@ class AsciiArt : public Image<AsciiEl> {
 
     Image<Color> const &image() const { return _image; }
 
+    Image &operator*=(Filter<AsciiEl, AsciiArt> const &other) {
+        other(*this);
+        return *this;
+    }
+
    private:
     Image<Color> const &_image;
 };

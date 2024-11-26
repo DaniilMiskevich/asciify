@@ -2,6 +2,7 @@
 #define DOG_FILTER_HPP
 
 #include "image/filter/convolution.hpp"
+#include "image/filter/filter.hpp"
 
 template <uint16_t S>
 struct GaussianKernel : public ConvolutionKernel<float, S, S> {
@@ -15,20 +16,19 @@ struct GaussianKernel : public ConvolutionKernel<float, S, S> {
 static let g_s = GaussianKernel<7>();
 static let g_ks = GaussianKernel<5>();
 
-struct DoGFilter {
-   public:
-    DoGFilter(Image<Color> const &src, float const eps, float const p = 1)
-    : image(src.size()) {
-        let a = g_s * src, b = g_ks * src;
-        for (letmut it = image.begin(); it != image.end(); it++) {
-            static let bright = Color(0xFFFFFF), dim = Color(0x000000);
+struct DoGFilter : public Filter<Color> {
+    DoGFilter(float const eps, float const p = 1) : eps(eps), p(p) {}
 
+    void operator()(Image<Color> &dst) const override {
+        let a = g_s * dst, b = g_ks * dst;
+        for (letmut it = dst.begin(); it != dst.end(); it++) {
             let px = a[it.pos()] * (1 + p) - b[it.pos()] * p;
-            image[it.pos()] = px.sqr_magnitude() > eps * eps ? bright : dim;
+            dst[it.pos()] = px.sqr_magnitude() > eps * eps ? Color(0xFFFFFF)
+                                                           : Color(0x000000);
         }
     }
 
-    Image<Color> image;
+    float const eps, p;
 };
 
 #endif
