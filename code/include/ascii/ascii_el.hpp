@@ -10,18 +10,18 @@ struct AsciiEl {
     AsciiEl() : AsciiEl(' ') {}
 
     explicit AsciiEl(char const c, Color const &color = Color(0xFFFFFF))
-    : c(c), true_color(color), indexed_color_index(color_to_indexed(color)) {}
+    : c(c), _true_color(color), _indexed_color_index(color_to_indexed(color)) {}
 
     char c;
 
-    constexpr unsigned get_indexed_color_index() const {
-        return indexed_color_index;
+    constexpr unsigned indexed_color_index() const {
+        return _indexed_color_index;
     }
-    constexpr Color get_true_color() const { return true_color; }
+    constexpr Color true_color() const { return _true_color; }
 
     void set_true_color(Color const &value) {
-        true_color = value;
-        indexed_color_index = color_to_indexed(value);
+        _true_color = value;
+        _indexed_color_index = color_to_indexed(value);
     }
 
    private:
@@ -49,8 +49,8 @@ struct AsciiEl {
 #endif
     };
 
-    Color true_color;
-    unsigned indexed_color_index;
+    Color _true_color;
+    unsigned _indexed_color_index;
 
     static constexpr unsigned color_to_indexed(Color const &color) {
         return std::min_element(

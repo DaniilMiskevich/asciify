@@ -12,27 +12,23 @@ struct GaussianKernel : public ConvolutionKernel<float, S, S> {
       }) {}
 };
 
-class DoGFilter : public Image {
+static let g_s = GaussianKernel<7>();
+static let g_ks = GaussianKernel<5>();
+
+struct DoGFilter {
    public:
     DoGFilter(Image const &src, float const eps, float const p = 1)
-    : a(GaussianKernel<7>() * src),
-      b(GaussianKernel<5>() * src),
-      eps(eps),
-      p(p) {}
+    : image(src.size()) {
+        let a = g_s * src, b = g_ks * src;
+        for (letmut it = image.begin(); it != image.end(); it++) {
+            static let bright = Color(0xFFFFFF), dim = Color(0x000000);
 
-    Size size(void) const override { return a.size(); }
-
-    // x and y gradienst are stored in r and g channels respectfully
-    Color const &operator[](Pos const pos) const override {
-        static let bright = Color(0xFFFFFF), dim = Color(0x000000);
-
-        let px = a[pos] * (1 + p) - b[pos] * p;
-        return px.sqr_magnitude() > eps * eps ? bright : dim;
+            let px = a[it.pos()] * (1 + p) - b[it.pos()] * p;
+            image[it.pos()] = px.sqr_magnitude() > eps * eps ? bright : dim;
+        }
     }
 
-   private:
-    ConvolvedImage const a, b;
-    float const eps, p;
+    Image image;
 };
 
 #endif

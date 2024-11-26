@@ -6,33 +6,6 @@
 
 #include "image/image.hpp"
 
-class ConvolvedImage : public Image {
-   public:
-    ConvolvedImage(Color const *const data, Size const size)
-    : _size(size), data(data) {}
-    ConvolvedImage(ConvolvedImage const &other)
-    : _size(other._size), data(new Color[_size.area()]()) {
-        std::copy(
-            other.data,
-            other.data + _size.area(),
-            const_cast<Color *>(data)
-        );
-    }
-
-    ~ConvolvedImage() { delete[] data; }
-
-    Size size(void) const override { return _size; }
-    Color const &operator[](Pos pos) const override {
-        if (pos.x >= _size.w) pos.x = _size.w - 1;
-        if (pos.y >= _size.h) pos.y = _size.h - 1;
-        return data[pos.x + pos.y * _size.w];
-    }
-
-   private:
-    Size const _size;
-    Color const *const data;
-};
-
 template <typename T, uint16_t W, uint16_t H>
 struct ConvolutionKernel {
     ConvolutionKernel() = delete;
@@ -50,9 +23,10 @@ struct ConvolutionKernel {
 
     T matrix[W][H];
 
-    ConvolvedImage operator*(Image const &other) const {
+    Image operator*(Image const &other) const {
+        letmut result = Image(other.size());
+
         let size = other.size();
-        letmut data = new Color[size.area()];
 
         letmut pos = Pos(0, 0);
         for (pos.x = 0; pos.x < size.w; pos.x++) {
@@ -83,11 +57,11 @@ struct ConvolutionKernel {
                     for (letmut j = uint16_t(0); j < W; j++)
                         s += src[i][j] * matrix[H - 1 - i][W - 1 - j];
 
-                data[pos.x + pos.y * size.w] = s;
+                result[pos] = s;
             }
         }
 
-        return ConvolvedImage(data, size);
+        return result;
     }
 };
 

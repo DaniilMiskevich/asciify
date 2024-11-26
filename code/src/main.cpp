@@ -26,20 +26,18 @@ void run() {
     let color = ColorAsciiEffect();
     let edges = EdgeAsciiEffect(4.5, "|\\`~;/");
 
-    let image_loader = ImageLoader();
-    letmut image = image_loader.decode("test.jpeg");
+    let loader = ImageLoader();
+    let &image = loader.decode("test.jpeg");
     // letmut image = image_loader.decode("test.webp");
     // letmut image = image_loader.decode("CMakeLists.txt");
-    let image_size = image->size();
+    let image_size = image.size();
     std::cout << "image size: " << image_size.w << "x" << image_size.h << "\n";
 
-    letmut ascii_art = AsciiArt(*image, FONT_CHAR_SIZE / CHAR_SCALE);
+    letmut ascii_art = AsciiArt(image, FONT_CHAR_SIZE / CHAR_SCALE);
 
     fill(ascii_art);
     edges(ascii_art);
     color(ascii_art);
-
-    delete image;
 
     let writer = AsciiArtWriter(ascii_art);
     writer.write_to(std::cout, AsciiArtWriter::COLOR_MODE_INDEXED);

@@ -11,19 +11,19 @@ class AsciiArt {
    public:
     class Iterator {
        public:
-        Iterator(Pos const pos, AsciiArt const &art) : pos(pos), art(art) {}
+        Iterator(Pos const pos, AsciiArt const &art) : _pos(pos), art(art) {}
 
-        Pos const &get_pos() const { return pos; }
+        Pos const &pos() const { return _pos; }
 
         Iterator &operator++() {
-            let size = art.get_size();
+            let size = art.size();
 
-            pos.x++;
-            if (pos.x < size.w) return *this;
+            _pos.x++;
+            if (_pos.x < size.w) return *this;
 
-            pos.x = 0;
-            pos.y++;
-            if (pos.y < size.h) return *this;
+            _pos.x = 0;
+            _pos.y++;
+            if (_pos.y < size.h) return *this;
 
             return *this;
         }
@@ -35,53 +35,56 @@ class AsciiArt {
         }
 
         AsciiEl &operator*() const {
-            return art.els[pos.x + pos.y * art.size.w];
+            return art.els[_pos.x + _pos.y * art._size.w];
         }
 
         bool operator==(Iterator const &other) const {
-            return pos == other.pos;
+            return _pos == other._pos;
         }
         bool operator!=(Iterator const &other) const {
-            return pos != other.pos;
+            return _pos != other._pos;
         }
 
        private:
-        Pos pos;
+        Pos _pos;
         AsciiArt const &art;
     };
 
     AsciiArt(Image const &image, Size const char_size)
-    : image(image),
-      size(image.size() / char_size),
-      els(new AsciiEl[size.area()]()) {}
+    : _image(image),
+      _size(image.size() / char_size),
+      els(new AsciiEl[_size.area()]()) {}
 
     AsciiArt(AsciiArt const &other)
-    : image(other.image), size(other.size), els(new AsciiEl[size.area()]()) {
-        std::copy(other.els, other.els + size.area(), els);
+    : _image(other._image),
+      _size(other._size),
+      els(new AsciiEl[_size.area()]()) {
+        std::copy(other.els, other.els + _size.area(), els);
     }
 
     ~AsciiArt() { delete[] els; }
 
-    Image const &get_image() const { return image; }
-    Size get_size() const { return size; };
+    Image const &image() const { return _image; }
+    Size size() const { return _size; };
 
     Iterator begin() { return Iterator(Pos(0, 0), *this); }
-    Iterator end() { return Iterator(Pos(0, size.h), *this); }
+    Iterator end() { return Iterator(Pos(0, _size.h), *this); }
 
-    AsciiEl operator[](Pos const pos) const {
-        if (pos.x >= size.w || pos.y >= size.h) return AsciiEl();
-        return els[pos.x + pos.y * size.w];
+    AsciiEl const &operator[](Pos const pos) const {
+        if (pos.x >= _size.w || pos.y >= _size.h)
+            throw std::out_of_range("`pos` is outside the image.");
+        return els[pos.x + pos.y * _size.w];
     }
     AsciiEl &operator[](Pos const pos) {
-        if (pos.x >= size.w || pos.y >= size.h)
+        if (pos.x >= _size.w || pos.y >= _size.h)
             throw std::out_of_range("`pos` is outside the image.");
-        return els[pos.x + pos.y * size.w];
+        return els[pos.x + pos.y * _size.w];
     }
 
    private:
-    Image const &image;
+    Image const &_image;
 
-    Size const size;
+    Size const _size;
     AsciiEl *const els;
 };
 

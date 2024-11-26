@@ -9,11 +9,11 @@
 template <typename T>
 static void pass_image(uint8_t const *const src_data, size_t const src_size) {
     try {
-        throw new T(T::decode(src_data, src_size));
+        throw T::decode(src_data, src_size);
     } catch (std::exception &e) {}
 }
 
-Image const *ImageLoader::decode(char const *const filename) const {
+Image ImageLoader::decode(char const *const filename) const {
     static_assert(
         sizeof(char) == sizeof(uint8_t),
         "This code is expected to work on 1-byte chars only."
@@ -29,15 +29,16 @@ Image const *ImageLoader::decode(char const *const filename) const {
     let src_data = new uint8_t[src_size];
     src.read(reinterpret_cast<char *>(src_data), src_size);
 
-    Image const *image = nullptr;
-    try {
-        pass_image<WebpImage>(src_data, src_size);
-        pass_image<JpegImage>(src_data, src_size);
-    } catch (Image const *passed_image) { image = passed_image; }
+    let decoders = {WebpImage::decode, JpegImage::decode};
+    for (let &decode : decoders) {
+        try {
+            let image = decode(src_data, src_size);
+
+            delete[] src_data;
+            return image;
+        } catch (std::exception const &e) { continue; }
+    }
 
     delete[] src_data;
-
-    if (image == nullptr) throw UnsupportedFormatException();
-
-    return image;
+    throw UnsupportedFormatException();
 }

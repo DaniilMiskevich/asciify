@@ -11,12 +11,11 @@ class ColorAsciiEffect : public AsciiEffect {
     ColorAsciiEffect() {}
 
     void operator()(AsciiArt &dst) const override {
-        let &image = dst.get_image();
-        let char_size = image.size() / dst.get_size();
+        let &image = dst.image();
+        let char_size = image.size() / dst.size();
 
         for (letmut it = dst.begin(); it != dst.end(); it++) {
-            let region =
-                Image::Region(image, it.get_pos() * char_size, char_size);
+            let region = Image::Region(image, it.pos() * char_size, char_size);
             let avg = std::accumulate(region.begin(), region.end(), Color()) /
                       char_size.area();
 

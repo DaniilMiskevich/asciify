@@ -17,8 +17,7 @@ static struct jpeg_error_mgr *jpeg_throw_error(struct jpeg_error_mgr *err) {
     return err;
 }
 
-JpegImage
-JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
+Image JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
     struct Pixel {
         uint8_t r, g, b;
     };
@@ -38,13 +37,11 @@ JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
         if (info.output_components != sizeof(Pixel))
             throw InternalLoadingException("Unsupported colour format.");
 
-        let width = info.image_width;
-        let height = info.image_height;
+        let size = Size(info.image_width, info.image_height);
 
-        let buf = new Pixel[width * height];
-
-        while (info.output_scanline < height) {
-            Pixel *buf_ptr = buf + info.output_scanline * width;
+        let buf = new Pixel[size.area()];
+        while (info.output_scanline < size.h) {
+            Pixel *buf_ptr = buf + info.output_scanline * size.w;
 
             jpeg_read_scanlines(
                 &info,
@@ -53,18 +50,21 @@ JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
             );
         }
 
-        let data = new Color[width * height]();
-        std::transform(buf, buf + width * height, data, [](Pixel const px) {
-            return Color::rgb24(px.r, px.g, px.b);
-        });
+        let image = Image(size);
+        std::transform(
+            buf,
+            buf + size.area(),
+            image.begin(),
+            [](Pixel const px) { return Color::rgb24(px.r, px.g, px.b); }
+        );
 
         delete[] buf;
 
         jpeg_finish_decompress(&info);
         jpeg_destroy_decompress(&info);
 
-        return JpegImage(data, Size(width, height));
-    } catch (std::exception &e) {
+        return image;
+    } catch (std::exception const &e) {
         jpeg_destroy_decompress(&info);
         throw;
     }

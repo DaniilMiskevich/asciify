@@ -15,7 +15,7 @@ class AsciiArtWriter {
         std::ostream &stream,
         ColorMode const color_mode = COLOR_MODE_INDEXED
     ) const {
-        let size = art.get_size();
+        let size = art.size();
 
         letmut pos = Pos(0, 0);
         for (pos.y = 0; pos.y < size.h; pos.y++) {
@@ -26,7 +26,7 @@ class AsciiArtWriter {
                 case COLOR_MODE_NONE: stream << el.c; break;
 
                 case COLOR_MODE_INDEXED: {
-                    stream << "\033[3" << el.get_indexed_color_index() << ";2m"
+                    stream << "\033[3" << el.indexed_color_index() << ";2m"
 
                            << el.c
 
@@ -34,7 +34,7 @@ class AsciiArtWriter {
                 } break;
 
                 case COLOR_MODE_TRUE: {
-                    let col = el.get_true_color();
+                    let col = el.true_color();
 
                     stream << "\033[38;2;"
 
