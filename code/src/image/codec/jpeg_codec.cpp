@@ -1,4 +1,4 @@
-#include "image/jpeg_image.hpp"
+#include "image/codec/jpeg_codec.hpp"
 
 #include <algorithm>
 #include <cassert>
@@ -9,7 +9,7 @@
 #include "conviniences.hpp"
 
 static void my_jpeg_error_exit(j_common_ptr const common) {
-    throw JpegImage::InternalLoadingException(common->err->msg_parm.s);
+    throw JpegCodec::InternalDecodingException(common->err->msg_parm.s);
 }
 static struct jpeg_error_mgr *jpeg_throw_error(struct jpeg_error_mgr *err) {
     err = jpeg_std_error(err);
@@ -18,7 +18,7 @@ static struct jpeg_error_mgr *jpeg_throw_error(struct jpeg_error_mgr *err) {
 }
 
 Image<Color>
-JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
+JpegCodec::decode(uint8_t const *const src_data, size_t const src_size) {
     struct Pixel {
         uint8_t r, g, b;
     };
@@ -31,12 +31,12 @@ JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
 
         jpeg_mem_src(&info, src_data, src_size);
 
-        if (!jpeg_read_header(&info, 1)) throw InvalidHeaderLoadingException();
+        if (!jpeg_read_header(&info, 1)) throw InvalidHeaderDecodingException();
         if (!jpeg_start_decompress(&info)) throw std::bad_alloc();
 
         // TODO! support CMYK and grayscale images
         if (info.output_components != sizeof(Pixel))
-            throw InternalLoadingException("Unsupported colour format.");
+            throw InternalDecodingException("Unsupported colour format.");
 
         let size = Size(info.image_width, info.image_height);
 

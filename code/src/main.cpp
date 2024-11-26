@@ -12,24 +12,24 @@ refs:
 
 #include "ascii/ascii_art.hpp"
 #include "ascii/ascii_art_writer.hpp"
-#include "ascii/effect/color_ascii_effect.hpp"
-#include "ascii/effect/edge_ascii_effect.hpp"
-#include "ascii/effect/fill_ascii_effect.hpp"
+#include "ascii/filter/color_ascii_filter.hpp"
+#include "ascii/filter/edge_ascii_filter.hpp"
+#include "ascii/filter/fill_ascii_filter.hpp"
 #include "conviniences.hpp"
-#include "image/image_loader.hpp"
+#include "image/codec/image_codec.hpp"
 
 #define FONT_CHAR_SIZE (Size(10, 22))
 #define CHAR_SCALE     (1.25)
 
 void run() {
-    let fill = FillAsciiEffect(" .:+*csS&$@");
-    let color = ColorAsciiEffect();
-    let edges = EdgeAsciiEffect(4.5, "|\\`~;/");
+    let fill = FillAsciiFilter(" .:+*csS&$@");
+    let color = ColorAsciiFilter();
+    let edges = EdgeAsciiFilter(4.5, "|\\`~;/");
 
-    let loader = ImageLoader();
-    let image = loader.decode("test.jpeg");
-    // letmut image = image_loader.decode("test.webp");
-    // letmut image = image_loader.decode("CMakeLists.txt");
+    let codec = ImageCodec();
+    let image = codec.decode("test.webp");
+    // let image = codec.decode("test.jpeg");
+    // let image = codec.decode("CMakeLists.txt");
     let image_size = image->size();
     std::cout << "image size: " << image_size.w << "x" << image_size.h
               << std::endl;

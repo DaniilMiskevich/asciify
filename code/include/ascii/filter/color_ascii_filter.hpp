@@ -1,12 +1,17 @@
-#ifndef COLOR_ASCII_EFFECT_HPP
-#define COLOR_ASCII_EFFECT_HPP
+#ifndef COLOR_ASCII_FILTER_HPP
+#define COLOR_ASCII_FILTER_HPP
 
 #include <cmath>
 #include <numeric>
 
-#include "ascii_effect.hpp"
+#include "ascii/ascii_art.hpp"
+#include "image/filter/image_filter.hpp"
 
-struct ColorAsciiEffect : public AsciiEffect {
+class ColorAsciiFilter : public ImageFilter<AsciiArt> {
+   public:
+    ColorAsciiFilter() {}
+
+   private:
     void operator()(AsciiArt &dst) const override {
         let &image = dst.image();
         let char_size = image.size() / dst.size();

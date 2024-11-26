@@ -1,9 +1,10 @@
 // man: https://developers.google.com/speed/webp/docs/api
 
-#include "image/webp_image.hpp"
+#include "image/codec/webp_codec.hpp"
 
 #include <algorithm>
 #include <fstream>
+#include <iostream>
 #include <new>
 
 #include <webp/decode.h>
@@ -14,7 +15,7 @@ struct Pixel {
 };
 
 Image<Color>
-WebpImage::decode(uint8_t const *const src_data, size_t const src_size) {
+WebpCodec::decode(uint8_t const *const src_data, size_t const src_size) {
     int width, height;
     let buf = reinterpret_cast<Pixel *>(
         WebPDecodeRGBA(src_data, src_size, &width, &height)
@@ -33,7 +34,7 @@ WebpImage::decode(uint8_t const *const src_data, size_t const src_size) {
     return image;
 }
 
-void WebpImage::encode(Image<Color> const &src, char const *const path) {
+void WebpCodec::encode(Image<Color> const &src, char const *const path) {
     let size = src.size();
 
     let pixels = new Pixel[size.area()]();
@@ -42,11 +43,11 @@ void WebpImage::encode(Image<Color> const &src, char const *const path) {
     });
 
     uint8_t *out;
-    let out_len = WebPEncodeRGB(
+    let out_len = WebPEncodeRGBA(
         reinterpret_cast<uint8_t *>(pixels),
         size.w,
         size.h,
-        size.w * 3,
+        size.w * elsizeof(pixels),
         100,
         &out
     );

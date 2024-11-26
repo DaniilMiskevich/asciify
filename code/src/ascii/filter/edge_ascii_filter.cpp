@@ -1,21 +1,21 @@
-#include "ascii/effect/edge_ascii_effect.hpp"
+#include "ascii/filter/edge_ascii_filter.hpp"
 
 #include <numeric>
 
 #include <alloca.h>
 
-#include "image/filter/dog_filter.hpp"
-#include "image/filter/sobel_filter.hpp"
-#include "image/webp_image.hpp"
+#include "image/codec/webp_codec.hpp"
+#include "image/filter/dog_image_filter.hpp"
+#include "image/filter/sobel_image_filter.hpp"
 
-void EdgeAsciiEffect::operator()(AsciiArt &dst) const {
+void EdgeAsciiFilter::operator()(AsciiArt &dst) const {
     letmut image = dst.image();
-    image *= DoGFilter(dog_eps, dog_p);
+    image *= DoGImageFilter(dog_eps, dog_p);
     // TODO for debugging remove later
-    WebpImage::encode(image, "dog_filter.webp");
-    image *= SobelFilter();
+    WebpCodec::encode(image, "dog_filter.webp");
+    image *= SobelImageFilter();
     // TODO for debugging remove later
-    WebpImage::encode(image, "sobel_filter.webp");
+    WebpCodec::encode(image, "sobel_filter.webp");
 
     let art_size = dst.size();
     let char_size = image.size() / art_size;

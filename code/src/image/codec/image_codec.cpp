@@ -1,11 +1,11 @@
-#include "image/image_loader.hpp"
+#include "image/codec/image_codec.hpp"
 
 #include <fstream>
 
-#include "image/jpeg_image.hpp"
-#include "image/webp_image.hpp"
+#include "image/codec/jpeg_codec.hpp"
+#include "image/codec/webp_codec.hpp"
 
-Image<Color> *ImageLoader::decode(char const *const filename) const {
+Image<Color> *ImageCodec::decode(char const *const filename) const {
     static_assert(
         sizeof(char) == sizeof(uint8_t),
         "This code is expected to work on 1-byte chars only."
@@ -21,7 +21,7 @@ Image<Color> *ImageLoader::decode(char const *const filename) const {
     let src_data = new uint8_t[src_size]();
     src.read(reinterpret_cast<char *>(src_data), src_size);
 
-    let decoders = {WebpImage::decode, JpegImage::decode};
+    let decoders = {WebpCodec::decode, JpegCodec::decode};
     for (let &decode : decoders) {
         try {
             let image = new Image(decode(src_data, src_size));

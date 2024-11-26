@@ -1,16 +1,22 @@
-#ifndef FILL_ASCII_EFFECT_HPP
-#define FILL_ASCII_EFFECT_HPP
+#ifndef FILL_ASCII_FILTER_HPP
+#define FILL_ASCII_FILTER_HPP
 
 #include <cstring>
 #include <numeric>
 
-#include "ascii_effect.hpp"
+#include "ascii/ascii_art.hpp"
 #include "conviniences.hpp"
+#include "image/filter/image_filter.hpp"
 #include "image/image.hpp"
 
-struct FillAsciiEffect : public AsciiEffect {
-    FillAsciiEffect(char const *const palette = " .:-;=+*#B%@")
+class FillAsciiFilter : public ImageFilter<AsciiArt> {
+   public:
+    FillAsciiFilter(char const *const palette = " .:-;=+*#B%@")
     : palette(palette), palette_len(strlen(palette)) {}
+
+   private:
+    char const *const palette;
+    size_t const palette_len;
 
     void operator()(AsciiArt &dst) const override {
         let &image = dst.image();
@@ -29,10 +35,6 @@ struct FillAsciiEffect : public AsciiEffect {
             (*it) = AsciiEl(palette[i]);
         }
     }
-
-   private:
-    char const *const palette;
-    size_t const palette_len;
 };
 
 #endif

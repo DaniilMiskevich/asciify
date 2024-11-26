@@ -1,13 +1,15 @@
-#ifndef EDGE_ASCII_EFFECT_HPP
-#define EDGE_ASCII_EFFECT_HPP
+#ifndef EDGE_ASCII_FILTER_HPP
+#define EDGE_ASCII_FILTER_HPP
 
 #include <cassert>
 #include <cstring>
 
-#include "ascii_effect.hpp"
+#include "ascii/ascii_art.hpp"
+#include "image/filter/image_filter.hpp"
 
-struct EdgeAsciiEffect : public AsciiEffect {
-    EdgeAsciiEffect(
+class EdgeAsciiFilter : public ImageFilter<AsciiArt> {
+   public:
+    EdgeAsciiFilter(
         float const threshold,
         char const *const palette = "|\\-/",
         float const dog_eps = 1,
@@ -19,13 +21,13 @@ struct EdgeAsciiEffect : public AsciiEffect {
       dog_eps(dog_eps),
       dog_p(dog_p) {}
 
-    void operator()(AsciiArt &dst) const override;
-
    private:
     float const threshold;
     char const *const palette;
     size_t const palette_len;
     float const dog_eps, dog_p;
+
+    void operator()(AsciiArt &dst) const override;
 };
 
 #endif

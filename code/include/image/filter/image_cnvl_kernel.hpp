@@ -1,5 +1,5 @@
-#ifndef CONVOLUTION_HPP
-#define CONVOLUTION_HPP
+#ifndef IMAGE_CNVL_KERNEL_HPP
+#define IMAGE_CNVL_KERNEL_HPP
 
 #include <algorithm>
 #include <functional>
@@ -8,14 +8,14 @@
 #include "image/image.hpp"
 
 template <typename T, uint16_t W, uint16_t H>
-struct ConvolutionKernel {
-    ConvolutionKernel() = delete;
+struct ImageCnvlKernel {
+    ImageCnvlKernel() = delete;
 
-    constexpr ConvolutionKernel(T const (&matrix)[H][W]) {
+    constexpr ImageCnvlKernel(T const (&matrix)[H][W]) {
         std::copy(&matrix[0][0], &matrix[0][0] + H * W, &this->matrix[0][0]);
     }
 
-    constexpr ConvolutionKernel(
+    constexpr ImageCnvlKernel(
         std::function<T(uint16_t const x, uint16_t const y)> const &fn
     ) {
         for (letmut i = uint16_t(0); i < H; i++)
