@@ -24,6 +24,14 @@
                 "echo; gdb $BUILD/main $ARGS"
             ]
         },
+        "build lib": {
+            "icon": "󰐊",
+            "desc": "just run the project",
+            "cmd": [
+                "cmake -B $BUILD -S ./ --log-level=$CMAKE_LOG_LEVEL -DCMAKE_BUILD_TYPE=$RUN_BUILD_TYPE -DDO_BUILD_FOR_PLUGIN=TRUE; cmake --build $BUILD",
+                "cp $BUILD/libasciify.so ./plugin"
+            ]
+        },
         "clean": {
             "icon": "󰃢",
             "desc": "clean",

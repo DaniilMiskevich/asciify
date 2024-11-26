@@ -4,6 +4,8 @@
 template <typename T>
 class ImageFilter {
    public:
+    virtual ~ImageFilter() {}
+
     friend T &operator*=(T &image, ImageFilter const &other) {
         other(image);
         return image;

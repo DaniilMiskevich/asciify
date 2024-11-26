@@ -8,7 +8,11 @@
 
 class ImageCodec {
    public:
-    Image<Color> *decode(char const *const filename) const;
+    // ImageCodec(std::vector<ImageCodec> const &codecs) : codecs(codecs) {}
+    static Image<Color> *decode(char const *const filename);
+
+   private:
+    // std::vector<ImageCodec> const &codecs;
 
    public:
     struct DecodingException;
