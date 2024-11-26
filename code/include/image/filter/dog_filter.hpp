@@ -17,7 +17,7 @@ static let g_ks = GaussianKernel<5>();
 
 struct DoGFilter {
    public:
-    DoGFilter(Image const &src, float const eps, float const p = 1)
+    DoGFilter(Image<Color> const &src, float const eps, float const p = 1)
     : image(src.size()) {
         let a = g_s * src, b = g_ks * src;
         for (letmut it = image.begin(); it != image.end(); it++) {
@@ -28,7 +28,7 @@ struct DoGFilter {
         }
     }
 
-    Image image;
+    Image<Color> image;
 };
 
 #endif

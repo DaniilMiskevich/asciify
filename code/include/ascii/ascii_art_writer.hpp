@@ -38,9 +38,8 @@ class AsciiArtWriter {
 
                     stream << "\033[38;2;"
 
-                           << std::to_string(int(col.r8())) + ";"
-                           << std::to_string(int(col.g8())) + ";"
-                           << std::to_string(int(col.b8())) + "m"
+                           << int(col.r8()) << ";" << int(col.g8()) << ";"
+                           << int(col.b8()) << "m"
 
                            << el.c
 
@@ -48,7 +47,7 @@ class AsciiArtWriter {
                 } break;
                 }
             }
-            stream << "\n";
+            stream << std::endl;
         }
     }
 

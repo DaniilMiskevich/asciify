@@ -26,7 +26,8 @@ void EdgeAsciiEffect::operator()(AsciiArt &dst) const {
     for (letmut it = dst.begin(); it != dst.end(); it++) {
         std::fill(edge_weights, edge_weights + palette_len, 0);
 
-        let region = Image::Region(image, it.pos() * char_size, char_size);
+        let region =
+            Image<Color>::Region(image, it.pos() * char_size, char_size);
         for (let &px : region) {
             // must be negated to preserve palette in normal order
             let angle = -atan2(px.g, px.r) / M_PI;

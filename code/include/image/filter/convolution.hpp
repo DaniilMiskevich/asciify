@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <functional>
 
+#include "color.hpp"
 #include "image/image.hpp"
 
 template <typename T, uint16_t W, uint16_t H>
@@ -23,8 +24,8 @@ struct ConvolutionKernel {
 
     T matrix[W][H];
 
-    Image operator*(Image const &other) const {
-        letmut result = Image(other.size());
+    Image<Color> operator*(Image<Color> const &other) const {
+        letmut result = Image<Color>(other.size());
 
         let size = other.size();
 

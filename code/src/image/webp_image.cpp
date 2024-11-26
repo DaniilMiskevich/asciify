@@ -14,7 +14,8 @@ struct Pixel {
     uint8_t r, g, b;
 };
 
-Image WebpImage::decode(uint8_t const *const src_data, size_t const src_size) {
+Image<Color>
+WebpImage::decode(uint8_t const *const src_data, size_t const src_size) {
     int width, height;
     let buf = reinterpret_cast<Pixel *>(
         WebPDecodeRGB(src_data, src_size, &width, &height)
@@ -22,7 +23,7 @@ Image WebpImage::decode(uint8_t const *const src_data, size_t const src_size) {
     if (buf == nullptr) throw std::bad_alloc();
 
     let size = Size(width, height);
-    letmut image = Image(size);
+    letmut image = Image<Color>(size);
 
     std::transform(buf, buf + size.area(), image.begin(), [](Pixel const px) {
         return Color::rgb24(px.r, px.g, px.b);
@@ -33,7 +34,7 @@ Image WebpImage::decode(uint8_t const *const src_data, size_t const src_size) {
     return image;
 }
 
-void WebpImage::encode(Image const &src, char const *const path) {
+void WebpImage::encode(Image<Color> const &src, char const *const path) {
     let size = src.size();
 
     let pixels = new Pixel[size.area()]();

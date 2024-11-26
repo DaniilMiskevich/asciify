@@ -3,10 +3,12 @@
 
 #include <cstddef>
 
+#include "color.hpp"
 #include "image/image.hpp"
 
 struct JpegImage {
-    static Image decode(uint8_t const *const src_data, size_t const src_size);
+    static Image<Color>
+    decode(uint8_t const *const src_data, size_t const src_size);
 
    public:
     class InternalLoadingException;

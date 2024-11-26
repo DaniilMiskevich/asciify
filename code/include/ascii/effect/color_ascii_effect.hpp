@@ -15,7 +15,8 @@ class ColorAsciiEffect : public AsciiEffect {
         let char_size = image.size() / dst.size();
 
         for (letmut it = dst.begin(); it != dst.end(); it++) {
-            let region = Image::Region(image, it.pos() * char_size, char_size);
+            let region =
+                Image<Color>::Region(image, it.pos() * char_size, char_size);
             let avg = std::accumulate(region.begin(), region.end(), Color()) /
                       char_size.area();
 

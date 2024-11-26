@@ -3,11 +3,12 @@
 
 #include <exception>
 
+#include "color.hpp"
 #include "image/image.hpp"
 
 class ImageLoader {
    public:
-    Image decode(char const *const filename) const;
+    Image<Color> decode(char const *const filename) const;
 
    public:
     class UnsupportedFormatException;

@@ -16,14 +16,14 @@ static let g_y = ConvolutionKernel<float, 3, 3>({
 
 struct SobelFilter {
    public:
-    SobelFilter(Image const &src) : image(src.size()) {
+    SobelFilter(Image<Color> const &src) : image(src.size()) {
         let x = g_x * src, y = g_y * src;
 
         for (letmut it = image.begin(); it != image.end(); it++)
             image[it.pos()] = Color(x[it.pos()].sum(), y[it.pos()].sum(), 0);
     }
 
-    Image image;
+    Image<Color> image;
 };
 
 #endif

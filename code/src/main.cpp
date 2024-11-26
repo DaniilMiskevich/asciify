@@ -31,7 +31,8 @@ void run() {
     // letmut image = image_loader.decode("test.webp");
     // letmut image = image_loader.decode("CMakeLists.txt");
     let image_size = image.size();
-    std::cout << "image size: " << image_size.w << "x" << image_size.h << "\n";
+    std::cout << "image size: " << image_size.w << "x" << image_size.h
+              << std::endl;
 
     letmut ascii_art = AsciiArt(image, FONT_CHAR_SIZE / CHAR_SCALE);
 
@@ -49,7 +50,7 @@ int main() {
         run();
         return 0;
     } catch (std::exception &e) {
-        std::cout << e.what() << "\n";
+        std::cout << e.what() << std::endl;
         return 1;
     }
 }

@@ -17,7 +17,8 @@ static struct jpeg_error_mgr *jpeg_throw_error(struct jpeg_error_mgr *err) {
     return err;
 }
 
-Image JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
+Image<Color>
+JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
     struct Pixel {
         uint8_t r, g, b;
     };
@@ -50,7 +51,7 @@ Image JpegImage::decode(uint8_t const *const src_data, size_t const src_size) {
             );
         }
 
-        let image = Image(size);
+        let image = Image<Color>(size);
         std::transform(
             buf,
             buf + size.area(),
