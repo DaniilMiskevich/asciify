@@ -37,7 +37,9 @@ void edge_filter_delete(EdgeAsciiFilter const *const self) { delete self; }
 
 // image
 Image<Color> const *image_decode(char const *const path) {
-    return ImageCodec::decode(path);
+    try {
+        return ImageCodec::decode(path);
+    } catch (ImageCodec::UnsupportedFormatException const &) { return nullptr; }
 }
 void image_delete(Image<Color> const *const self) { delete self; }
 

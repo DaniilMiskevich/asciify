@@ -15,6 +15,7 @@ class AsciiArtWriter {
         std::ostream &stream,
         ColorMode const color_mode = COLOR_MODE_INDEXED
     ) const {
+        stream << "mode: " << color_mode << std::endl;
         let size = art.size();
 
         letmut pos = Pos(0, 0);
@@ -55,7 +56,7 @@ class AsciiArtWriter {
         char const *const filename,
         ColorMode const color_mode = COLOR_MODE_NONE
     ) const {
-        letmut out = std::ofstream(filename);
+        letmut out = std::ofstream(filename, std::ios::binary);
         out.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         write_to(out, color_mode);
     }

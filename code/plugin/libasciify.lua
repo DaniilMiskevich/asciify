@@ -2,11 +2,8 @@ local ffi = require("ffi")
 
 local dirname = string.sub(debug.getinfo(1).source, 2, #"/libasciify.lua" * -1)
 local library_path = (function()
-	if package.config:sub(1, 1) == "\\" then
-		return dirname .. "/libasciify.dll"
-	else
-		return dirname .. "/libasciify.so"
-	end
+	local is_on_windows = package.config:sub(1, 1) == "\\"
+	return dirname .. (is_on_windows and "/libasciify.dll" or "/libasciify.so")
 end)()
 local native = ffi.load(library_path)
 ffi.cdef([[
@@ -59,27 +56,30 @@ void ascii_art_apply_edge(AsciiArt *const self, EdgeAsciiFilter const *const edg
 -- oop --
 ---------
 
-local function class()
+---Creates a class.
+---@param Base ?table
+---@return table
+local function class(Base)
 	local Self = {}
 	Self.__index = Self
 
-	function Self.construct(args)
-		return Self.setmetatable(args)
+	if Base then
+		setmetatable(Self, Base)
+		Self._constructor = Base._constructor
+	else
+		---@param a table|nil
+		---@return table|nil
+		Self._constructor = function(a)
+			return a or {}
+		end
 	end
-	function Self.setmetatable(args)
-		return setmetatable(args, Self)
-	end
 
-	return Self
-end
-
-local function extends(Base)
-	local Self = class()
-	Self.__index = Self
-	setmetatable(Self, Base)
-
-	function Self.construct(args)
-		return Self.setmetatable(Base.construct(args))
+	---A function to construct a new object. Should NOT be overloaded.
+	---@param a table|nil
+	---@return table|nil
+	Self.new = function(a)
+		local self = Self._constructor(a)
+		return self and setmetatable(self, Self) or nil
 	end
 
 	return Self
@@ -92,26 +92,39 @@ end
 local M = {}
 
 local Native = class()
-function Native:delete()
-	self._delete(self._self)
-	self._self = nil
+
+---@param a { _self:ffi.cdata*, _delete:function }
+---@return table|nil
+function Native._constructor(a)
+	if not a._self or a._self == ffi.NULL then
+		return nil
+	end
+
+	ffi.gc(a._self, a._delete)
+
+	return a
 end
 
--- color filter
+-- fill filter
 
-local FillFilter = extends(Native)
-function FillFilter.new(palette)
-	return FillFilter.construct({
-		_self = native.fill_filter_create(palette),
+local FillFilter = class(Native)
+
+---@param a { palette:string }
+---@return table|nil
+function FillFilter._constructor(a)
+	return Native._constructor({
+		_self = native.fill_filter_create(a.palette),
 		_delete = native.fill_filter_delete,
 	})
 end
 
 -- color filter
 
-local ColorFilter = extends(Native)
-function ColorFilter.new()
-	return ColorFilter.construct({
+local ColorFilter = class(Native)
+
+---@return table|nil
+function ColorFilter._constructor()
+	return Native._constructor({
 		_self = native.color_filter_create(),
 		_delete = native.color_filter_delete,
 	})
@@ -119,52 +132,90 @@ end
 
 -- edge filter
 
-local EdgeFilter = extends(Native)
-function EdgeFilter.new(threshold, palette)
-	return EdgeFilter.construct({
-		_self = native.edge_filter_create(threshold, palette),
-		_delete = native.edge_filter_delete,
-	})
-end
-function EdgeFilter.new_extra(threshold, palette, dog_eps, dog_p)
-	return EdgeFilter.construct({
-		_self = native.edge_filter_create_extra(threshold, palette, dog_eps, dog_p),
+local EdgeFilter = class(Native)
+
+---@param a { threshold:number, palette:string, dog:{ eps:number, p:number }|nil }
+---@return table|nil
+function EdgeFilter._constructor(a)
+	local _self
+	if a.dog then
+		_self = native.edge_filter_create_extra(a.threshold, a.palette, a.dog.eps, a.dog.p)
+	else
+		_self = native.edge_filter_create(a.threshold, a.palette)
+	end
+
+	return Native._constructor({
+		_self = _self,
 		_delete = native.edge_filter_delete,
 	})
 end
 
 -- image
 
-local Image = extends(Native)
-function Image.decode(path)
-	return Image.construct({
-		_self = native.image_decode(path),
+local Image = class(Native)
+
+---@param a { path:string }
+---@return table|nil
+function Image._constructor(a)
+	return Native._constructor({
+		_self = native.image_decode(a.path),
 		_delete = native.image_delete,
 	})
 end
 
 -- ascii art
 
-local AsciiArt = extends(Native)
+local AsciiArt = class(Native)
 
-function AsciiArt.new(image, char_size)
-	return AsciiArt.construct({
-		_self = native.ascii_art_create(image._self, char_size),
+AsciiArt.ColorMode = { EMPTY = 0, INDEXED = 1, TRUE = 2 }
+
+---@param a { image:table, char_size:{ w:number, h:number } }
+---@return table|nil
+function AsciiArt._constructor(a)
+	return Native._constructor({
+		_self = native.ascii_art_create(a.image._self, a.char_size),
 		_delete = native.ascii_art_delete,
 	})
 end
 
+---@param mode number
+---@return table<string>
 function AsciiArt:write(mode)
-	local out = native.ascii_art_write(self._self, mode)
-	return ffi.string(out.cstr, out.len)
+	---@param str string
+	---@param delim string
+	---@return table
+	local function strsplit(str, delim)
+		local result = {}
+		local from = 1
+		local delim_from, delim_to = string.find(str, delim, from)
+		while delim_from do
+			table.insert(result, string.sub(str, from, delim_from - 1))
+			from = delim_to + 1
+			delim_from, delim_to = string.find(str, delim, from)
+		end
+		table.insert(result, string.sub(str, from))
+		return result
+	end
+
+	local out = (function()
+		local native_out = native.ascii_art_write(self._self, mode)
+		local out = ffi.string(native_out.cstr, native_out.len)
+		ffi.C.free(ffi.cast("void *", native_out.cstr))
+		return out
+	end)()
+
+	return strsplit(out, "\n")
 end
 
+---@param fill table
 function AsciiArt:apply_fill(fill)
 	return native.ascii_art_apply_fill(self._self, fill._self)
 end
+---@param color table
 function AsciiArt:apply_color(color)
 	return native.ascii_art_apply_color(self._self, color._self)
 end
+---@param edge table
 function AsciiArt:apply_edge(edge)
 	return native.ascii_art_apply_edge(self._self, edge._self)
 end
@@ -174,22 +225,5 @@ M.ColorFilter = ColorFilter
 M.EdgeFilter = EdgeFilter
 M.Image = Image
 M.AsciiArt = AsciiArt
-
-local scale = 1.25
-
-local image = Image.decode(dirname .. "../test.webp")
-local fill = FillFilter.new(" .:+*csS&$@")
-local color = ColorFilter.new()
-local edge = EdgeFilter.new(4.5, "|\\`~;/")
-local art = AsciiArt.new(image, { w = 10 / scale, h = 22 / scale })
-art:apply_fill(fill)
-art:apply_edge(edge)
-art:apply_color(color)
-print(art:write(0))
-art:delete()
-edge:delete()
-color:delete()
-fill:delete()
-image:delete()
 
 return M
