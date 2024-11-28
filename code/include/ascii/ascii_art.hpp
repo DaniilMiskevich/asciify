@@ -68,13 +68,43 @@ struct AsciiEl {
 
 class AsciiArt : public Image<AsciiEl> {
    public:
-    AsciiArt(Image<Color> const &image, Size const char_size)
-    : Image<AsciiEl>(image.size() / char_size), _image(image) {}
+    AsciiArt(
+        Image<Color> const &image,
+        Size const frame_size_chars,
+        Size const char_size
+    )
+    : Image<AsciiEl>(
+          image.size() /
+          (fit_char_size(char_size, image.size(), frame_size_chars))
+      ),
+      _char_size(fit_char_size(char_size, image.size(), frame_size_chars)),
+      _image(image) {}
 
+    Size char_size() const { return _char_size; }
     Image<Color> const &image() const { return _image; }
 
    private:
+    Size const _char_size;
     Image<Color> const &_image;
+
+    constexpr static float
+    fit_ratio(Size const image_size_px, Size const frame_size_px) {
+        return std::max(
+            float(image_size_px.w) / frame_size_px.w,
+            float(image_size_px.h) / frame_size_px.h
+        );
+    }
+    constexpr static Size fit_char_size(
+        Size const char_size,
+        Size const image_size_px,
+        Size const frame_size_chars
+    ) {
+        return char_size *
+                   fit_ratio(image_size_px, frame_size_chars * char_size)
+             // allows chars to be bigger -> image will contain less chars,
+             // never more
+             + Size(1, 1);
+    }
 };
 
 #endif

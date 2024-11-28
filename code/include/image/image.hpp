@@ -1,6 +1,7 @@
 #ifndef IMAGE_HPP
 #define IMAGE_HPP
 
+#include <algorithm>
 #include <stdexcept>
 
 #include "conviniences.hpp"
@@ -104,7 +105,10 @@ template <typename T>
 class Image<T>::Region {
    public:
     Region(Image const &base, Pos const offset, Size const size)
-    : offset(offset), _size(size), base(base) {}
+    : offset(offset), _size(clamp_size(base.size(), offset, size)), base(base) {
+        let image_size = base.size();
+        assert(offset.x <= image_size.w && offset.y <= image_size.h);
+    }
 
     Size size() const { return _size; }
 
@@ -121,6 +125,14 @@ class Image<T>::Region {
     Pos const offset;
     Size const _size;
     Image const &base;
+
+    static constexpr Size const
+    clamp_size(Size const image_size, Pos const offset, Size const size) {
+        return Size(
+            std::min<uint16_t>(size.w, image_size.w - offset.x),
+            std::min<uint16_t>(size.h, image_size.h - offset.y)
+        );
+    }
 };
 
 #endif

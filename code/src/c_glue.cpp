@@ -45,9 +45,12 @@ void image_delete(Image<Color> const *const self) { delete self; }
 
 // ascii art
 
-AsciiArt *
-ascii_art_create(Image<Color> const *const image, Size const char_size) {
-    return new AsciiArt(*image, char_size);
+AsciiArt *ascii_art_create(
+    Image<Color> const *const image,
+    Size const frame_size_chars,
+    Size const char_size_px
+) {
+    return new AsciiArt(*image, frame_size_chars, char_size_px);
 }
 void ascii_art_delete(AsciiArt const *const self) { delete self; }
 
@@ -57,9 +60,10 @@ struct AsciiArtOutput {
 };
 AsciiArtOutput ascii_art_write(
     AsciiArt const *const self,
+    Size const frame_size,
     AsciiArtWriter::ColorMode const mode
 ) {
-    let writer = AsciiArtWriter(*self);
+    let writer = AsciiArtWriter(*self, frame_size);
 
     letmut stream = std::stringstream();
     writer.write_to(stream, mode);

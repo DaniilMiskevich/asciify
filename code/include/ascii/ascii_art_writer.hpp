@@ -2,6 +2,7 @@
 #define ASCII_ART_WRITER_HPP
 
 #include <fstream>
+#include <iomanip>
 
 #include "ascii/ascii_art.hpp"
 
@@ -9,17 +10,22 @@ class AsciiArtWriter {
    public:
     enum ColorMode { COLOR_MODE_NONE, COLOR_MODE_INDEXED, COLOR_MODE_TRUE };
 
-    AsciiArtWriter(AsciiArt const &art) : art(art) {}
+    AsciiArtWriter(AsciiArt const &art, Size const frame_size)
+    : frame_size(frame_size), art(art) {}
 
     void write_to(
         std::ostream &stream,
         ColorMode const color_mode = COLOR_MODE_INDEXED
     ) const {
-        stream << "mode: " << color_mode << std::endl;
         let size = art.size();
+        let dw = frame_size.w - size.w, dh = frame_size.h - size.h;
+
+        for (letmut i = int(0); i < dh / 2; i++) stream << std::endl;
 
         letmut pos = Pos(0, 0);
         for (pos.y = 0; pos.y < size.h; pos.y++) {
+            for (letmut i = int(0); i < dw / 2; i++) stream << ' ';
+
             for (pos.x = 0; pos.x < size.w; pos.x++) {
                 let el = art[pos];
 
@@ -48,8 +54,12 @@ class AsciiArtWriter {
                 } break;
                 }
             }
+
+            for (letmut i = int(0); i < dw - dw / 2; i++) stream << ' ';
             stream << std::endl;
         }
+
+        for (letmut i = int(0); i < dh - dh / 2 - 1; i++) stream << std::endl;
     }
 
     void write_to_file(
@@ -62,6 +72,7 @@ class AsciiArtWriter {
     }
 
    private:
+    Size const frame_size;
     AsciiArt const &art;
 };
 

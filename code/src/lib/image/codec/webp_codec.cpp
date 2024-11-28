@@ -4,7 +4,6 @@
 
 #include <algorithm>
 #include <fstream>
-#include <iostream>
 #include <new>
 
 #include <webp/decode.h>

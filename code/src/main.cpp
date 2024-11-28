@@ -18,8 +18,8 @@ refs:
 #include "conviniences.hpp"
 #include "image/codec/image_codec.hpp"
 
-#define FONT_CHAR_SIZE (Size(10, 22))
-#define CHAR_SCALE     (1.25)
+#define CHAR_SIZE        (Size(10, 21))
+#define FRAME_SIZE_CHARS (Size(50, 20))
 
 void run() {
     let fill = FillAsciiFilter(" .:+*csS&$@");
@@ -34,7 +34,8 @@ void run() {
     std::cout << "image size: " << image_size.w << "x" << image_size.h
               << std::endl;
 
-    letmut ascii_art = AsciiArt(*image, FONT_CHAR_SIZE / CHAR_SCALE);
+    letmut ascii_art =
+        AsciiArt(*image, FRAME_SIZE_CHARS - Size(2, 2), CHAR_SIZE);
 
     ascii_art *= fill;
     ascii_art *= edges;
@@ -42,7 +43,7 @@ void run() {
 
     delete image;
 
-    let writer = AsciiArtWriter(ascii_art);
+    let writer = AsciiArtWriter(ascii_art, FRAME_SIZE_CHARS);
     writer.write_to(std::cout, AsciiArtWriter::COLOR_MODE_INDEXED);
     writer.write_to_file("out.txt");
 }

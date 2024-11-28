@@ -20,7 +20,7 @@ class FillAsciiFilter : public ImageFilter<AsciiArt> {
 
     void operator()(AsciiArt &dst) const override {
         let &image = dst.image();
-        let char_size = image.size() / dst.size();
+        let char_size = dst.char_size();
 
         for (letmut it = dst.begin(); it != dst.end(); it++) {
             let region =

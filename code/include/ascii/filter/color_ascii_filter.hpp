@@ -1,7 +1,6 @@
 #ifndef COLOR_ASCII_FILTER_HPP
 #define COLOR_ASCII_FILTER_HPP
 
-#include <cmath>
 #include <numeric>
 
 #include "ascii/ascii_art.hpp"
@@ -14,7 +13,7 @@ class ColorAsciiFilter : public ImageFilter<AsciiArt> {
    private:
     void operator()(AsciiArt &dst) const override {
         let &image = dst.image();
-        let char_size = image.size() / dst.size();
+        let char_size = dst.char_size();
 
         for (letmut it = dst.begin(); it != dst.end(); it++) {
             let region =
