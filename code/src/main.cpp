@@ -19,7 +19,7 @@ refs:
 #include "image/codec/image_codec.hpp"
 
 #define CHAR_SIZE        (Size(10, 21))
-#define FRAME_SIZE_CHARS (Size(50, 20))
+#define FRAME_SIZE_CHARS (Size(100, 40))
 
 void run() {
     let fill = FillAsciiFilter(" .:+*csS&$@");
@@ -27,8 +27,9 @@ void run() {
     let edges = EdgeAsciiFilter(4.5, "|\\`~;/");
 
     let codec = ImageCodec();
-    let image = codec.decode("test.webp");
+    // let image = codec.decode("test.webp");
     // let image = codec.decode("test.jpeg");
+    let image = codec.decode("test_cmyk.jpeg");
     // let image = codec.decode("CMakeLists.txt");
     let image_size = image->size();
     std::cout << "image size: " << image_size.w << "x" << image_size.h
@@ -44,7 +45,7 @@ void run() {
     delete image;
 
     let writer = AsciiArtWriter(ascii_art, FRAME_SIZE_CHARS);
-    writer.write_to(std::cout, AsciiArtWriter::COLOR_MODE_INDEXED);
+    writer.write_to(std::cout, AsciiArtWriter::COLOR_MODE_TRUE);
     writer.write_to_file("out.txt");
 }
 

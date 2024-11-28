@@ -65,7 +65,7 @@ class AsciiArtWriter {
         char const *const filename,
         ColorMode const color_mode = COLOR_MODE_NONE
     ) const {
-        letmut out = std::ofstream(filename, std::ios::binary);
+        letmut out = std::ofstream(filename);
         out.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         write_to(out, color_mode);
     }

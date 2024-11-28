@@ -50,8 +50,8 @@ void WebpCodec::encode(Image<Color> const &src, char const *const path) {
         100,
         &out
     );
-    // TODO
-    assert(out_len != 0);
+    if (out_len == 0)
+        throw InternalEncodingException("Internal encoding exception.");
 
     {
         letmut file = std::ofstream(path, std::ios::binary);
