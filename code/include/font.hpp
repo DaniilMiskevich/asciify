@@ -12,7 +12,7 @@ class Font {
     ~Font();
 
    private:
-    Font(FT_Library ft) : ft(ft) {}
+    explicit Font(FT_Library ft) : ft(ft) {}
 
     FT_Library const ft;
 };

@@ -13,7 +13,7 @@ struct Pixel {
     uint8_t r, g, b, a;
 };
 
-Image<Color>
+Image<Color> *
 WebpCodec::decode(uint8_t const *const src_data, size_t const src_size) {
     int width, height;
     let buf = reinterpret_cast<Pixel *>(
@@ -22,9 +22,9 @@ WebpCodec::decode(uint8_t const *const src_data, size_t const src_size) {
     if (buf == nullptr) throw std::bad_alloc();
 
     let size = Size(width, height);
-    letmut image = Image<Color>(size);
+    letmut image = new Image<Color>(size);
 
-    std::transform(buf, buf + size.area(), image.begin(), [](Pixel const px) {
+    std::transform(buf, buf + size.area(), image->begin(), [](Pixel const px) {
         return Color::rgb24(px.r, px.g, px.b) * px.a / 0xFF;
     });
 

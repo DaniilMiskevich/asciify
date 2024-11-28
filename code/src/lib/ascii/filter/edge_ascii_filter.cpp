@@ -9,7 +9,7 @@
 #include "image/filter/sobel_image_filter.hpp"
 
 void EdgeAsciiFilter::operator()(AsciiArt &dst) const {
-    letmut image = dst.image();
+    letmut image = Image<Color>(dst.image());
     image *= DoGImageFilter(dog_eps, dog_p);
     // TODO for debugging remove later
     WebpCodec::encode(image, "dog_filter.webp");

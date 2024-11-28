@@ -9,7 +9,7 @@
 
 class JpegCodec : public ImageCodec {
    public:
-    static Image<Color>
+    static Image<Color> *
     decode(uint8_t const *const src_data, size_t const src_size);
 
    public:

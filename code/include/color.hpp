@@ -8,7 +8,7 @@ struct Color {
     constexpr Color() : r(0.0), g(0.0), b(0.0) {}
     constexpr Color(float const r, float const g, float const b)
     : r(r), g(g), b(b) {}
-    constexpr Color(uint32_t const hex)
+    constexpr explicit Color(uint32_t const hex)
     : r(float((hex >> 16) & 0xFF) / 0xFF),
       g(float((hex >> 8) & 0xFF) / 0xFF),
       b(float((hex >> 0) & 0xFF) / 0xFF) {}

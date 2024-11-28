@@ -11,7 +11,7 @@
 
 class FillAsciiFilter : public ImageFilter<AsciiArt> {
    public:
-    FillAsciiFilter(char const *const palette = " .:-;=+*#B%@")
+    explicit FillAsciiFilter(char const *const palette = " .:-;=+*#B%@")
     : palette(palette), palette_len(strlen(palette)) {}
 
    private:

@@ -24,7 +24,7 @@ Image<Color> *ImageCodec::decode(char const *const filename) {
     let decoders = {WebpCodec::decode, JpegCodec::decode};
     for (let &decode : decoders) {
         try {
-            let image = new Image(decode(src_data, src_size));
+            let image = decode(src_data, src_size);
 
             delete[] src_data;
             return image;

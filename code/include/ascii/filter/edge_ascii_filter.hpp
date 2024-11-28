@@ -9,7 +9,7 @@
 
 class EdgeAsciiFilter : public ImageFilter<AsciiArt> {
    public:
-    EdgeAsciiFilter(
+    explicit EdgeAsciiFilter(
         float const threshold,
         char const *const palette = "|\\-/",
         float const dog_eps = 1,

@@ -2,7 +2,6 @@
 #define IMAGE_HPP
 
 #include <algorithm>
-#include <stdexcept>
 
 #include "conviniences.hpp"
 #include "dims.hpp"
@@ -13,8 +12,8 @@ class Image {
     class Iterator;
     class Region;
 
-    Image(Size const size) : _size(size), data(new T[size.area()]()) {}
-    Image(Image const &other)
+    explicit Image(Size const size) : _size(size), data(new T[size.area()]()) {}
+    explicit Image(Image const &other)
     : _size(other._size), data(new T[_size.area()]()) {
         std::copy(other.data, other.data + _size.area(), data);
     }
@@ -23,7 +22,7 @@ class Image {
 
     Size size(void) const { return _size; }
 
-    T &operator[](Pos pos) const {
+    T const &operator[](Pos pos) const {
         if (int16_t(pos.x) < 0)
             pos.x = 0;
         else if (pos.x >= _size.w)
@@ -36,9 +35,17 @@ class Image {
 
         return data[pos.x + pos.y * _size.w];
     }
-    T &operator[](Pos const pos) {
-        if (pos.x >= _size.w || pos.y >= _size.h)
-            throw std::range_error("`pos` is beyond of image size.");
+    T &operator[](Pos pos) {
+        if (int16_t(pos.x) < 0)
+            pos.x = 0;
+        else if (pos.x >= _size.w)
+            pos.x = _size.w - 1;
+
+        if (int16_t(pos.y) < 0)
+            pos.y = 0;
+        else if (pos.y >= _size.h)
+            pos.y = _size.h - 1;
+
         return data[pos.x + pos.y * _size.w];
     }
 
@@ -112,7 +119,8 @@ class Image<T>::Region {
 
     Size size() const { return _size; }
 
-    T &operator[](Pos const pos) const { return base[offset + pos]; }
+    T const &operator[](Pos const pos) const { return base[offset + pos]; }
+    T &operator[](Pos const pos) { return base[offset + pos]; }
 
     Iterator begin() const {
         return Image::Iterator(Pos(0, 0), base, offset, _size);

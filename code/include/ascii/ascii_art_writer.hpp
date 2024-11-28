@@ -2,7 +2,6 @@
 #define ASCII_ART_WRITER_HPP
 
 #include <fstream>
-#include <iomanip>
 
 #include "ascii/ascii_art.hpp"
 

@@ -11,11 +11,11 @@ template <typename T, uint16_t W, uint16_t H>
 struct ImageCnvlKernel {
     ImageCnvlKernel() = delete;
 
-    constexpr ImageCnvlKernel(T const (&matrix)[H][W]) {
+    constexpr explicit ImageCnvlKernel(T const (&matrix)[H][W]) {
         std::copy(&matrix[0][0], &matrix[0][0] + H * W, &this->matrix[0][0]);
     }
 
-    constexpr ImageCnvlKernel(
+    constexpr explicit ImageCnvlKernel(
         std::function<T(uint16_t const x, uint16_t const y)> const &fn
     ) {
         for (letmut i = uint16_t(0); i < H; i++)
@@ -24,10 +24,9 @@ struct ImageCnvlKernel {
 
     T matrix[W][H];
 
-    Image<Color> operator*(Image<Color> const &other) const {
-        letmut result = Image<Color>(other.size());
-
-        let size = other.size();
+    Image<Color> const &apply(Image<Color> &result, Image<Color> const &image)
+        const {
+        let size = result.size();
 
         letmut pos = Pos(0, 0);
         for (pos.x = 0; pos.x < size.w; pos.x++) {
@@ -35,7 +34,7 @@ struct ImageCnvlKernel {
             for (letmut i = uint16_t(0); i < H; i++)
                 for (letmut j = uint16_t(0); j < W; j++) {
                     src[i][j] =
-                        other[pos + Pos(j - (W - 1) / 2, i - (H - 1) / 2)];
+                        image[pos + Pos(j - (W - 1) / 2, i - (H - 1) / 2)];
                 }
 
             for (pos.y = 0; pos.y < size.h; pos.y++) {
@@ -49,7 +48,7 @@ struct ImageCnvlKernel {
                     let i = H - 1;
                     for (letmut j = uint16_t(0); j < W; j++) {
                         src[i][j] =
-                            other[pos + Pos(j - (W - 1) / 2, i - (H - 1) / 2)];
+                            image[pos + Pos(j - (W - 1) / 2, i - (H - 1) / 2)];
                     }
                 }
 

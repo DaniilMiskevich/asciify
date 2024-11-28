@@ -1,6 +1,8 @@
 #ifndef DOG_IMAGE_FILTER_HPP
 #define DOG_IMAGE_FILTER_HPP
 
+#include <thread>
+
 #include "image/filter/image_cnvl_kernel.hpp"
 #include "image/filter/image_filter.hpp"
 
@@ -24,7 +26,13 @@ class DoGImageFilter : public ImageFilter<Image<Color>> {
         static let g_s = GaussianKernel<7>();
         static let g_ks = GaussianKernel<5>();
 
-        let a = g_s * dst, b = g_ks * dst;
+        letmut a = Image<Color>(dst.size()), b = Image<Color>(dst.size());
+
+        letmut a_thread = std::thread([&a, &dst]() { g_s.apply(a, dst); }),
+               b_thread = std::thread([&b, &dst]() { g_ks.apply(b, dst); });
+        a_thread.join();
+        b_thread.join();
+
         for (letmut it = dst.begin(); it != dst.end(); it++) {
             let px = a[it.pos()] * (1 + p) - b[it.pos()] * p;
             dst[it.pos()] = px.sqr_magnitude() > eps * eps ? Color(0xFFFFFF)
