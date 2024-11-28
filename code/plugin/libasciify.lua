@@ -65,11 +65,10 @@ local function class(Base)
 
 	if Base then
 		setmetatable(Self, Base)
-		Self._constructor = Base._constructor
 	else
 		---@param a table|nil
 		---@return table|nil
-		Self._constructor = function(a)
+		function Self._constructor(a)
 			return a or {}
 		end
 	end
@@ -77,7 +76,7 @@ local function class(Base)
 	---A function to construct a new object. Should NOT be overloaded.
 	---@param a table|nil
 	---@return table|nil
-	Self.new = function(a)
+	function Self.new(a)
 		local self = Self._constructor(a)
 		return self and setmetatable(self, Self) or nil
 	end
@@ -167,9 +166,10 @@ end
 
 local AsciiArt = class(Native)
 
+---@enum
 AsciiArt.ColorMode = { EMPTY = 0, INDEXED = 1, TRUE = 2 }
 
----@param a { image:table, char_size:{ w:number, h:number } }
+---@param a { image:table, char_size:{ w:integer, h:integer } }
 ---@return table|nil
 function AsciiArt._constructor(a)
 	return Native._constructor({
@@ -178,33 +178,14 @@ function AsciiArt._constructor(a)
 	})
 end
 
----@param mode number
----@return table<string>
+---@param mode AsciiArt.ColorMode
+---@return string|string[]
 function AsciiArt:write(mode)
-	---@param str string
-	---@param delim string
-	---@return table
-	local function strsplit(str, delim)
-		local result = {}
-		local from = 1
-		local delim_from, delim_to = string.find(str, delim, from)
-		while delim_from do
-			table.insert(result, string.sub(str, from, delim_from - 1))
-			from = delim_to + 1
-			delim_from, delim_to = string.find(str, delim, from)
-		end
-		table.insert(result, string.sub(str, from))
-		return result
-	end
+	local native_out = native.ascii_art_write(self._self, mode)
+	local out = ffi.string(native_out.cstr, native_out.len)
+	ffi.C.free(ffi.cast("void *", native_out.cstr))
 
-	local out = (function()
-		local native_out = native.ascii_art_write(self._self, mode)
-		local out = ffi.string(native_out.cstr, native_out.len)
-		ffi.C.free(ffi.cast("void *", native_out.cstr))
-		return out
-	end)()
-
-	return strsplit(out, "\n")
+	return out
 end
 
 ---@param fill table
