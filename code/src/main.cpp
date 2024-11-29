@@ -30,7 +30,7 @@ void run() {
     try {
         char_size = Font::load("font.ttf").size();
     } catch (Font::InternalLoadingException const &e) {
-        std::cerr << "Font loading failed. Using fallback size of 10x20 pixels."
+        std::cerr << "Font loading failed. Using fallback size instead."
                   << std::endl;
     }
     std::cout << "Using following character size: " << char_size.w << "x"
