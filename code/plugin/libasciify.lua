@@ -44,7 +44,12 @@ typedef struct AsciiArt AsciiArt;
 typedef struct Size { uint16_t w, h; } Size;
 typedef enum AsciiArtWriterColorMode {COLOR_MODE_EMPTY, COLOR_MODE_INDEXED, COLOR_MODE_TRUE} AsciiArtWriterColorMode;
 
-AsciiArt *ascii_art_create(ImageOfColor const *const image, Size const frame_size_chars, Size const char_size);
+AsciiArt *ascii_art_create(
+    ImageOfColor const *const image,
+    Size const frame_size_chars,
+    char const *const font_family,
+    float const font_size
+);
 void ascii_art_delete(AsciiArt const *const self);
 
 typedef struct AsciiArtOutput { char const *const cstr; size_t const len;} AsciiArtOutput;
@@ -173,19 +178,17 @@ end
 
 local AsciiArt = class(Native)
 
----@alias Size { w:integer, h:integer }
-
 ---@enum AsciiArt.ColorMode
 AsciiArt.ColorMode = { EMPTY = 0, INDEXED = 1, TRUE = 2 }
 
----@param a { image:table, frame_size:Size, char_size:Size }
+---@param a { image:table, frame_size:{ w:integer, h:integer }, font_family:string, font_size:number }
 ---@return table|nil
 function AsciiArt._constructor(a)
 	return Native._constructor({
-		_self = native.ascii_art_create(a.image._self, a.frame_size, a.char_size),
+		_self = native.ascii_art_create(a.image._self, a.frame_size, a.font_family, a.font_size),
 		_delete = native.ascii_art_delete,
 		image = a.image,
-		char_size = a.char_size,
+		font_family = a.font_family,
 	})
 end
 

@@ -7,8 +7,6 @@ local Path = require("plenary.path")
 
 local libasciify = require("telescope._extensions.asciify.libasciify")
 
-local scale = 1
-
 local fill = libasciify.FillFilter.new({ palette = " .:+*csS&$@" })
 local color = libasciify.ColorFilter.new()
 local edge = libasciify.EdgeFilter.new({ threshold = 4.5, palette = "|\\`~;/" })
@@ -52,10 +50,22 @@ local asciify_previewer = defaulter(function(opts)
 				h = vim.api.nvim_win_get_height(self.state.winid),
 			}
 
+			local default_mono_font = (function()
+				local handle = io.popen('fc-list -f "%{file}\\n" :spacing=mono | head -n 1')
+				if not handle then
+					return ""
+				end
+
+				local result = handle:read("*a")
+				handle:close()
+				print(result)
+			end)()
+
 			local art = libasciify.AsciiArt.new({
 				image = image,
 				frame_size = frame_size,
-				char_size = { w = 10 / scale, h = 21 / scale },
+				font_family = default_mono_font,
+				font_size = 12,
 			})
 
 			local bufnr = self.state.bufnr

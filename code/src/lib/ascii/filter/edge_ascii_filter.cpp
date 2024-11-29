@@ -14,7 +14,6 @@ void EdgeAsciiFilter::operator()(AsciiArt &dst) const {
     image *= SobelImageFilter();
     // WebpCodec::encode(image, "sobel_filter.webp");
 
-    let art_size = dst.size();
     let char_size = dst.char_size();
 
     float *const edge_weights =

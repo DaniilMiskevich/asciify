@@ -28,7 +28,7 @@ Image<Color> *ImageCodec::decode(char const *const filename) {
 
             delete[] src_data;
             return image;
-        } catch (std::exception const &e) { continue; }
+        } catch (std::exception const &) { continue; }
     }
 
     delete[] src_data;

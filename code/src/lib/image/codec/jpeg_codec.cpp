@@ -99,7 +99,7 @@ JpegCodec::decode(uint8_t const *const src_data, size_t const src_size) {
         jpeg_destroy_decompress(&info);
 
         return image;
-    } catch (std::exception const &e) {
+    } catch (std::exception const &) {
         jpeg_destroy_decompress(&info);
         throw;
     }

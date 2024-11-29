@@ -6,6 +6,7 @@
 #include "ascii/filter/edge_ascii_filter.hpp"
 #include "ascii/filter/fill_ascii_filter.hpp"
 #include "conviniences.hpp"
+#include "font.hpp"
 #include "image/codec/image_codec.hpp"
 
 extern "C" {
@@ -48,8 +49,16 @@ void image_delete(Image<Color> const *const self) { delete self; }
 AsciiArt *ascii_art_create(
     Image<Color> const *const image,
     Size const frame_size_chars,
-    Size const char_size_px
+    char const *const font_family,
+    float const font_size
 ) {
+    letmut char_size_px = Size(10, 20);
+    try {
+        if (font_family != nullptr)
+            char_size_px = Font::load(font_family, font_size).size();
+    } catch (Font::InternalLoadingException const &) {
+        // use default size
+    }
     return new AsciiArt(*image, frame_size_chars, char_size_px);
 }
 void ascii_art_delete(AsciiArt const *const self) { delete self; }

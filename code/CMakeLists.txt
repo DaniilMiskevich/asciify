@@ -15,7 +15,10 @@ file(GLOB_RECURSE SRCS ${SRCS_PATH})
 set(LIB "asciify")
 
 add_library(${LIB} SHARED ${SRCS} "src/c_glue.cpp")
-target_include_directories(${LIB} PRIVATE ${INCLUDE_DIR})
+target_include_directories(${LIB} PUBLIC ${INCLUDE_DIR})
+set(COMPILE_AND_LINK_OPTS -O3 -g -Wall -Wextra -Wformat)
+target_compile_options(${LIB} PRIVATE ${COMPILE_AND_LINK_OPTS})
+target_link_options(${LIB} PRIVATE ${COMPILE_AND_LINK_OPTS})
 
 target_link_libraries(${LIB} webp jpeg freetype)
 
@@ -23,7 +26,6 @@ if(NOT DO_BUILD_FOR_PLUGIN)
     set(MAIN "main")
 
     add_executable(${MAIN} "src/main.cpp")
-    target_include_directories(${MAIN} PRIVATE "include/")
 
     set(COMPILE_AND_LINK_OPTS -Og -g -Wall -Wextra -Wformat -fsanitize=address)
     target_compile_options(${MAIN} PUBLIC ${COMPILE_AND_LINK_OPTS})
