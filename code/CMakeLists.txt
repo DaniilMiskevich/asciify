@@ -26,8 +26,8 @@ if(NOT DO_BUILD_FOR_PLUGIN)
     target_include_directories(${MAIN} PRIVATE "include/")
 
     set(COMPILE_AND_LINK_OPTS -Og -g -Wall -Wextra -Wformat -fsanitize=address)
-    target_compile_options(${MAIN} PRIVATE ${COMPILE_AND_LINK_OPTS})
-    target_link_options(${MAIN} PRIVATE ${COMPILE_AND_LINK_OPTS})
+    target_compile_options(${MAIN} PUBLIC ${COMPILE_AND_LINK_OPTS})
+    target_link_options(${MAIN} PUBLIC ${COMPILE_AND_LINK_OPTS})
 
     target_link_libraries(${MAIN} ${LIB})
 endif()

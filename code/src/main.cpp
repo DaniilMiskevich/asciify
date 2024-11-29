@@ -28,11 +28,13 @@ void run() {
 
     letmut char_size = Size(10, 20);
     try {
-        char_size = Font::load("font.ttf", 10.5).size();
+        char_size = Font::load("font.ttf").size();
     } catch (Font::InternalLoadingException const &e) {
         std::cerr << "Font loading failed. Using fallback size of 10x20 pixels."
                   << std::endl;
     }
+    std::cout << "Using following character size: " << char_size.w << "x"
+              << char_size.h << std::endl;
 
     let codec = ImageCodec();
     let image = codec.decode("test.webp");
