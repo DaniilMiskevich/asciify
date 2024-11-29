@@ -2,36 +2,46 @@
 
 #include "font.hpp"
 
-#include <stdexcept>
+#include <cmath>
 
 #include <freetype2/ft2build.h>
+
+#include "dims.hpp"
 #include FT_FREETYPE_H
 
 #include "conviniences.hpp"
 
-// TODO? maybe make library static/global
-Font Font::load(char const *const path, float const font_size) {
-    FT_Library ft = nullptr;
-    let handle_err = [](FT_Error err, char const *const msg = "error") {
-        if (err != FT_Err_Ok) throw std::runtime_error(msg);
+static struct FTWrap {
+    FTWrap() : lib(load_lib()) {}
+
+    FT_Library const lib;
+
+    static void
+    handle_err(FT_Error const err, char const *const msg = "Unknown error.") {
+        if (err != FT_Err_Ok) throw Font::InternalLoadingException(msg);
     };
 
-    handle_err(FT_Init_FreeType(&ft), "Freetype init error.");
+   private:
+    static FT_Library load_lib() {
+        FT_Library ft = nullptr;
+        handle_err(FT_Init_FreeType(&ft), "Freetype init error.");
+        return ft;
+    }
 
-    (void)path, (void)font_size;
-    // FT_Face face;
-    // handle_err(FT_New_Face(ft, path, 0, &face), "Face loading error.");
-    //
-    // handle_err(
-    //     FT_Set_Char_Size(face, 0, font_size * 64, 96, 96),
-    //     "Size setting error."
-    // );
-    // handle_err(FT_Load_Glyph(face, 0, FT_LOAD_DEFAULT), "Glyph loading
-    // error."); FT_Glyph_Get_CBox(face->glyph, FT_GLYPH_BBOX);
+} ft;
 
-    // let size = Size(face->bbox.xMin, face->bbox.yMin) / 26.6 / 64;
-    // std::cout << size.w << ", " << size.h << "\n";
+Font Font::load(char const *const path, float const font_size_px) {
+    FT_Face face;
+    FTWrap::handle_err(
+        FT_New_Face(ft.lib, path, 0, &face),
+        "Face loading error."
+    );
 
-    return Font(ft);
+    let size = Size(
+                   face->bbox.yMax - face->bbox.yMin,
+                   face->bbox.xMax - face->bbox.xMin
+               ) *
+               font_size_px / face->units_per_EM;
+
+    return Font(size);
 }
-Font::~Font() { FT_Done_FreeType(ft); }

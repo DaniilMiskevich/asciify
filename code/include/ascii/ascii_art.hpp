@@ -101,8 +101,8 @@ class AsciiArt : public Image<AsciiEl> {
     ) {
         return char_size *
                    fit_ratio(image_size_px, frame_size_chars * char_size)
-             // allows chars to be bigger -> image will contain less chars,
-             // never more
+             // allows chars to be a bit bigger == image will contain less
+             // chars, never more
              + Size(1, 1);
     }
 };
