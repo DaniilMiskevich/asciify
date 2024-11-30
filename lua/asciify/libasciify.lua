@@ -190,8 +190,8 @@ Ascii.ColorMode = { EMPTY = 0, INDEXED = 1, TRUE = 2 }
 ---@return table|nil
 function Ascii._constructor(a)
 	return Native._constructor({
-		_self = native.ascii_art_create(a.bitmap._self, a.frame_size, a.font.family, a.font.size),
-		_delete = native.ascii_art_delete,
+		_self = native.ascii_create(a.bitmap._self, a.frame_size, a.font.family, a.font.size),
+		_delete = native.ascii_delete,
 		bitmap = a.bitmap,
 		frame_size = a.frame_size,
 		font = a.font,
@@ -202,7 +202,7 @@ end
 ---@param mode Ascii.ColorMode
 ---@return string|string[]
 function Ascii:write(frame_size, mode)
-	local native_out = native.ascii_art_write(self._self, frame_size, mode)
+	local native_out = native.ascii_write(self._self, frame_size, mode)
 	local out = ffi.string(native_out.cstr, native_out.len)
 	ffi.C.free(ffi.cast("void *", native_out.cstr))
 
@@ -211,15 +211,15 @@ end
 
 ---@param fill table
 function Ascii:apply_fill(fill)
-	return native.ascii_art_apply_fill(self._self, fill._self)
+	return native.ascii_apply_fill(self._self, fill._self)
 end
 ---@param color table
 function Ascii:apply_color(color)
-	return native.ascii_art_apply_color(self._self, color._self)
+	return native.ascii_apply_color(self._self, color._self)
 end
 ---@param edge table
 function Ascii:apply_edge(edge)
-	return native.ascii_art_apply_edge(self._self, edge._self)
+	return native.ascii_apply_edge(self._self, edge._self)
 end
 
 M.FillFilter = FillFilter

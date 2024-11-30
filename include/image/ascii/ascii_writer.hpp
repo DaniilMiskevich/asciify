@@ -1,5 +1,5 @@
-#ifndef ASCII_ART_WRITER_HPP
-#define ASCII_ART_WRITER_HPP
+#ifndef ASCII_WRITER_HPP
+#define ASCII_WRITER_HPP
 
 #include <fstream>
 

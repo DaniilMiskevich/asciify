@@ -43,15 +43,15 @@ void run() {
     let size = bitmap->size();
     std::cout << "bitmap size: " << size.w << "x" << size.h << std::endl;
 
-    letmut ascii_art = Ascii(*bitmap, FRAME_SIZE_CHARS - Size(2, 2), char_size);
+    letmut ascii = Ascii(*bitmap, FRAME_SIZE_CHARS - Size(2, 2), char_size);
 
-    ascii_art *= fill;
-    ascii_art *= edges;
-    ascii_art *= color;
+    ascii *= fill;
+    ascii *= edges;
+    ascii *= color;
 
     delete bitmap;
 
-    let writer = AsciiWriter(ascii_art, FRAME_SIZE_CHARS);
+    let writer = AsciiWriter(ascii, FRAME_SIZE_CHARS);
     writer.write_to(std::cout, AsciiWriter::COLOR_MODE_INDEXED);
     writer.write_to_file("out.txt");
 }
