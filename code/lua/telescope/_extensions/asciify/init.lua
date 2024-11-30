@@ -5,7 +5,7 @@ local defaulter = require("telescope.utils").make_default_callable
 local previewers = require("telescope.previewers.buffer_previewer")
 local Path = require("plenary.path")
 
-local libasciify = require("libasciify")
+local libasciify = require("telescope._extensions.asciify.libasciify")
 
 local fill = libasciify.FillFilter.new({ palette = " .:+*csS&$@" })
 local color = libasciify.ColorFilter.new()
