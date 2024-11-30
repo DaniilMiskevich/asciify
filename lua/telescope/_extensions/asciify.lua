@@ -69,8 +69,7 @@ local asciify_previewer = defaulter(function(opts)
 			local art = libasciify.AsciiArt.new({
 				image = image,
 				frame_size = frame_size,
-				font_family = default_mono_font.family,
-				font_size = default_mono_font.size,
+				font = default_mono_font,
 			})
 
 			local bufnr = self.state.bufnr
