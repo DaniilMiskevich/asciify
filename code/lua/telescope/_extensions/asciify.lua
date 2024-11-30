@@ -95,6 +95,6 @@ local M = {}
 
 M.asciify_previewer = asciify_previewer.new
 
-return telescope.register_extension({
+return require("telescope").register_extension({
 	exports = M,
 })
