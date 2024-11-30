@@ -32,7 +32,7 @@ class AsciiWriter {
                 case COLOR_MODE_NONE: stream << el.c; break;
 
                 case COLOR_MODE_INDEXED: {
-                    stream << "\033[3" << el.indexed_color_index() << ";2m"
+                    stream << "\033[3" << indexed_color_index(el.color) << ";2m"
 
                            << el.c
 
@@ -40,12 +40,10 @@ class AsciiWriter {
                 } break;
 
                 case COLOR_MODE_TRUE: {
-                    let col = el.true_color();
-
                     stream << "\033[38;2;"
 
-                           << int(col.r8()) << ";" << int(col.g8()) << ";"
-                           << int(col.b8()) << "m"
+                           << int(el.color.r8()) << ";" << int(el.color.g8())
+                           << ";" << int(el.color.b8()) << "m"
 
                            << el.c
 
@@ -71,8 +69,42 @@ class AsciiWriter {
     }
 
    private:
+    static constexpr Color const indexed_colors[] = {
+#ifdef _MSC_BUILD  // windows console colors
+        Color::rgb255(12, 12, 12),
+        Color::rgb255(197, 15, 31),
+        Color::rgb255(19, 161, 14),
+        Color::rgb255(193, 156, 0),
+        Color::rgb255(0, 55, 218),
+        Color::rgb255(136, 23, 152),
+        Color::rgb255(58, 150, 221),
+        Color::rgb255(204, 204, 204),
+#else  // xterm colors
+        Color::rgb24(0, 0, 0),
+        Color::rgb24(205, 0, 0),
+        Color::rgb24(0, 205, 0),
+        Color::rgb24(205, 205, 0),
+        Color::rgb24(0, 0, 238),
+        Color::rgb24(205, 0, 205),
+        Color::rgb24(0, 205, 205),
+        Color::rgb24(229, 229, 229),
+#endif
+    };
+
     Size const frame_size;
     Ascii const &art;
+
+    constexpr unsigned indexed_color_index(Color const &color) const {
+        return std::min_element(
+                   indexed_colors,
+                   indexed_colors + lenof(indexed_colors),
+                   [&color](Color const &a, Color const &b) {
+                       return (a - color).sqr_magnitude() <=
+                              (b - color).sqr_magnitude();
+                   }
+               ) -
+               indexed_colors;
+    }
 };
 
 #endif

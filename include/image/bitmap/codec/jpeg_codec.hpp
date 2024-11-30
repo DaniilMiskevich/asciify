@@ -15,7 +15,7 @@ class JpegCodec : public BitmapCodec {
 };
 
 struct JpegCodec::InternalDecodingException :
-public JpegCodec::DecodingException {
+public BitmapCodec::DecodingException {
     InternalDecodingException(char const *const msg) : msg(msg) {}
 
     char const *const msg;
@@ -24,7 +24,7 @@ public JpegCodec::DecodingException {
 };
 
 struct JpegCodec::InvalidHeaderDecodingException :
-public JpegCodec::DecodingException {
+public BitmapCodec::DecodingException {
     char const *what() const throw() override { return "Invalid JPEG header."; }
 };
 

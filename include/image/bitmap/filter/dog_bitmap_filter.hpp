@@ -26,7 +26,7 @@ class DoGBitmapFilter : public BitmapFilter {
         static let g_s = GaussianKernel<7>();
         static let g_ks = GaussianKernel<5>();
 
-        letmut a = Image<Color>(dst.size()), b = Image<Color>(dst.size());
+        letmut a = Bitmap(dst.size()), b = Bitmap(dst.size());
 
         letmut a_thread = std::thread([&a, &dst]() { g_s.apply(a, dst); }),
                b_thread = std::thread([&b, &dst]() { g_ks.apply(b, dst); });

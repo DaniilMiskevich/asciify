@@ -19,9 +19,7 @@ class BitmapCodec {
 };
 
 struct BitmapCodec::DecodingException : public std::exception {
-    char const *what() const throw() override {
-        return "Generic decoding error.";
-    }
+    char const *what() const throw() override = 0;
 };
 struct BitmapCodec::UnsupportedFormatException : public std::exception {
     char const *what() const throw() override {

@@ -43,6 +43,6 @@ void EdgeAsciiFilter::operator()(Ascii &dst) const {
         let max_i = std::max_element(edge_weights, edge_weights + palette_len) -
                     edge_weights;
 
-        (*it) = AsciiEl(palette[max_i]);
+        *it = AsciiEl(palette[max_i]);
     }
 }

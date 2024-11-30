@@ -13,11 +13,11 @@ class ColorAsciiFilter : public AsciiFilter {
 
         for (letmut it = dst.begin(); it != dst.end(); it++) {
             let region =
-                Image<Color>::Region(bitmap, it.pos() * char_size, char_size);
+                Bitmap::Region(bitmap, it.pos() * char_size, char_size);
             let avg = std::accumulate(region.begin(), region.end(), Color()) /
                       char_size.area();
 
-            (*it).set_true_color(avg);
+            it->color = avg;
         }
     }
 };

@@ -19,7 +19,7 @@ class SobelBitmapFilter : public BitmapFilter {
             {-1, -2, -1},
         });
 
-        letmut x = Image<Color>(dst.size()), y = Image<Color>(dst.size());
+        letmut x = Bitmap(dst.size()), y = Bitmap(dst.size());
         letmut x_thread = std::thread([&x, &dst]() { g_x.apply(x, dst); }),
                y_thread = std::thread([&y, &dst]() { g_y.apply(y, dst); });
         x_thread.join();

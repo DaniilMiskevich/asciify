@@ -25,7 +25,7 @@ struct BitmapFilter::CnvlKernel {
             for (letmut j = uint16_t(0); j < W; j++) matrix[i][j] = fn(i, j);
     }
 
-    T matrix[W][H];
+    T matrix[H][W];
 
     Image<Color> const &apply(Image<Color> &result, Image<Color> const &image)
         const {

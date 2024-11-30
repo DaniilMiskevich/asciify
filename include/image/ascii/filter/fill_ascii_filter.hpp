@@ -22,7 +22,7 @@ class FillAsciiFilter : public AsciiFilter {
 
         for (letmut it = dst.begin(); it != dst.end(); it++) {
             let region =
-                Image<Color>::Region(bitmap, it.pos() * char_size, char_size);
+                Bitmap::Region(bitmap, it.pos() * char_size, char_size);
             let avg = std::accumulate(region.begin(), region.end(), Color()) /
                       char_size.area();
             let avg_lum = avg.luminance();
@@ -30,7 +30,7 @@ class FillAsciiFilter : public AsciiFilter {
             letmut i = size_t(avg_lum * palette_len);
             if (i >= palette_len) i = palette_len - 1;
 
-            (*it) = AsciiEl(palette[i]);
+            *it = AsciiEl(palette[i]);
         }
     }
 };

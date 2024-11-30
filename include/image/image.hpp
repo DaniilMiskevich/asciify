@@ -12,14 +12,6 @@ class Image {
     class Iterator;
     class Region;
 
-    explicit Image(Size const size) : _size(size), data(new T[size.area()]()) {}
-    explicit Image(Image const &other)
-    : _size(other._size), data(new T[_size.area()]()) {
-        std::copy(other.data, other.data + _size.area(), data);
-    }
-
-    ~Image() { delete[] data; };
-
     Size size(void) const { return _size; }
 
     T const &operator[](Pos pos) const {
@@ -51,6 +43,15 @@ class Image {
 
     Iterator begin() const { return Iterator(Pos(0, 0), *this); }
     Iterator end() const { return Iterator(Pos(0, _size.h), *this); }
+
+   protected:
+    explicit Image(Size const size) : _size(size), data(new T[size.area()]()) {}
+    explicit Image(Image const &other)
+    : _size(other._size), data(new T[_size.area()]()) {
+        std::copy(other.data, other.data + _size.area(), data);
+    }
+
+    ~Image() { delete[] data; };
 
    private:
     Size const _size;
@@ -94,10 +95,13 @@ class Image<T>::Iterator {
         return it;
     }
 
-    T &operator*() const { return data[_pos.x + _pos.y * image_size.w]; }
+    T const &operator*() const { return data[_pos.x + _pos.y * image_size.w]; }
+    T &operator*() { return data[_pos.x + _pos.y * image_size.w]; }
+
     T const *operator->() const {
         return data + _pos.x + _pos.y * image_size.w;
     }
+    T *operator->() { return data + _pos.x + _pos.y * image_size.w; }
 
     bool operator==(Iterator const &other) const { return _pos == other._pos; }
     bool operator!=(Iterator const &other) const { return _pos != other._pos; }
