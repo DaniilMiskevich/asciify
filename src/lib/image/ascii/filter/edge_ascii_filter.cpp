@@ -1,17 +1,17 @@
-#include "ascii/filter/edge_ascii_filter.hpp"
+#include "image/ascii/filter/edge_ascii_filter.hpp"
 
 #include <numeric>
 
 #include <alloca.h>
 
-#include "image/filter/dog_image_filter.hpp"
-#include "image/filter/sobel_image_filter.hpp"
+#include "image/bitmap/filter/dog_bitmap_filter.hpp"
+#include "image/bitmap/filter/sobel_bitmap_filter.hpp"
 
-void EdgeAsciiFilter::operator()(AsciiArt &dst) const {
-    letmut image = Image<Color>(dst.image());
-    image *= DoGImageFilter(dog_eps, dog_p);
+void EdgeAsciiFilter::operator()(Ascii &dst) const {
+    letmut bitmap = Bitmap(dst.bitmap());
+    bitmap *= DoGBitmapFilter(dog_eps, dog_p);
     // WebpCodec::encode(image, "dog_filter.webp");
-    image *= SobelImageFilter();
+    bitmap *= SobelBitmapFilter();
     // WebpCodec::encode(image, "sobel_filter.webp");
 
     let char_size = dst.char_size();
@@ -22,8 +22,7 @@ void EdgeAsciiFilter::operator()(AsciiArt &dst) const {
     for (letmut it = dst.begin(); it != dst.end(); it++) {
         std::fill(edge_weights, edge_weights + palette_len, 0);
 
-        let region =
-            Image<Color>::Region(image, it.pos() * char_size, char_size);
+        let region = Bitmap::Region(bitmap, it.pos() * char_size, char_size);
         for (let &px : region) {
             // must be negated to preserve palette in normal order
             let angle = -atan2(px.g, px.r) / M_PI;

@@ -33,31 +33,36 @@ EdgeAsciiFilter *edge_filter_create_extra(
 );
 void edge_filter_delete(EdgeAsciiFilter const *const self);
 
-// image
-typedef struct ImageOfColor ImageOfColor;
-ImageOfColor *image_decode(char const *const path);
-void image_delete(ImageOfColor const *const self);
+// bitmap
 
-// ascii art
+typedef struct Bitmap Bitmap;
+Bitmap *bitmap_decode(char const *const path);
+void bitmap_delete(Bitmap const *const self);
 
-typedef struct AsciiArt AsciiArt;
+// ascii 
+
+typedef struct Ascii Ascii;
 typedef struct Size { uint16_t w, h; } Size;
-typedef enum AsciiArtWriterColorMode {COLOR_MODE_EMPTY, COLOR_MODE_INDEXED, COLOR_MODE_TRUE} AsciiArtWriterColorMode;
+typedef enum AsciiWriterColorMode {COLOR_MODE_EMPTY, COLOR_MODE_INDEXED, COLOR_MODE_TRUE} AsciiWriterColorMode;
 
-AsciiArt *ascii_art_create(
-    ImageOfColor const *const image,
+Ascii *ascii_create(
+    Bitmap const *const bitmap,
     Size const frame_size_chars,
     char const *const font_family,
     float const font_size
 );
-void ascii_art_delete(AsciiArt const *const self);
+void ascii_delete(Ascii const *const self);
 
-typedef struct AsciiArtOutput { char const *const cstr; size_t const len;} AsciiArtOutput;
-AsciiArtOutput ascii_art_write(AsciiArt const *const self, Size const frame_size_chars, AsciiArtWriterColorMode const mode);
+typedef struct AsciiOutput { char const *const cstr; size_t const len;} AsciiOutput;
+AsciiOutput ascii_write(
+    Ascii const *const self, 
+    Size const frame_size_chars, 
+    AsciiWriterColorMode const mode
+);
 
-void ascii_art_apply_fill(AsciiArt *const self, FillAsciiFilter const *const fill);
-void ascii_art_apply_color(AsciiArt *const self, ColorAsciiFilter const *const color);
-void ascii_art_apply_edge(AsciiArt *const self, EdgeAsciiFilter const *const edge);
+void ascii_apply_fill(Ascii *const self, FillAsciiFilter const *const fill);
+void ascii_apply_color(Ascii *const self, ColorAsciiFilter const *const color);
+void ascii_apply_edge(Ascii *const self, EdgeAsciiFilter const *const edge);
 ]])
 
 ---------
@@ -160,43 +165,43 @@ function EdgeFilter._constructor(a)
 	})
 end
 
--- image
+-- bitmap
 
-local Image = class(Native)
+local Bitmap = class(Native)
 
 ---@param a { path:string }
 ---@return table|nil
-function Image._constructor(a)
+function Bitmap._constructor(a)
 	return Native._constructor({
-		_self = native.image_decode(a.path),
-		_delete = native.image_delete,
+		_self = native.bitmap_decode(a.path),
+		_delete = native.bitmap_delete,
 		path = a.path,
 	})
 end
 
 -- ascii art
 
-local AsciiArt = class(Native)
+local Ascii = class(Native)
 
----@enum AsciiArt.ColorMode
-AsciiArt.ColorMode = { EMPTY = 0, INDEXED = 1, TRUE = 2 }
+---@enum Ascii.ColorMode
+Ascii.ColorMode = { EMPTY = 0, INDEXED = 1, TRUE = 2 }
 
----@param a { image:table, frame_size:{ w:integer, h:integer }, font:{ family:string|nil, size:number } }
+---@param a { bitmap:table, frame_size:{ w:integer, h:integer }, font:{ family:string|nil, size:number } }
 ---@return table|nil
-function AsciiArt._constructor(a)
+function Ascii._constructor(a)
 	return Native._constructor({
-		_self = native.ascii_art_create(a.image._self, a.frame_size, a.font.family, a.font.size),
+		_self = native.ascii_art_create(a.bitmap._self, a.frame_size, a.font.family, a.font.size),
 		_delete = native.ascii_art_delete,
-		image = a.image,
+		bitmap = a.bitmap,
 		frame_size = a.frame_size,
 		font = a.font,
 	})
 end
 
 ---@param frame_size { w:integer, h:integer }
----@param mode AsciiArt.ColorMode
+---@param mode Ascii.ColorMode
 ---@return string|string[]
-function AsciiArt:write(frame_size, mode)
+function Ascii:write(frame_size, mode)
 	local native_out = native.ascii_art_write(self._self, frame_size, mode)
 	local out = ffi.string(native_out.cstr, native_out.len)
 	ffi.C.free(ffi.cast("void *", native_out.cstr))
@@ -205,22 +210,22 @@ function AsciiArt:write(frame_size, mode)
 end
 
 ---@param fill table
-function AsciiArt:apply_fill(fill)
+function Ascii:apply_fill(fill)
 	return native.ascii_art_apply_fill(self._self, fill._self)
 end
 ---@param color table
-function AsciiArt:apply_color(color)
+function Ascii:apply_color(color)
 	return native.ascii_art_apply_color(self._self, color._self)
 end
 ---@param edge table
-function AsciiArt:apply_edge(edge)
+function Ascii:apply_edge(edge)
 	return native.ascii_art_apply_edge(self._self, edge._self)
 end
 
 M.FillFilter = FillFilter
 M.ColorFilter = ColorFilter
 M.EdgeFilter = EdgeFilter
-M.Image = Image
-M.AsciiArt = AsciiArt
+M.Bitmap = Bitmap
+M.Ascii = Ascii
 
 return M

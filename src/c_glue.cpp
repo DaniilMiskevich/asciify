@@ -1,13 +1,12 @@
 #include <sstream>
 
-#include "ascii/ascii_art.hpp"
-#include "ascii/ascii_art_writer.hpp"
-#include "ascii/filter/color_ascii_filter.hpp"
-#include "ascii/filter/edge_ascii_filter.hpp"
-#include "ascii/filter/fill_ascii_filter.hpp"
 #include "conviniences.hpp"
 #include "font.hpp"
-#include "image/codec/image_codec.hpp"
+#include "image/ascii/ascii_writer.hpp"
+#include "image/ascii/filter/color_ascii_filter.hpp"
+#include "image/ascii/filter/edge_ascii_filter.hpp"
+#include "image/ascii/filter/fill_ascii_filter.hpp"
+#include "image/bitmap/codec/bitmap_codec.hpp"
 
 extern "C" {
 
@@ -36,18 +35,18 @@ EdgeAsciiFilter *edge_filter_create_extra(
 }
 void edge_filter_delete(EdgeAsciiFilter const *const self) { delete self; }
 
-// image
-Image<Color> *image_decode(char const *const path) {
+// bitmap
+Bitmap *bitmap_decode(char const *const path) {
     try {
-        return ImageCodec::decode(path);
+        return BitmapCodec::decode(path);
     } catch (std::exception const &) { return nullptr; }
 }
-void image_delete(Image<Color> const *const self) { delete self; }
+void bitmap_delete(Bitmap const *const self) { delete self; }
 
-// ascii art
+// ascii
 
-AsciiArt *ascii_art_create(
-    Image<Color> const *const image,
+Ascii *ascii_create(
+    Bitmap const *const bitmap,
     Size const frame_size_chars,
     char const *const font_family,
     float const font_size
@@ -59,20 +58,20 @@ AsciiArt *ascii_art_create(
     } catch (std::exception const &) {
         // use default size
     }
-    return new AsciiArt(*image, frame_size_chars, char_size_px);
+    return new Ascii(*bitmap, frame_size_chars, char_size_px);
 }
-void ascii_art_delete(AsciiArt const *const self) { delete self; }
+void ascii_delete(Ascii const *const self) { delete self; }
 
-struct AsciiArtOutput {
+struct AsciiOutput {
     char const *const cstr;
     size_t const len;
 };
-AsciiArtOutput ascii_art_write(
-    AsciiArt const *const self,
+AsciiOutput ascii_write(
+    Ascii const *const self,
     Size const frame_size,
-    AsciiArtWriter::ColorMode const mode
+    AsciiWriter::ColorMode const mode
 ) {
-    let writer = AsciiArtWriter(*self, frame_size);
+    let writer = AsciiWriter(*self, frame_size);
 
     letmut stream = std::stringstream();
     writer.write_to(stream, mode);
@@ -82,25 +81,16 @@ AsciiArtOutput ascii_art_write(
 
     let cstr = new char[len]();
     std::move(string.begin(), string.end(), cstr);
-    return AsciiArtOutput{cstr, len};
+    return AsciiOutput{cstr, len};
 }
 
-void ascii_art_apply_fill(
-    AsciiArt *const self,
-    FillAsciiFilter const *const fill
-) {
+void ascii_apply_fill(Ascii *const self, FillAsciiFilter const *const fill) {
     *self *= *fill;
 }
-void ascii_art_apply_color(
-    AsciiArt *const self,
-    ColorAsciiFilter const *const color
-) {
+void ascii_apply_color(Ascii *const self, ColorAsciiFilter const *const color) {
     *self *= *color;
 }
-void ascii_art_apply_edge(
-    AsciiArt *const self,
-    EdgeAsciiFilter const *const edge
-) {
+void ascii_apply_edge(Ascii *const self, EdgeAsciiFilter const *const edge) {
     *self *= *edge;
 }
 }

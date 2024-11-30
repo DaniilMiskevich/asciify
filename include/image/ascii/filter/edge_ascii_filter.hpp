@@ -4,10 +4,10 @@
 #include <cassert>
 #include <cstring>
 
-#include "ascii/ascii_art.hpp"
-#include "image/filter/image_filter.hpp"
+#include "image/ascii/ascii.hpp"
+#include "image/ascii/filter/ascii_filter.hpp"
 
-class EdgeAsciiFilter : public ImageFilter<AsciiArt> {
+class EdgeAsciiFilter : public AsciiFilter {
    public:
     explicit EdgeAsciiFilter(
         float const threshold,
@@ -27,7 +27,7 @@ class EdgeAsciiFilter : public ImageFilter<AsciiArt> {
     size_t const palette_len;
     float const dog_eps, dog_p;
 
-    void operator()(AsciiArt &dst) const override;
+    void operator()(Ascii &dst) const override;
 };
 
 #endif

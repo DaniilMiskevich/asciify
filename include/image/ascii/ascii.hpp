@@ -1,10 +1,10 @@
-#ifndef ASCII_ART_HPP
-#define ASCII_ART_HPP
+#ifndef ASCII_HPP
+#define ASCII_HPP
 
 #include <algorithm>
 
-#include "color.hpp"
-#include "dims.hpp"
+#include "image/bitmap/bitmap.hpp"
+#include "image/color.hpp"
 #include "image/image.hpp"
 
 struct AsciiEl {
@@ -66,26 +66,26 @@ struct AsciiEl {
     }
 };
 
-class AsciiArt : public Image<AsciiEl> {
+class Ascii : public Image<AsciiEl> {
    public:
-    AsciiArt(
-        Image<Color> const &image,
+    Ascii(
+        Bitmap const &bitmap,
         Size const frame_size_chars,
         Size const char_size
     )
     : Image<AsciiEl>(
-          image.size() /
-          (fit_char_size(char_size, image.size(), frame_size_chars))
+          bitmap.size() /
+          (fit_char_size(char_size, bitmap.size(), frame_size_chars))
       ),
-      _char_size(fit_char_size(char_size, image.size(), frame_size_chars)),
-      _image(image) {}
+      _char_size(fit_char_size(char_size, bitmap.size(), frame_size_chars)),
+      _bitmap(bitmap) {}
 
     Size char_size() const { return _char_size; }
-    Image<Color> const &image() const { return _image; }
+    Bitmap const &bitmap() const { return _bitmap; }
 
    private:
     Size const _char_size;
-    Image<Color> const &_image;
+    Bitmap const &_bitmap;
 
     constexpr static float
     fit_ratio(Size const image_size_px, Size const frame_size_px) {

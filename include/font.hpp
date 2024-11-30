@@ -4,6 +4,7 @@
 #include <exception>
 
 #include "dims.hpp"
+
 class Font {
     typedef struct FT_LibraryRec_ *FT_Library;
 

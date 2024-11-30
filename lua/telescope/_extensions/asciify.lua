@@ -13,7 +13,7 @@ local edge
 ---@type table|nil
 local color
 
----@type AsciiArt.ColorMode
+---@type Ascii.ColorMode
 local color_mode
 
 ---@type string[]
@@ -43,8 +43,8 @@ local asciify_previewer = defaulter(function(opts)
 				return vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
 			end
 
-			local image = libasciify.Image.new({ path = path })
-			if not image then
+			local bitmap = libasciify.Bitmap.new({ path = path })
+			if not bitmap then
 				return conf.buffer_previewer_maker(path, self.state.bufnr, {
 					bufname = self.state.bufname,
 					winid = self.state.winid,
@@ -74,8 +74,8 @@ local asciify_previewer = defaulter(function(opts)
 				}
 			end)()
 
-			local art = libasciify.AsciiArt.new({
-				image = image,
+			local art = libasciify.Ascii.new({
+				bitmap = bitmap,
 				frame_size = frame_size,
 				font = default_mono_font,
 			})
@@ -122,7 +122,7 @@ return require("telescope").register_extension({
 		extconf.edge_threshold = extconf.edge_threshold or 4.5
 		extconf.edge_dog_conf = extconf.edge_dog_conf or { eps = 1, p = 10 }
 
-		extconf.color_mode = extconf.color_mode or libasciify.AsciiArt.ColorMode.INDEXED
+		extconf.color_mode = extconf.color_mode or libasciify.Ascii.ColorMode.INDEXED
 
 		extconf.order = extconf.order or { "fill", "edge", "color" }
 

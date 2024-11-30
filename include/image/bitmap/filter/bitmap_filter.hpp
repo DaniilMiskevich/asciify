@@ -1,21 +1,24 @@
-#ifndef IMAGE_CNVL_KERNEL_HPP
-#define IMAGE_CNVL_KERNEL_HPP
+#ifndef BITMAP_FILTER_HPP
+#define BITMAP_FILTER_HPP
 
-#include <algorithm>
 #include <functional>
 
-#include "color.hpp"
-#include "image/image.hpp"
+#include "image/bitmap/bitmap.hpp"
+#include "image/image_filter.hpp"
+
+class BitmapFilter : public ImageFilter<Bitmap> {
+   public:
+    template <typename T, uint16_t W, uint16_t H>
+    struct CnvlKernel;
+};
 
 template <typename T, uint16_t W, uint16_t H>
-struct ImageCnvlKernel {
-    ImageCnvlKernel() = delete;
-
-    constexpr explicit ImageCnvlKernel(T const (&matrix)[H][W]) {
+struct BitmapFilter::CnvlKernel {
+    constexpr explicit CnvlKernel(T const (&matrix)[H][W]) {
         std::copy(&matrix[0][0], &matrix[0][0] + H * W, &this->matrix[0][0]);
     }
 
-    constexpr explicit ImageCnvlKernel(
+    constexpr explicit CnvlKernel(
         std::function<T(uint16_t const x, uint16_t const y)> const &fn
     ) {
         for (letmut i = uint16_t(0); i < H; i++)

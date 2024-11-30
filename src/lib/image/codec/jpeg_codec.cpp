@@ -1,8 +1,9 @@
-#include "image/codec/jpeg_codec.hpp"
+#include "image/bitmap/codec/jpeg_codec.hpp"
 
 #include <algorithm>
 #include <cassert>
 #include <cstdio>
+#include <functional>
 
 #include <jpeglib.h>
 
@@ -18,18 +19,25 @@ static struct jpeg_error_mgr *jpeg_throw_error(struct jpeg_error_mgr *err) {
 }
 
 template <typename T>
-static T const *
-jpeg_read_pixels(jpeg_decompress_struct &info, Size const size) {
-    let buf = new T[size.area()];
+static void jpeg_read_pixels(
+    Bitmap &dst,
+    jpeg_decompress_struct &info,
+    std::function<Color(T pixel)> transform_fn
+) {
+    let size = dst.size();
+
+    let buf = new T[size.area()]();
+
     while (info.output_scanline < size.h) {
         letmut buf_ptr = buf + info.output_scanline * size.w;
         jpeg_read_scanlines(&info, reinterpret_cast<uint8_t **>(&buf_ptr), 1);
     }
+    std::transform(buf, buf + size.area(), dst.begin(), transform_fn);
 
-    return buf;
+    delete[] buf;
 }
 
-Image<Color> *
+Bitmap *
 JpegCodec::decode(uint8_t const *const src_data, size_t const src_size) {
     struct RGBPixel {
         uint8_t r, g, b;
@@ -54,43 +62,25 @@ JpegCodec::decode(uint8_t const *const src_data, size_t const src_size) {
 
         let size = Size(info.image_width, info.image_height);
 
-        let image = new Image<Color>(size);
+        let bitmap = new Bitmap(size);
         switch (info.output_components) {
-        case sizeof(RGBPixel): {
-            let buf = jpeg_read_pixels<RGBPixel>(info, size);
-            std::transform(
-                buf,
-                buf + size.area(),
-                image->begin(),
-                [](RGBPixel const px) { return Color::rgb24(px.r, px.g, px.b); }
-            );
-            delete[] buf;
-        }; break;
+        case sizeof(RGBPixel):
+            jpeg_read_pixels<RGBPixel>(*bitmap, info, [](RGBPixel const px) {
+                return Color::rgb24(px.r, px.g, px.b);
+            });
+            break;
 
-        case sizeof(CMYKPixel): {
-            let buf = jpeg_read_pixels<CMYKPixel>(info, size);
-            std::transform(
-                buf,
-                buf + size.area(),
-                image->begin(),
-                [](CMYKPixel const px) {
-                    return Color(px.inv_c, px.inv_m, px.inv_y) / 0xFF * px.k /
-                           0xFF;
-                }
-            );
-            delete[] buf;
-        }; break;
+        case sizeof(CMYKPixel):
+            jpeg_read_pixels<CMYKPixel>(*bitmap, info, [](CMYKPixel const px) {
+                return Color(px.inv_c, px.inv_m, px.inv_y) / 0xFF * px.k / 0xFF;
+            });
+            break;
 
-        case sizeof(GrayPixel): {
-            let buf = jpeg_read_pixels<GrayPixel>(info, size);
-            std::transform(
-                buf,
-                buf + size.area(),
-                image->begin(),
-                [](GrayPixel const px) { return Color(0xFFFFFF) * px.g / 0xFF; }
-            );
-            delete[] buf;
-        }; break;
+        case sizeof(GrayPixel):
+            jpeg_read_pixels<GrayPixel>(*bitmap, info, [](GrayPixel const px) {
+                return Color(0xFFFFFF) * px.g / 0xFF;
+            });
+            break;
 
         default: throw InternalDecodingException("Unsupported color format.");
         }
@@ -98,7 +88,7 @@ JpegCodec::decode(uint8_t const *const src_data, size_t const src_size) {
         jpeg_finish_decompress(&info);
         jpeg_destroy_decompress(&info);
 
-        return image;
+        return bitmap;
     } catch (std::exception const &) {
         jpeg_destroy_decompress(&info);
         throw;

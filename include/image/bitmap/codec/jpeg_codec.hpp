@@ -3,14 +3,11 @@
 
 #include <cstddef>
 
-#include "color.hpp"
-#include "image/codec/image_codec.hpp"
-#include "image/image.hpp"
+#include "image/bitmap/codec/bitmap_codec.hpp"
 
-class JpegCodec : public ImageCodec {
+class JpegCodec : public BitmapCodec {
    public:
-    static Image<Color> *
-    decode(uint8_t const *const src_data, size_t const src_size);
+    static Bitmap *decode(uint8_t const *const src_data, size_t const src_size);
 
    public:
     struct InternalDecodingException;
@@ -18,7 +15,7 @@ class JpegCodec : public ImageCodec {
 };
 
 struct JpegCodec::InternalDecodingException :
-public ImageCodec::DecodingException {
+public JpegCodec::DecodingException {
     InternalDecodingException(char const *const msg) : msg(msg) {}
 
     char const *const msg;
@@ -27,7 +24,7 @@ public ImageCodec::DecodingException {
 };
 
 struct JpegCodec::InvalidHeaderDecodingException :
-public ImageCodec::DecodingException {
+public JpegCodec::DecodingException {
     char const *what() const throw() override { return "Invalid JPEG header."; }
 };
 

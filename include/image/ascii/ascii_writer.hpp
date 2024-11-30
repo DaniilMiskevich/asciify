@@ -3,13 +3,13 @@
 
 #include <fstream>
 
-#include "ascii/ascii_art.hpp"
+#include "image/ascii/ascii.hpp"
 
-class AsciiArtWriter {
+class AsciiWriter {
    public:
     enum ColorMode { COLOR_MODE_NONE, COLOR_MODE_INDEXED, COLOR_MODE_TRUE };
 
-    AsciiArtWriter(AsciiArt const &art, Size const frame_size)
+    AsciiWriter(Ascii const &art, Size const frame_size)
     : frame_size(frame_size), art(art) {}
 
     void write_to(
@@ -72,7 +72,7 @@ class AsciiArtWriter {
 
    private:
     Size const frame_size;
-    AsciiArt const &art;
+    Ascii const &art;
 };
 
 #endif

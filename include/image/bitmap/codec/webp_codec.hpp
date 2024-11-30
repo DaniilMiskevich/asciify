@@ -4,14 +4,11 @@
 #include <cstddef>
 #include <exception>
 
-#include "color.hpp"
-#include "image/codec/image_codec.hpp"
-#include "image/image.hpp"
+#include "image/bitmap/codec/bitmap_codec.hpp"
 
-class WebpCodec : public ImageCodec {
+class WebpCodec : public BitmapCodec {
    public:
-    static Image<Color> *
-    decode(uint8_t const *const src_data, size_t const src_size);
+    static Bitmap *decode(uint8_t const *const src_data, size_t const src_size);
 
     static void encode(Image<Color> const &src, char const *const path);
 

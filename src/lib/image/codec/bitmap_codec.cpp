@@ -1,11 +1,11 @@
-#include "image/codec/image_codec.hpp"
+#include "image/bitmap/codec/bitmap_codec.hpp"
 
 #include <fstream>
 
-#include "image/codec/jpeg_codec.hpp"
-#include "image/codec/webp_codec.hpp"
+#include "image/bitmap/codec/jpeg_codec.hpp"
+#include "image/bitmap/codec/webp_codec.hpp"
 
-Image<Color> *ImageCodec::decode(char const *const filename) {
+Bitmap *BitmapCodec::decode(char const *const filename) {
     static_assert(
         sizeof(char) == sizeof(uint8_t),
         "This code is expected to work on 1-byte chars only."

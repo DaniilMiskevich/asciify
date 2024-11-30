@@ -1,28 +1,28 @@
-#ifndef DOG_IMAGE_FILTER_HPP
-#define DOG_IMAGE_FILTER_HPP
+#ifndef DOG_BITMAP_FILTER_HPP
+#define DOG_BITMAP_FILTER_HPP
 
 #include <thread>
 
-#include "image/filter/image_cnvl_kernel.hpp"
-#include "image/filter/image_filter.hpp"
+#include "image/bitmap/filter/bitmap_filter.hpp"
 
-template <uint16_t S>
-struct GaussianKernel : public ImageCnvlKernel<float, S, S> {
-    GaussianKernel()
-    : ImageCnvlKernel<float, S, S>([](uint16_t const i, uint16_t const j) {
-          let x = i - 0.5 * S, y = j - 0.5 * S;
-          return 1.0 / (M_2_PI * S * S) * expf(-(x * x + y * y) / (2 * S * S));
-      }) {}
-};
-
-class DoGImageFilter : public ImageFilter<Image<Color>> {
+class DoGBitmapFilter : public BitmapFilter {
    public:
-    DoGImageFilter(float const eps, float const p = 1) : eps(eps), p(p) {}
+    template <uint16_t S>
+    struct GaussianKernel : public CnvlKernel<float, S, S> {
+        GaussianKernel()
+        : CnvlKernel<float, S, S>([](uint16_t const i, uint16_t const j) {
+              let x = i - 0.5 * S, y = j - 0.5 * S;
+              return 1.0 / (M_2_PI * S * S) *
+                     expf(-(x * x + y * y) / (2 * S * S));
+          }) {}
+    };
+
+    DoGBitmapFilter(float const eps, float const p = 1) : eps(eps), p(p) {}
 
    private:
     float const eps, p;
 
-    void operator()(Image<Color> &dst) const override {
+    void operator()(Bitmap &dst) const override {
         static let g_s = GaussianKernel<7>();
         static let g_ks = GaussianKernel<5>();
 

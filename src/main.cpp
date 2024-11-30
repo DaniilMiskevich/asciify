@@ -10,14 +10,13 @@ refs:
 
 #include <iostream>
 
-#include "ascii/ascii_art.hpp"
-#include "ascii/ascii_art_writer.hpp"
-#include "ascii/filter/color_ascii_filter.hpp"
-#include "ascii/filter/edge_ascii_filter.hpp"
-#include "ascii/filter/fill_ascii_filter.hpp"
 #include "conviniences.hpp"
 #include "font.hpp"
-#include "image/codec/image_codec.hpp"
+#include "image/ascii/ascii_writer.hpp"
+#include "image/ascii/filter/color_ascii_filter.hpp"
+#include "image/ascii/filter/edge_ascii_filter.hpp"
+#include "image/ascii/filter/fill_ascii_filter.hpp"
+#include "image/bitmap/codec/bitmap_codec.hpp"
 
 #define FRAME_SIZE_CHARS (Size(100, 50))
 
@@ -36,26 +35,24 @@ void run() {
     std::cout << "Using following character size: " << char_size.w << "x"
               << char_size.h << std::endl;
 
-    let codec = ImageCodec();
-    let image = codec.decode("test.webp");
-    // let image = codec.decode("test.jpeg");
-    // let image = codec.decode("test_cmyk.jpeg");
-    // let image = codec.decode("CMakeLists.txt");
-    let image_size = image->size();
-    std::cout << "image size: " << image_size.w << "x" << image_size.h
-              << std::endl;
+    let codec = BitmapCodec();
+    let bitmap = codec.decode("test.webp");
+    // let bitmap = codec.decode("test.jpeg");
+    // let bitmap = codec.decode("test_cmyk.jpeg");
+    // let bitmap = codec.decode("CMakeLists.txt");
+    let size = bitmap->size();
+    std::cout << "bitmap size: " << size.w << "x" << size.h << std::endl;
 
-    letmut ascii_art =
-        AsciiArt(*image, FRAME_SIZE_CHARS - Size(2, 2), char_size);
+    letmut ascii_art = Ascii(*bitmap, FRAME_SIZE_CHARS - Size(2, 2), char_size);
 
     ascii_art *= fill;
     ascii_art *= edges;
     ascii_art *= color;
 
-    delete image;
+    delete bitmap;
 
-    let writer = AsciiArtWriter(ascii_art, FRAME_SIZE_CHARS);
-    writer.write_to(std::cout, AsciiArtWriter::COLOR_MODE_INDEXED);
+    let writer = AsciiWriter(ascii_art, FRAME_SIZE_CHARS);
+    writer.write_to(std::cout, AsciiWriter::COLOR_MODE_INDEXED);
     writer.write_to_file("out.txt");
 }
 

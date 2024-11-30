@@ -5,8 +5,6 @@
 #include <cstdint>
 
 struct Size {
-    Size() = delete;
-
     constexpr Size(uint16_t const w, uint16_t const h) : w(w), h(h) {}
 
     uint16_t w, h;
@@ -36,8 +34,6 @@ struct Size {
 };
 
 struct Pos {
-    Pos() = delete;
-
     constexpr Pos(uint16_t const x, uint16_t const y) : x(x), y(y) {}
 
     uint16_t x, y;

@@ -1,6 +1,6 @@
 // man: https://developers.google.com/speed/webp/docs/api
 
-#include "image/codec/webp_codec.hpp"
+#include "image/bitmap/codec/webp_codec.hpp"
 
 #include <algorithm>
 #include <fstream>
@@ -13,7 +13,7 @@ struct Pixel {
     uint8_t r, g, b, a;
 };
 
-Image<Color> *
+Bitmap *
 WebpCodec::decode(uint8_t const *const src_data, size_t const src_size) {
     int width, height;
     let buf = reinterpret_cast<Pixel *>(
@@ -22,15 +22,15 @@ WebpCodec::decode(uint8_t const *const src_data, size_t const src_size) {
     if (buf == nullptr) throw std::bad_alloc();
 
     let size = Size(width, height);
-    letmut image = new Image<Color>(size);
+    letmut bitmap = new Bitmap(size);
 
-    std::transform(buf, buf + size.area(), image->begin(), [](Pixel const px) {
+    std::transform(buf, buf + size.area(), bitmap->begin(), [](Pixel const px) {
         return Color::rgb24(px.r, px.g, px.b) * px.a / 0xFF;
     });
 
     WebPFree(buf);
 
-    return image;
+    return bitmap;
 }
 
 void WebpCodec::encode(Image<Color> const &src, char const *const path) {

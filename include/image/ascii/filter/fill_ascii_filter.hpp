@@ -4,12 +4,10 @@
 #include <cstring>
 #include <numeric>
 
-#include "ascii/ascii_art.hpp"
 #include "conviniences.hpp"
-#include "image/filter/image_filter.hpp"
-#include "image/image.hpp"
+#include "image/ascii/filter/ascii_filter.hpp"
 
-class FillAsciiFilter : public ImageFilter<AsciiArt> {
+class FillAsciiFilter : public AsciiFilter {
    public:
     explicit FillAsciiFilter(char const *const palette = " .:-;=+*#B%@")
     : palette(palette), palette_len(strlen(palette)) {}
@@ -18,13 +16,13 @@ class FillAsciiFilter : public ImageFilter<AsciiArt> {
     char const *const palette;
     size_t const palette_len;
 
-    void operator()(AsciiArt &dst) const override {
-        let &image = dst.image();
+    void operator()(Ascii &dst) const override {
+        let &bitmap = dst.bitmap();
         let char_size = dst.char_size();
 
         for (letmut it = dst.begin(); it != dst.end(); it++) {
             let region =
-                Image<Color>::Region(image, it.pos() * char_size, char_size);
+                Image<Color>::Region(bitmap, it.pos() * char_size, char_size);
             let avg = std::accumulate(region.begin(), region.end(), Color()) /
                       char_size.area();
             let avg_lum = avg.luminance();
