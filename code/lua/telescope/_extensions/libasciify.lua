@@ -181,18 +181,19 @@ local AsciiArt = class(Native)
 ---@enum AsciiArt.ColorMode
 AsciiArt.ColorMode = { EMPTY = 0, INDEXED = 1, TRUE = 2 }
 
----@param a { image:table, frame_size:{ w:integer, h:integer }, font_family:string, font_size:number }
+---@param a { image:table, frame_size:{ w:integer, h:integer }, font:{ family:string|nil, size:number } }
 ---@return table|nil
 function AsciiArt._constructor(a)
 	return Native._constructor({
-		_self = native.ascii_art_create(a.image._self, a.frame_size, a.font_family, a.font_size),
+		_self = native.ascii_art_create(a.image._self, a.frame_size, a.font.family, a.font.size),
 		_delete = native.ascii_art_delete,
 		image = a.image,
-		font_family = a.font_family,
+		frame_size = a.frame_size,
+		font = a.font,
 	})
 end
 
----@param frame_size Size
+---@param frame_size { w:integer, h:integer }
 ---@param mode AsciiArt.ColorMode
 ---@return string|string[]
 function AsciiArt:write(frame_size, mode)

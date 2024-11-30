@@ -47,7 +47,7 @@ Font Font::load(char const *const path, float const font_size) {
     );
 
     let size = Size(face->max_advance_width, face->size->metrics.height) *
-               font_size_px / face->units_per_EM;
+               (font_size_px / face->units_per_EM);
 
     FT_Done_Face(face);
 

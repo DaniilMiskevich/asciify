@@ -51,21 +51,26 @@ local asciify_previewer = defaulter(function(opts)
 			}
 
 			local default_mono_font = (function()
-				local handle = io.popen('fc-list -f "%{file}\\n" :spacing=mono | head -n 1')
+				local handle = io.popen('fc-match -f "%{file}:%{size}\n" monospace')
 				if not handle then
-					return ""
+					return { family = nil }
 				end
 
-				local result = handle:read("*a")
+				local out = handle:read("*a")
 				handle:close()
-				print(result)
+
+				local sep_pos = string.find(out, ":") --[[@as integer]]
+				return {
+					family = string.sub(out, 1, sep_pos),
+					size = tonumber(string.sub(out, sep_pos)) or 12,
+				}
 			end)()
 
 			local art = libasciify.AsciiArt.new({
 				image = image,
 				frame_size = frame_size,
-				font_family = default_mono_font,
-				font_size = 12,
+				font_family = default_mono_font.family,
+				font_size = default_mono_font.size,
 			})
 
 			local bufnr = self.state.bufnr
