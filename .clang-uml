@@ -1,0 +1,9 @@
+compilation_database_dir: build/
+output_directory: z_docs/diag
+diagrams:
+  class:
+    type: class
+    glob:
+      - include/*.hpp
+      - include/**/*.hpp
+
