@@ -12,21 +12,21 @@
 extern "C" {
 
 // fill
-FillAsciiFilter const *fill_filter_create(char const *const palette) {
+FillAsciiFilter *fill_filter_create(char const *const palette) {
     return new FillAsciiFilter(palette);
 }
 void fill_filter_delete(FillAsciiFilter const *const self) { delete self; }
 
 // color
-ColorAsciiFilter const *color_filter_create() { return new ColorAsciiFilter(); }
+ColorAsciiFilter *color_filter_create() { return new ColorAsciiFilter(); }
 void color_filter_delete(ColorAsciiFilter const *const self) { delete self; }
 
 // edge
-EdgeAsciiFilter const *
+EdgeAsciiFilter *
 edge_filter_create(float const threshold, char const *const palette) {
     return new EdgeAsciiFilter(threshold, palette);
 }
-EdgeAsciiFilter const *edge_filter_create_extra(
+EdgeAsciiFilter *edge_filter_create_extra(
     float const threshold,
     char const *const palette,
     float const dog_eps,
@@ -37,10 +37,10 @@ EdgeAsciiFilter const *edge_filter_create_extra(
 void edge_filter_delete(EdgeAsciiFilter const *const self) { delete self; }
 
 // image
-Image<Color> const *image_decode(char const *const path) {
+Image<Color> *image_decode(char const *const path) {
     try {
         return ImageCodec::decode(path);
-    } catch (ImageCodec::UnsupportedFormatException const &) { return nullptr; }
+    } catch (std::exception const &) { return nullptr; }
 }
 void image_delete(Image<Color> const *const self) { delete self; }
 
@@ -56,7 +56,7 @@ AsciiArt *ascii_art_create(
     try {
         if (font_family != nullptr)
             char_size_px = Font::load(font_family, font_size).size();
-    } catch (Font::InternalLoadingException const &) {
+    } catch (std::exception const &) {
         // use default size
     }
     return new AsciiArt(*image, frame_size_chars, char_size_px);

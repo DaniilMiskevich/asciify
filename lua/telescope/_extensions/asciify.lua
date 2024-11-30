@@ -1,4 +1,3 @@
-local telescope = require("telescope")
 local from_entry = require("telescope.from_entry")
 local conf = require("telescope.config").values
 local defaulter = require("telescope.utils").make_default_callable
@@ -7,9 +6,18 @@ local Path = require("plenary.path")
 
 local libasciify = require("asciify.libasciify")
 
-local fill = libasciify.FillFilter.new({ palette = " .:+*csS&$@" })
-local color = libasciify.ColorFilter.new()
-local edge = libasciify.EdgeFilter.new({ threshold = 4.5, palette = "|\\`~;/" })
+---@type table|nil
+local fill
+---@type table|nil
+local edge
+---@type table|nil
+local color
+
+---@type AsciiArt.ColorMode
+local color_mode
+
+---@type string[]
+local order
 
 local asciify_previewer = defaulter(function(opts)
 	opts = opts or {}
@@ -79,11 +87,23 @@ local asciify_previewer = defaulter(function(opts)
 					return preview_error("Cannot open an internal terminal inside buffer #" .. self.state.bufnr)
 				end
 
-				art:apply_fill(fill)
-				art:apply_edge(edge)
-				art:apply_color(color)
+				local filters = {
+					fill = function()
+						art:apply_fill(fill)
+					end,
+					edge = function()
+						art:apply_edge(edge)
+					end,
+					color = function()
+						art:apply_color(color)
+					end,
+				}
+				for _, v in ipairs(order) do
+					local filter = filters[string.lower(v)] or function() end
+					filter()
+				end
 
-				local out = art:write(frame_size, libasciify.AsciiArt.ColorMode.INDEXED)
+				local out = art:write(frame_size, color_mode)
 				vim.api.nvim_chan_send(chan, out)
 			end)
 		end,
@@ -95,5 +115,27 @@ local M = {}
 M.asciify_previewer = asciify_previewer.new
 
 return require("telescope").register_extension({
+	setup = function(extconf)
+		extconf.fill_palette = extconf.fill_palette or " .:+*csS&$@"
+
+		extconf.edge_palette = extconf.edge_palette or "|\\`~;/"
+		extconf.edge_threshold = extconf.edge_threshold or 4.5
+		extconf.edge_dog_conf = extconf.edge_dog_conf or { eps = 1, p = 10 }
+
+		extconf.color_mode = extconf.color_mode or libasciify.AsciiArt.ColorMode.INDEXED
+
+		extconf.order = extconf.order or { "fill", "edge", "color" }
+
+		fill = libasciify.FillFilter.new({ palette = extconf.fill_palette })
+		color = libasciify.ColorFilter.new()
+		edge = libasciify.EdgeFilter.new({
+			threshold = extconf.edge_threshold,
+			palette = extconf.edge_palette,
+			dog = extconf.edge_dog_conf,
+		})
+
+		order = extconf.order
+		color_mode = extconf.color_mode
+	end,
 	exports = M,
 })

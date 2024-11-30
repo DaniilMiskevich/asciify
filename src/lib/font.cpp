@@ -3,6 +3,7 @@
 #include "font.hpp"
 
 #include <cmath>
+#include <fstream>
 
 #include <freetype2/ft2build.h>
 
@@ -33,11 +34,23 @@ static struct FTWrap {
 Font Font::load(char const *const path, float const font_size) {
     assert(font_size >= 8);
 
+    letmut src = std::ifstream(path, std::ios::binary);
+    src.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+    src.seekg(0, std::ios::end);
+    let src_size = src.tellg();
+    src.seekg(0, std::ios::beg);
+
+    let src_data = new uint8_t[src_size]();
+    src.read(reinterpret_cast<char *>(src_data), src_size);
+
     FT_Face face;
     FTWrap::handle_err(
-        FT_New_Face(ft.lib, path, 0, &face),
+        FT_New_Memory_Face(ft.lib, src_data, src_size, 0, &face),
         "Face loading error."
     );
+
+    delete[] src_data;
 
     let font_size_px = font_size * float(96.0 / 72.0);
 

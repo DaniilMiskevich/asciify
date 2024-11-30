@@ -14,18 +14,18 @@ void free(void *ptr);
 
 // fill
 typedef struct FillAsciiFilter FillAsciiFilter;
-FillAsciiFilter const *fill_filter_create(char const *const palette);
+FillAsciiFilter *fill_filter_create(char const *const palette);
 void fill_filter_delete(FillAsciiFilter const *const self);
 
 // color
 typedef struct ColorAsciiFilter ColorAsciiFilter;
-ColorAsciiFilter const *color_filter_create() ;
+ColorAsciiFilter *color_filter_create() ;
 void color_filter_delete(ColorAsciiFilter const *const self);
 
 // edge
 typedef struct EdgeAsciiFilter EdgeAsciiFilter;
-EdgeAsciiFilter const *edge_filter_create(float const threshold, char const *const palette);
-EdgeAsciiFilter const *edge_filter_create_extra(
+EdgeAsciiFilter *edge_filter_create(float const threshold, char const *const palette);
+EdgeAsciiFilter *edge_filter_create_extra(
     float const threshold,
     char const *const palette,
     float const dog_eps,
@@ -35,7 +35,7 @@ void edge_filter_delete(EdgeAsciiFilter const *const self);
 
 // image
 typedef struct ImageOfColor ImageOfColor;
-ImageOfColor const *image_decode(char const *const path);
+ImageOfColor *image_decode(char const *const path);
 void image_delete(ImageOfColor const *const self);
 
 // ascii art
