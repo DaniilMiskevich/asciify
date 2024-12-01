@@ -2,7 +2,7 @@
 #define WEBP_CODEC_HPP
 
 #include <cstddef>
-// #include <exception>
+#include <exception>
 
 #include "image/bitmap/codec/bitmap_codec.hpp"
 
@@ -12,16 +12,16 @@ class WebpCodec : public BitmapCodec {
 
     static void encode(Image<Color> const &src, char const *const path);
 
-    // public:
-    //  struct InternalEncodingException;
+   public:
+    struct InternalEncodingException;
 };
 
-// struct WebpCodec::InternalEncodingException : public std::exception {
-//     InternalEncodingException(char const *const msg) : msg(msg) {}
-//
-//     char const *const msg;
-//
-//     char const *what() const throw() override { return msg; }
-// };
+struct WebpCodec::InternalEncodingException : public std::exception {
+    InternalEncodingException(char const *const msg) : msg(msg) {}
+
+    char const *const msg;
+
+    char const *what() const throw() override { return msg; }
+};
 
 #endif
