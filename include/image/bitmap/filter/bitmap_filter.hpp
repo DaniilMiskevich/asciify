@@ -29,11 +29,12 @@ struct BitmapFilter::CnvlKernel {
 
     Image<Color> const &apply(Image<Color> &result, Image<Color> const &image)
         const {
+        static Color src[H][W] = {{}};
+
         let size = result.size();
 
         letmut pos = Pos(0, 0);
         for (pos.x = 0; pos.x < size.w; pos.x++) {
-            Color src[H][W];
             for (letmut i = uint16_t(0); i < H; i++)
                 for (letmut j = uint16_t(0); j < W; j++) {
                     src[i][j] =

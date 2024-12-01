@@ -6,11 +6,12 @@ class ImageFilter {
    public:
     virtual ~ImageFilter() {}
 
-    friend T &operator*=(T &image, ImageFilter const &other) {
+    friend T const &operator*=(T &image, ImageFilter const &other) {
         other(image);
         return image;
     }
 
+   protected:
     virtual void operator()(T &dst) const = 0;
 };
 
