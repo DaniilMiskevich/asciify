@@ -4,16 +4,15 @@
 
 #include <alloca.h>
 
-#include "image/bitmap/codec/webp_codec.hpp"
 #include "image/bitmap/filter/dog_bitmap_filter.hpp"
 #include "image/bitmap/filter/sobel_bitmap_filter.hpp"
 
 void EdgeAsciiFilter::operator()(Ascii &dst) const {
     letmut bitmap = Bitmap(dst.bitmap());
     bitmap *= DoGBitmapFilter(dog_eps, dog_p);
-    WebpCodec::encode(bitmap, "dog_filter.webp");
+    // WebpCodec::encode(bitmap, "dog_filter.webp");
     bitmap *= SobelBitmapFilter();
-    WebpCodec::encode(bitmap, "sobel_filter.webp");
+    // WebpCodec::encode(bitmap, "sobel_filter.webp");
 
     let char_size = dst.char_size();
 
