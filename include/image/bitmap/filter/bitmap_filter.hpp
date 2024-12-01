@@ -48,7 +48,7 @@ struct BitmapFilter::CnvlKernel {
                 if (pos.x > 0) {
                     // just move each col up a col
                     for (letmut col = src; col < src + W - 1; col++)
-                        std::move(&*(col + 1)[0], &*(col + 1)[0] + H, &*col[0]);
+                        std::move(&col[1][0], &col[1][0] + H, &col[0][0]);
 
                     // and only calculate the last
                     let i = W - 1;
