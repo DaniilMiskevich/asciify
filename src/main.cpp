@@ -1,13 +1,3 @@
-/*
-refs:
-    - inspiration & everything:
-        - https://www.youtube.com/watch?v=gg40RWiaHRY
-    - gradients:
-        - https://paulbourke.net/dataformats/asciiart/
-    - dog:
-        - https://users.cs.northwestern.edu/~sco590/winnemoeller-cag2012.pdf
-*/
-
 #include <iostream>
 
 #include "conviniences.hpp"

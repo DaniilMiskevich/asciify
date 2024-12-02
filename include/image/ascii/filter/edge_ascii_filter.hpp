@@ -1,7 +1,6 @@
 #ifndef EDGE_ASCII_FILTER_HPP
 #define EDGE_ASCII_FILTER_HPP
 
-#include <cassert>
 #include <cstring>
 
 #include "image/ascii/ascii.hpp"

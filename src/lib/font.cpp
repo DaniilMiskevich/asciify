@@ -6,11 +6,10 @@
 #include <fstream>
 
 #include <freetype2/ft2build.h>
-
-#include "dims.hpp"
 #include FT_FREETYPE_H
 
 #include "conviniences.hpp"
+#include "dims.hpp"
 
 static struct FTWrap {
     FTWrap()
