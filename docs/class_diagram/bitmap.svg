@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32.940926mm"
+   height="19.057306mm"
+   viewBox="0 0 32.940926 19.057306"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="bitmap.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.0565516"
+     inkscape:cx="104.58552"
+     inkscape:cy="84.2363"
+     inkscape:window-width="1167"
+     inkscape:window-height="1398"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-77.258331,-126.20625)">
+    <g
+       id="Node000005"
+       class="node"
+       transform="matrix(0.35291309,0,0,0.35291309,19.909954,174.02597)">
+      <title
+         id="title113">Node5</title>
+      <g
+         id="a_Node000005">
+        <a
+           xlink:href="file:///usr/share/inkscape/templates/classBitmap.html"
+           target="_top"
+           xlink:title=" "
+           id="a120">
+          <polygon
+             fill="#ffffff"
+             stroke="none"
+             points="255,-135 163,-135 163,-82 255,-82 "
+             id="polygon114" />
+          <text
+             text-anchor="start"
+             x="195.5"
+             y="-123.4"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text114">Bitmap</text>
+          <text
+             text-anchor="start"
+             x="206.75"
+             y="-110.4"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text115"> </text>
+          <text
+             text-anchor="start"
+             x="166.75"
+             y="-97.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text116">+</text>
+          <text
+             text-anchor="start"
+             x="175"
+             y="-97.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text117">Bitmap(Size const</text>
+          <text
+             text-anchor="start"
+             x="175"
+             y="-87.650002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text118">size)</text>
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="163,-120 255,-120 "
+             id="polygon118" />
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="163,-107 255,-107 "
+             id="polygon119" />
+          <polygon
+             fill="none"
+             stroke="#000000"
+             points="163,-82 163,-135 255,-135 255,-82 "
+             id="polygon120" />
+        </a>
+      </g>
+    </g>
+  </g>
+</svg>

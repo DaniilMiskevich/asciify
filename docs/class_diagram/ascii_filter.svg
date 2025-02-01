@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="21.166666mm"
+   height="15.522222mm"
+   viewBox="0 0 21.166666 15.522221"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="ascii_filter.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.0565516"
+     inkscape:cx="-61.047656"
+     inkscape:cy="197.3401"
+     inkscape:window-width="1167"
+     inkscape:window-height="735"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-121.17916,-96.043758)">
+    <g
+       id="g76"
+       transform="matrix(0.35277777,0,0,0.35277777,61.559716,19.05001)">
+      <g
+         id="Node000001"
+         class="node"
+         transform="translate(4,465.75)">
+        <title
+           id="title2">Node1</title>
+        <g
+           id="a_Node000001">
+          <a
+             xlink:title=" "
+             id="a6">
+            <polygon
+               fill="#999999"
+               stroke="none"
+               points="165.5,-204 224.5,-204 224.5,-247 165.5,-247 "
+               id="polygon2"
+               style="fill:#ffffff" />
+            <text
+               text-anchor="start"
+               x="170.25"
+               y="-235.39999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text2">AsciiFilter</text>
+            <text
+               text-anchor="start"
+               x="192.75"
+               y="-222.39999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text3"> </text>
+            <text
+               text-anchor="start"
+               x="192.75"
+               y="-209.39999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text4"> </text>
+            <polygon
+               fill="#000000"
+               stroke="#000000"
+               points="165.5,-232 224.5,-232 "
+               id="polygon4" />
+            <polygon
+               fill="#000000"
+               stroke="#000000"
+               points="165.5,-219 224.5,-219 "
+               id="polygon5" />
+            <polygon
+               fill="none"
+               stroke="#000000"
+               points="224.5,-247 224.5,-204 165.5,-204 165.5,-247 "
+               id="polygon6" />
+          </a>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

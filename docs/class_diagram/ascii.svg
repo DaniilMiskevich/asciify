@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="50.466572mm"
+   height="76.935051mm"
+   viewBox="0 0 50.466572 76.935051"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="ascii.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="4.4868047"
+     inkscape:cx="76.446386"
+     inkscape:cy="71.097368"
+     inkscape:window-width="1712"
+     inkscape:window-height="1398"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="a112" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-143.66875,-69.585413)">
+    <g
+       id="Node000003"
+       class="node"
+       transform="matrix(0.35291309,0,0,0.35291309,143.84521,146.34401)">
+      <title
+         id="title83">Node3</title>
+      <g
+         id="a_Node000003">
+        <a
+           xlink:href="file:///usr/share/inkscape/templates/classAscii.html"
+           target="_top"
+           xlink:title=" "
+           id="a112">
+          <polygon
+             fill="#ffffff"
+             stroke="none"
+             points="142,-217 0,-217 0,0 142,0 "
+             id="polygon84" />
+          <text
+             text-anchor="start"
+             x="59.75"
+             y="-205.39999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text84">Ascii</text>
+          <text
+             text-anchor="start"
+             x="3.75"
+             y="-192.39999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text85">-</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-192.39999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text86">Size const _char_size</text>
+          <text
+             text-anchor="start"
+             x="3.75"
+             y="-179.39999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text87">-</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-179.39999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text88">Bitmap const  &amp; _bitmap</text>
+          <text
+             text-anchor="start"
+             x="3.75"
+             y="-166.39999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text89">+</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-166.39999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text90">Ascii(Bitmap const</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-156.64999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text91">&amp;bitmap, Size const</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-146.89999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text92">frame_size_chars, Size</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-137.14999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text93">const char_size)</text>
+          <text
+             text-anchor="start"
+             x="3.75"
+             y="-123.4"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text94">+</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-123.4"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text95">Size char_size() const</text>
+          <text
+             text-anchor="start"
+             x="3.75"
+             y="-110.4"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text96">+</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-110.4"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text97">Bitmap const &amp; bitmap</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-100.65"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text98">() const</text>
+          <text
+             text-anchor="start"
+             x="3.75"
+             y="-87.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text99">-</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-87.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text100">static constexpr float</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-77.650002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text101">fit_ratio(Size const</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-67.900002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text102">image_size_px, Size const</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-58.150002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text103">frame_size_px)</text>
+          <text
+             text-anchor="start"
+             x="3.75"
+             y="-44.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text104">-</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-44.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text105">static constexpr Size</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-34.650002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text106">fit_char_size(Size const</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-24.9"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text107">char_size, Size const image</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-15.15"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text108">_size_px, Size const frame</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-5.4000001"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text109">_size_chars)</text>
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="0,-202 142,-202 "
+             id="polygon109" />
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="0,-176 10,-176 "
+             id="polygon110" />
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="10,-176 142,-176 "
+             id="polygon111" />
+          <polygon
+             fill="none"
+             stroke="#000000"
+             points="0,0 0,-217 142,-217 142,0 "
+             id="polygon112" />
+        </a>
+      </g>
+    </g>
+  </g>
+</svg>

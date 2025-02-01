@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="47.525322mm"
+   height="30.719799mm"
+   viewBox="0 0 47.525322 30.719799"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="jpeg_codec__internal_loading_exception.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.1405979"
+     inkscape:cx="13.589364"
+     inkscape:cy="110.03001"
+     inkscape:window-width="1167"
+     inkscape:window-height="735"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-114.82916,-100.01251)">
+    <g
+       id="g28"
+       transform="matrix(0.35310114,0,0,0.35310114,94.172739,130.55576)">
+      <g
+         id="Node000001"
+         class="node">
+        <title
+           id="title2">Node1</title>
+        <g
+           id="a_Node000001">
+          <a
+             xlink:title=" "
+             id="a12">
+            <polygon
+               fill="#999999"
+               stroke="none"
+               points="59,0 190,0 190,-86 59,-86 "
+               id="polygon2"
+               style="fill:#ffffff" />
+            <text
+               text-anchor="start"
+               x="63.75"
+               y="-74.400002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text2">JpegCodec::InternalDecoding</text>
+            <text
+               text-anchor="start"
+               x="104.25"
+               y="-64.650002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text3">Exception</text>
+            <text
+               text-anchor="start"
+               x="122.25"
+               y="-51.400002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text4"> </text>
+            <text
+               text-anchor="start"
+               x="63.25"
+               y="-38.400002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text5">+</text>
+            <text
+               text-anchor="start"
+               x="72"
+               y="-38.400002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text6">InternalDecodingException</text>
+            <text
+               text-anchor="start"
+               x="72"
+               y="-28.65"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text7">(char const *const msg)</text>
+            <text
+               text-anchor="start"
+               x="63.25"
+               y="-15.4"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text8">+</text>
+            <text
+               text-anchor="start"
+               x="72"
+               y="-15.4"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text9">char const * what()</text>
+            <text
+               text-anchor="start"
+               x="72"
+               y="-5.6500001"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text10">const override</text>
+            <polygon
+               fill="#000000"
+               stroke="#000000"
+               points="59,-61 190,-61 "
+               id="polygon10" />
+            <polygon
+               fill="#000000"
+               stroke="#000000"
+               points="59,-48 190,-48 "
+               id="polygon11" />
+            <polygon
+               fill="none"
+               stroke="#000000"
+               points="190,-86 190,0 59,0 59,-86 "
+               id="polygon12" />
+          </a>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

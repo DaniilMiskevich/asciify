@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="42.333332mm"
+   height="26.105555mm"
+   viewBox="0 0 42.333332 26.105554"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="jpeg_codec.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.1405979"
+     inkscape:cx="192.44293"
+     inkscape:cy="-12.712631"
+     inkscape:window-width="1167"
+     inkscape:window-height="735"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-67.46874,-132.55627)">
+    <g
+       id="Node000002"
+       class="node"
+       transform="matrix(0.35277777,0,0,0.35277777,67.645129,158.48544)">
+      <title
+         id="title8">Node2</title>
+      <g
+         id="a_Node000002">
+        <a
+           xlink:href="../doxygen/html/classJpegCodec.html"
+           target="_top"
+           xlink:title=" "
+           id="a17">
+          <polygon
+             fill="#ffffff"
+             stroke="none"
+             points="119,-73 0,-73 0,0 119,0 "
+             id="polygon9" />
+          <text
+             text-anchor="start"
+             x="39.25"
+             y="-61.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text9">JpegCodec</text>
+          <text
+             text-anchor="start"
+             x="57.25"
+             y="-48.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text10"> </text>
+          <text
+             text-anchor="start"
+             x="3.75"
+             y="-35.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text11">+</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-35.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text12">static Bitmap * decode</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-25.65"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text13">(uint8_t const *const</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-15.9"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text14">src_data, size_t const</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-6.1500001"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text15">src_size)</text>
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="0,-58 119,-58 "
+             id="polygon15" />
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="0,-45 119,-45 "
+             id="polygon16" />
+          <polygon
+             fill="none"
+             stroke="#000000"
+             points="0,0 0,-73 119,-73 119,0 "
+             id="polygon17" />
+        </a>
+      </g>
+    </g>
+  </g>
+</svg>

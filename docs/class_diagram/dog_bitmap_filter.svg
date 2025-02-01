@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="50.47942mm"
+   height="31.770264mm"
+   viewBox="0 0 50.479419 31.770263"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="dog_bitmap_filter.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.1405979"
+     inkscape:cx="-26.740361"
+     inkscape:cy="100.38595"
+     inkscape:window-width="1167"
+     inkscape:window-height="735"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-125.41249,-102.65835)">
+    <g
+       id="Node000004"
+       class="node"
+       transform="matrix(0.35300293,0,0,0.35300293,125.58899,134.25211)">
+      <title
+         id="title6">Node4</title>
+      <g
+         id="a_Node000004">
+        <a
+           xlink:href="../doxygen/html/classDoGBitmapFilter.html"
+           target="_top"
+           xlink:title=" "
+           id="a20">
+          <polygon
+             fill="#ffffff"
+             stroke="none"
+             points="142,-89 0,-89 0,0 142,0 "
+             id="polygon7" />
+          <text
+             text-anchor="start"
+             x="37.25"
+             y="-77.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text7">DoGBitmapFilter</text>
+          <text
+             text-anchor="start"
+             x="3.75"
+             y="-64.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text8">-</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-64.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text9">float const eps</text>
+          <text
+             text-anchor="start"
+             x="3.75"
+             y="-51.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text10">-</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-51.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text11">float const p</text>
+          <text
+             text-anchor="start"
+             x="3.75"
+             y="-38.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text12">+</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-38.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text13">DoGBitmapFilter(float</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-28.65"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text14">const eps, float const p=1)</text>
+          <text
+             text-anchor="start"
+             x="3.75"
+             y="-15.4"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text15">-</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-15.4"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text16">void operator()(Bitmap</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-5.6500001"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text17">&amp;dst) const override</text>
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="0,-74 142,-74 "
+             id="polygon17" />
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="0,-48 10,-48 "
+             id="polygon18" />
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="10,-48 142,-48 "
+             id="polygon19" />
+          <polygon
+             fill="none"
+             stroke="#000000"
+             points="0,0 0,-89 142,-89 142,0 "
+             id="polygon20" />
+        </a>
+      </g>
+    </g>
+  </g>
+</svg>

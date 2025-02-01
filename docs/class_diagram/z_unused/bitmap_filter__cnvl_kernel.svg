@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="48.168304mm"
+   height="52.916664mm"
+   viewBox="0 0 48.168304 52.916663"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="bitmap_filter__cnvl_kernel.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.1405979"
+     inkscape:cx="-20.603229"
+     inkscape:cy="162.634"
+     inkscape:window-width="1167"
+     inkscape:window-height="735"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-123.82499,-86.254182)">
+    <g
+       id="g28"
+       transform="matrix(0.35277777,0,0,0.35277777,124.00138,170.39168)">
+      <g
+         id="Node000001"
+         class="node">
+        <title
+           id="title2">Node1</title>
+        <g
+           id="a_Node000001">
+          <a
+             xlink:title=" "
+             id="a21">
+            <polygon
+               fill="#999999"
+               stroke="none"
+               points="0,-89 133,-89 133,-238 0,-238 "
+               id="polygon2"
+               style="fill:#ffffff" />
+            <text
+               text-anchor="start"
+               x="12.5"
+               y="-226.39999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text2">BitmapFilter::CnvlKernel</text>
+            <text
+               text-anchor="start"
+               x="41.75"
+               y="-216.64999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text3">&lt; T, W, H &gt;</text>
+            <text
+               text-anchor="start"
+               x="3.75"
+               y="-203.39999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text4">+</text>
+            <text
+               text-anchor="start"
+               x="12"
+               y="-203.39999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text5">T matrix</text>
+            <text
+               text-anchor="start"
+               x="3.75"
+               y="-190.39999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text6">+</text>
+            <text
+               text-anchor="start"
+               x="12"
+               y="-190.39999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text7">constexpr CnvlKernel</text>
+            <text
+               text-anchor="start"
+               x="12"
+               y="-180.64999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text8">(T const (&amp;matrix)[H][W])</text>
+            <text
+               text-anchor="start"
+               x="3.75"
+               y="-167.39999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text9">+</text>
+            <text
+               text-anchor="start"
+               x="12"
+               y="-167.39999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text10">constexpr CnvlKernel</text>
+            <text
+               text-anchor="start"
+               x="12"
+               y="-157.64999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text11">(std::function&lt; T(uint16</text>
+            <text
+               text-anchor="start"
+               x="12"
+               y="-147.89999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text12">_t const x, uint16_t const</text>
+            <text
+               text-anchor="start"
+               x="12"
+               y="-138.14999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text13">y)&gt; const &amp;fn)</text>
+            <text
+               text-anchor="start"
+               x="3.75"
+               y="-124.4"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text14">+</text>
+            <text
+               text-anchor="start"
+               x="12"
+               y="-124.4"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text15">Image&lt; Color &gt; const</text>
+            <text
+               text-anchor="start"
+               x="12"
+               y="-114.65"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text16">&amp; apply(Image&lt; Color</text>
+            <text
+               text-anchor="start"
+               x="12"
+               y="-104.9"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text17">&gt; &amp;result, Image&lt; Color</text>
+            <text
+               text-anchor="start"
+               x="12"
+               y="-95.150002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text18">&gt; const &amp;image) const</text>
+            <polygon
+               fill="#666666"
+               stroke="#666666"
+               points="0,-213 133,-213 "
+               id="polygon18" />
+            <polygon
+               fill="#666666"
+               stroke="#666666"
+               points="0,-200 10,-200 "
+               id="polygon19" />
+            <polygon
+               fill="#666666"
+               stroke="#666666"
+               points="10,-200 133,-200 "
+               id="polygon20" />
+            <polygon
+               fill="none"
+               stroke="#666666"
+               points="133,-238 133,-89 0,-89 0,-238 "
+               id="polygon21" />
+          </a>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

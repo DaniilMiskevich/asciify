@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="52.636112mm"
+   height="19.067461mm"
+   viewBox="0 0 52.636112 19.067461"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="bitmap_codec__decoding_exception.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.1405979"
+     inkscape:cx="49.535423"
+     inkscape:cy="212.60779"
+     inkscape:window-width="1167"
+     inkscape:window-height="735"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-105.30416,-72.760434)">
+    <g
+       id="Node000002"
+       class="node"
+       transform="matrix(0.35310114,0,0,0.35310114,105.48071,138.17242)">
+      <title
+         id="title12">Node2</title>
+      <g
+         id="a_Node000002">
+        <a
+           xlink:href="../doxygen/html/structBitmapCodec_1_1DecodingException.html"
+           target="_top"
+           xlink:title=" "
+           id="a19">
+          <polygon
+             fill="#ffffff"
+             stroke="none"
+             points="0,-131.75 145,-131.75 145,-184.75 0,-184.75 "
+             id="polygon13" />
+          <text
+             text-anchor="start"
+             x="5"
+             y="-173.14999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text13">BitmapCodec::DecodingException</text>
+          <text
+             text-anchor="start"
+             x="70.25"
+             y="-160.14999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text14"> </text>
+          <text
+             text-anchor="start"
+             x="14.75"
+             y="-147.14999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text15">+</text>
+          <text
+             text-anchor="start"
+             x="34"
+             y="-147.14999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text16">char const * what()</text>
+          <text
+             text-anchor="start"
+             x="34"
+             y="-137.39999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text17">const override=0</text>
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="0,-169.75 145,-169.75 "
+             id="polygon17" />
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="0,-156.75 145,-156.75 "
+             id="polygon18" />
+          <polygon
+             fill="none"
+             stroke="#000000"
+             points="145,-184.75 145,-131.75 0,-131.75 0,-184.75 "
+             id="polygon19" />
+        </a>
+      </g>
+    </g>
+  </g>
+</svg>

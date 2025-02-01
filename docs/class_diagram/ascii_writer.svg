@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="50.454063mm"
+   height="64.567093mm"
+   viewBox="0 0 50.454064 64.567092"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="ascii_writer.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.1405979"
+     inkscape:cx="39.891358"
+     inkscape:cy="132.82507"
+     inkscape:window-width="1167"
+     inkscape:window-height="735"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-107.94999,-93.927103)">
+    <g
+       id="g273"
+       transform="matrix(0.35282563,0,0,0.35282563,6.6890353,158.31778)">
+      <g
+         id="Node000001"
+         class="node">
+        <title
+           id="title2">Node1</title>
+        <g
+           id="a_Node000001">
+          <a
+             xlink:title=" "
+             id="a23">
+            <polygon
+               fill="#999999"
+               stroke="none"
+               points="429.5,-182 287.5,-182 287.5,0 429.5,0 "
+               id="polygon2"
+               style="fill:#ffffff" />
+            <text
+               text-anchor="start"
+               x="333.75"
+               y="-170.39999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text2">AsciiWriter</text>
+            <text
+               text-anchor="start"
+               x="356.25"
+               y="-157.39999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text3"> </text>
+            <text
+               text-anchor="start"
+               x="291.25"
+               y="-144.39999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text4">+</text>
+            <text
+               text-anchor="start"
+               x="299.5"
+               y="-144.39999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text5">AsciiWriter(Ascii</text>
+            <text
+               text-anchor="start"
+               x="299.5"
+               y="-134.64999"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text6">const &amp;art, Size const</text>
+            <text
+               text-anchor="start"
+               x="299.5"
+               y="-124.9"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text7">frame_size)</text>
+            <text
+               text-anchor="start"
+               x="291.25"
+               y="-111.4"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text8">+</text>
+            <text
+               text-anchor="start"
+               x="299.5"
+               y="-111.4"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text9">void write_to(std::</text>
+            <text
+               text-anchor="start"
+               x="299.5"
+               y="-101.65"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text10">ostream &amp;stream, ColorMode</text>
+            <text
+               text-anchor="start"
+               x="299.5"
+               y="-91.900002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text11">const color_mode=COLOR</text>
+            <text
+               text-anchor="start"
+               x="299.5"
+               y="-82.150002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text12">_MODE_INDEXED) const</text>
+            <text
+               text-anchor="start"
+               x="291.25"
+               y="-68.400002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text13">+</text>
+            <text
+               text-anchor="start"
+               x="299.5"
+               y="-68.400002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text14">void write_to_file</text>
+            <text
+               text-anchor="start"
+               x="299.5"
+               y="-58.650002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text15">(char const *const filename,</text>
+            <text
+               text-anchor="start"
+               x="299.5"
+               y="-48.900002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text16">ColorMode const color_mode</text>
+            <text
+               text-anchor="start"
+               x="299.5"
+               y="-39.150002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text17">=COLOR_MODE_NONE) const</text>
+            <text
+               text-anchor="start"
+               x="291.25"
+               y="-25.4"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text18">-</text>
+            <text
+               text-anchor="start"
+               x="299.5"
+               y="-25.4"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text19">constexpr unsigned</text>
+            <text
+               text-anchor="start"
+               x="299.5"
+               y="-15.65"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text20">indexed_color_index</text>
+            <text
+               text-anchor="start"
+               x="299.5"
+               y="-5.9000001"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text21">(Color const &amp;color) const</text>
+            <polygon
+               fill="#000000"
+               stroke="#000000"
+               points="287.5,-167 429.5,-167 "
+               id="polygon21" />
+            <polygon
+               fill="#000000"
+               stroke="#000000"
+               points="287.5,-154 429.5,-154 "
+               id="polygon22" />
+            <polygon
+               fill="none"
+               stroke="#000000"
+               points="287.5,0 287.5,-182 429.5,-182 429.5,0 "
+               id="polygon23" />
+          </a>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

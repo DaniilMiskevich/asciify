@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="39.727032mm"
+   height="19.049999mm"
+   viewBox="0 0 39.727032 19.049999"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="color_ascii_filter.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.0565516"
+     inkscape:cx="-48.743477"
+     inkscape:cy="93.227815"
+     inkscape:window-width="1167"
+     inkscape:window-height="735"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-118.00416,-123.56043)">
+    <g
+       id="Node000004"
+       class="node"
+       transform="matrix(0.35277777,0,0,0.35277777,118.18055,162.54237)">
+      <title
+         id="title6">Node4</title>
+      <g
+         id="a_Node000004">
+        <a
+           xlink:href="../doxygen/html/classColorAsciiFilter.html"
+           target="_top"
+           xlink:title=" "
+           id="a13">
+          <polygon
+             fill="#ffffff"
+             stroke="none"
+             points="0,-57 110,-57 110,-110 0,-110 "
+             id="polygon7" />
+          <text
+             text-anchor="start"
+             x="19"
+             y="-98.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text7">ColorAsciiFilter</text>
+          <text
+             text-anchor="start"
+             x="52.75"
+             y="-85.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text8"> </text>
+          <text
+             text-anchor="start"
+             x="3.75"
+             y="-72.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text9">-</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-72.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text10">void operator()(Ascii</text>
+          <text
+             text-anchor="start"
+             x="12"
+             y="-62.650002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text11">&amp;dst) const override</text>
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="0,-95 110,-95 "
+             id="polygon11" />
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="0,-82 110,-82 "
+             id="polygon12" />
+          <polygon
+             fill="none"
+             stroke="#000000"
+             points="110,-110 110,-57 0,-57 0,-110 "
+             id="polygon13" />
+        </a>
+      </g>
+    </g>
+  </g>
+</svg>

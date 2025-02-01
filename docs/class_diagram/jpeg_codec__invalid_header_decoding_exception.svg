@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="42.430725mm"
+   height="22.577778mm"
+   viewBox="0 0 42.430725 22.577777"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="jpeg_codec__invalid_header_decoding_exception.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.1405979"
+     inkscape:cx="19.726496"
+     inkscape:cy="141.5924"
+     inkscape:window-width="1167"
+     inkscape:window-height="735"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-113.24166,-91.545852)">
+    <g
+       id="g28"
+       transform="matrix(0.35277777,0,0,0.35277777,108.65555,113.94724)">
+      <g
+         id="Node000001"
+         class="node">
+        <title
+           id="title2">Node1</title>
+        <g
+           id="a_Node000001">
+          <a
+             xlink:title=" "
+             id="a9">
+            <polygon
+               fill="#999999"
+               stroke="none"
+               points="13.5,0 131.5,0 131.5,-63 13.5,-63 "
+               id="polygon2"
+               style="fill:#ffffff" />
+            <text
+               text-anchor="start"
+               x="18.5"
+               y="-51.400002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text2">JpegCodec::InvalidHeader</text>
+            <text
+               text-anchor="start"
+               x="34.25"
+               y="-41.650002"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text3">DecodingException</text>
+            <text
+               text-anchor="start"
+               x="70.25"
+               y="-28.4"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text4"> </text>
+            <text
+               text-anchor="start"
+               x="21.25"
+               y="-15.4"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text5">+</text>
+            <text
+               text-anchor="start"
+               x="33.5"
+               y="-15.4"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text6">char const * what()</text>
+            <text
+               text-anchor="start"
+               x="33.5"
+               y="-5.6500001"
+               font-family="Courier, monospace"
+               font-size="8px"
+               id="text7">const override</text>
+            <polygon
+               fill="#000000"
+               stroke="#000000"
+               points="13.5,-38 131.5,-38 "
+               id="polygon7" />
+            <polygon
+               fill="#000000"
+               stroke="#000000"
+               points="13.5,-25 131.5,-25 "
+               id="polygon8" />
+            <polygon
+               fill="none"
+               stroke="#000000"
+               points="131.5,-63 131.5,0 13.5,0 13.5,-63 "
+               id="polygon9" />
+          </a>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

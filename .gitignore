@@ -1,6 +1,3 @@
-# ignore coursework-related docs
-z_docs/
-
 .cache/
 build/
 out.txt

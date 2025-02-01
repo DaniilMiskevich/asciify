@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="47.272221mm"
+   height="59.266666mm"
+   viewBox="0 0 47.272221 59.266666"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="edge_ascii_filter.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.0565516"
+     inkscape:cx="137.71215"
+     inkscape:cy="178.41059"
+     inkscape:window-width="1167"
+     inkscape:window-height="735"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-68.791659,-101.07084)">
+    <g
+       id="Node000005"
+       class="node"
+       transform="matrix(0.35277777,0,0,0.35277777,23.636104,160.16112)">
+      <title
+         id="title14">Node5</title>
+      <g
+         id="a_Node000005">
+        <a
+           xlink:href="../doxygen/html/classEdgeAsciiFilter.html"
+           target="_top"
+           xlink:title=" "
+           id="a38">
+          <polygon
+             fill="#ffffff"
+             stroke="none"
+             points="128.5,0 261.5,0 261.5,-167 128.5,-167 "
+             id="polygon15" />
+          <text
+             text-anchor="start"
+             x="161.25"
+             y="-155.39999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text15">EdgeAsciiFilter</text>
+          <text
+             text-anchor="start"
+             x="132.25"
+             y="-142.39999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text16">-</text>
+          <text
+             text-anchor="start"
+             x="140.5"
+             y="-142.39999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text17">float const threshold</text>
+          <text
+             text-anchor="start"
+             x="132.25"
+             y="-129.39999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text18">-</text>
+          <text
+             text-anchor="start"
+             x="140.5"
+             y="-129.39999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text19">char const  *const</text>
+          <text
+             text-anchor="start"
+             x="140.5"
+             y="-119.65"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text20">palette</text>
+          <text
+             text-anchor="start"
+             x="132.25"
+             y="-106.4"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text21">-</text>
+          <text
+             text-anchor="start"
+             x="140.5"
+             y="-106.4"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text22">size_t const palette_len</text>
+          <text
+             text-anchor="start"
+             x="132.25"
+             y="-93.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text23">-</text>
+          <text
+             text-anchor="start"
+             x="140.5"
+             y="-93.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text24">float const dog_eps</text>
+          <text
+             text-anchor="start"
+             x="132.25"
+             y="-80.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text25">-</text>
+          <text
+             text-anchor="start"
+             x="140.5"
+             y="-80.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text26">float const dog_p</text>
+          <text
+             text-anchor="start"
+             x="132.25"
+             y="-67.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text27">+</text>
+          <text
+             text-anchor="start"
+             x="140.5"
+             y="-67.400002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text28">EdgeAsciiFilter(float</text>
+          <text
+             text-anchor="start"
+             x="140.5"
+             y="-57.650002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text29">const threshold, char</text>
+          <text
+             text-anchor="start"
+             x="140.5"
+             y="-47.900002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text30">const *const palette=&quot;|</text>
+          <text
+             text-anchor="start"
+             x="140.5"
+             y="-38.150002"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text31">\\-/&quot;, float const dog_eps</text>
+          <text
+             text-anchor="start"
+             x="140.5"
+             y="-28.4"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text32">=1, float const dog_p=10)</text>
+          <text
+             text-anchor="start"
+             x="132.25"
+             y="-15.4"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text33">-</text>
+          <text
+             text-anchor="start"
+             x="140.5"
+             y="-15.4"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text34">void operator()(Ascii</text>
+          <text
+             text-anchor="start"
+             x="140.5"
+             y="-5.6500001"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text35">&amp;dst) const override</text>
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="128.5,-152 261.5,-152 "
+             id="polygon35" />
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="128.5,-77 138.5,-77 "
+             id="polygon36" />
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="138.5,-77 261.5,-77 "
+             id="polygon37" />
+          <polygon
+             fill="none"
+             stroke="#000000"
+             points="261.5,-167 261.5,0 128.5,0 128.5,-167 "
+             id="polygon38" />
+        </a>
+      </g>
+    </g>
+  </g>
+</svg>

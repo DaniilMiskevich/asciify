@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="42.574047mm"
+   height="59.289398mm"
+   viewBox="0 0 42.574047 59.289398"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="image.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.3"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.0459466"
+     inkscape:cx="169.2247"
+     inkscape:cy="245.71044"
+     inkscape:document-units="mm"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:window-width="3440"
+     inkscape:window-height="1402"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <metadata
+     id="metadata1">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="g2"
+     transform="matrix(0.35291308,0,0,0.35291308,-27.880133,227.36425)">
+    <g
+       id="a_Node000001">
+      <a
+         xlink:title=" "
+         id="a27">
+        <polygon
+           fill="#999999"
+           stroke="none"
+           points="79.5,-643.75 79.5,-476.75 198.5,-476.75 198.5,-643.75 "
+           id="polygon2"
+           style="fill:#ffffff" />
+        <text
+           text-anchor="start"
+           x="116.5"
+           y="-632.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text2">Image&lt; T &gt;</text>
+        <text
+           text-anchor="start"
+           x="83.25"
+           y="-619.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text3">-</text>
+        <text
+           text-anchor="start"
+           x="91.5"
+           y="-619.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text4">Size const _size</text>
+        <text
+           text-anchor="start"
+           x="83.25"
+           y="-606.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text5">-</text>
+        <text
+           text-anchor="start"
+           x="91.5"
+           y="-606.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text6">T *const data</text>
+        <text
+           text-anchor="start"
+           x="83.25"
+           y="-593.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text7">+</text>
+        <text
+           text-anchor="start"
+           x="91.5"
+           y="-593.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text8">Size size(void) const</text>
+        <text
+           text-anchor="start"
+           x="83.25"
+           y="-580.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text9">+</text>
+        <text
+           text-anchor="start"
+           x="91.5"
+           y="-580.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text10">T const &amp; operator</text>
+        <text
+           text-anchor="start"
+           x="91.5"
+           y="-570.40002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text11">[](Pos pos) const</text>
+        <text
+           text-anchor="start"
+           x="83.25"
+           y="-557.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text12">+</text>
+        <text
+           text-anchor="start"
+           x="91.5"
+           y="-557.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text13">T &amp; operator[](Pos pos)</text>
+        <text
+           text-anchor="start"
+           x="83.25"
+           y="-544.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text14">+</text>
+        <text
+           text-anchor="start"
+           x="91.5"
+           y="-544.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text15">Iterator begin() const</text>
+        <text
+           text-anchor="start"
+           x="83.25"
+           y="-531.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text16">+</text>
+        <text
+           text-anchor="start"
+           x="91.5"
+           y="-531.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text17">Iterator end() const</text>
+        <text
+           text-anchor="start"
+           x="83.25"
+           y="-518.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text18">#</text>
+        <text
+           text-anchor="start"
+           x="91.5"
+           y="-518.15002"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text19">Image(Size const size)</text>
+        <text
+           text-anchor="start"
+           x="83.25"
+           y="-505.14999"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text20">#</text>
+        <text
+           text-anchor="start"
+           x="91.5"
+           y="-505.14999"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text21">Image(Image const</text>
+        <text
+           text-anchor="start"
+           x="91.5"
+           y="-495.39999"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text22">&amp;other)</text>
+        <text
+           text-anchor="start"
+           x="83.25"
+           y="-482.14999"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text23">#</text>
+        <text
+           text-anchor="start"
+           x="91.5"
+           y="-482.14999"
+           font-family="Courier, monospace"
+           font-size="8px"
+           id="text24">~Image()</text>
+        <polygon
+           fill="#000000"
+           stroke="#000000"
+           points="198.5,-628.75 79.5,-628.75 "
+           id="polygon24" />
+        <polygon
+           fill="#000000"
+           stroke="#000000"
+           points="89.5,-602.75 79.5,-602.75 "
+           id="polygon25" />
+        <polygon
+           fill="#000000"
+           stroke="#000000"
+           points="198.5,-602.75 89.5,-602.75 "
+           id="polygon26" />
+        <polygon
+           fill="none"
+           stroke="#000000"
+           points="79.5,-643.75 198.5,-643.75 198.5,-476.75 79.5,-476.75 "
+           id="polygon27" />
+      </a>
+    </g>
+  </g>
+</svg>

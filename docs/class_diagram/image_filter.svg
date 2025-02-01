@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="40.922222mm"
+   height="23.63611mm"
+   viewBox="0 0 40.922223 23.63611"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="image_filter.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.0565516"
+     inkscape:cx="-55.368804"
+     inkscape:cy="91.334865"
+     inkscape:window-width="1167"
+     inkscape:window-height="735"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-119.59166,-124.08959)">
+    <g
+       id="Node000003"
+       class="node"
+       transform="matrix(0.35277777,0,0,0.35277777,71.261108,287.16111)">
+      <title
+         id="title66">Node3</title>
+      <g
+         id="a_Node000003">
+        <a
+           xlink:href="../doxygen/html/classImageFilter.html"
+           target="_top"
+           xlink:title=" "
+           id="a75">
+          <polygon
+             fill="#ffffff"
+             stroke="none"
+             points="252.5,-395.75 252.5,-461.75 137.5,-461.75 137.5,-395.75 "
+             id="polygon67" />
+          <text
+             text-anchor="start"
+             x="159"
+             y="-450.14999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text67">ImageFilter&lt; T &gt;</text>
+          <text
+             text-anchor="start"
+             x="192.75"
+             y="-437.14999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text68"> </text>
+          <text
+             text-anchor="start"
+             x="141.25"
+             y="-424.14999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text69">+</text>
+          <text
+             text-anchor="start"
+             x="149.5"
+             y="-424.14999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text70">virtual ~ImageFilter()</text>
+          <text
+             text-anchor="start"
+             x="141.25"
+             y="-411.14999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text71">#</text>
+          <text
+             text-anchor="start"
+             x="149.5"
+             y="-411.14999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text72">virtual void operator</text>
+          <text
+             text-anchor="start"
+             x="149.5"
+             y="-401.39999"
+             font-family="Courier, monospace"
+             font-size="8px"
+             id="text73">()(T &amp;dst) const =0</text>
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="252.5,-446.75 137.5,-446.75 "
+             id="polygon73" />
+          <polygon
+             fill="#000000"
+             stroke="#000000"
+             points="252.5,-433.75 137.5,-433.75 "
+             id="polygon74" />
+          <polygon
+             fill="none"
+             stroke="#000000"
+             points="252.5,-395.75 137.5,-395.75 137.5,-461.75 252.5,-461.75 "
+             id="polygon75" />
+        </a>
+      </g>
+    </g>
+  </g>
+</svg>
