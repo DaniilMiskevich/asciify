@@ -6,6 +6,7 @@ Despite all said, this can be a good inspiration or basement for your projects.
 
 And here is the text of the paper itself:
 
+> [!warning]
 > The following text has been translated [from Russian](README.ru.md) via DeepSeek R1 as i felt too lazy to do it by hand. I believe it completed it's task exceptionally well though.
 
 # INTRODUCTION
